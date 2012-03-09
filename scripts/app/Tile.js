@@ -6,6 +6,7 @@ function() {
   var Tile = function(world, options) {
     this.world = world;
     this.color = options.color || '#000';
+    this.imageData = options.imageData || null;
     this.x = options.x;
     this.y = options.y;
     this.width = options.width || 32;
@@ -24,12 +25,16 @@ function() {
   };
 
   Tile.prototype.draw = function() {
-    this.world.drawRectangle(this.color, this.x, this.y, this.width, this.height);
+    if (this.imageData) {
+      this.world.canvas.putImageData(this.imageData, this.x, this.y);
+    } else {
+      this.world.drawRectangle(this.color, this.x, this.y, this.width, this.height);
+    }
   };
 
   Tile.prototype.inBounds = function() {
     return this.x >= 0 && this.x <= this.world.width &&
-           this.y >= 0 && this.y <= this.world.height;
+           this.y <= this.world.height;
   };
 
   return Tile;

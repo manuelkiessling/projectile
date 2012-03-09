@@ -18,8 +18,8 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
   world = {
     canvas: document.getElementById('world').getContext('2d'),
     width: 800,
-    height: 600,
-    fps: 40,
+    height: 300,
+    fps: 48,
     ticks: 0,
     players: [],
     enemies: [],
@@ -43,8 +43,6 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
     keyfire: 'q'
   }));
 
-  world.terrainBuilder = new TerrainBuilder(world, Tile);
-
   world.drawSprite = function(spriteName, x, y, width, height) {
     if (!sprites[spriteName]) {
       var img = new Image();
@@ -62,6 +60,8 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
     this.canvas.fillStyle = color;
     this.canvas.fillRect(x, y, width, height);
   };
+
+  world.terrainBuilder = new TerrainBuilder(world, Tile);
 
   // Game loop
   setInterval(function() {
