@@ -11,6 +11,10 @@ function() {
     world.enemies.forEach(function(enemy) {
       enemy.draw();
     });
+
+    world.bullets.forEach(function(bullet) {
+      bullet.draw();
+    });
   }
   return draw;
 

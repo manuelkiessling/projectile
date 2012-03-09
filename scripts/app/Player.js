@@ -13,7 +13,7 @@ function(keystatus, util) {
     this.x = (this.world.width / 2) + (this.width / 2);
     this.y = this.world.height - this.height;
     this.speed = 5;
-    this.bullets = [];
+    this.type = 'player';
   };
 
   Player.prototype.update = function() {
@@ -28,21 +28,9 @@ function(keystatus, util) {
     }
 
     this.x = util.clamp(this.x, 0, this.world.width - this.width);
-
-    this.bullets.forEach(function(bullet) {
-      bullet.update();
-    });
-
-    this.bullets = this.bullets.filter(function(bullet) {
-      return bullet.active;
-    });
   }
 
   Player.prototype.draw = function() {
-    this.bullets.forEach(function(bullet) {
-      bullet.draw();
-    });
-
     this.world.drawSprite('player', this.x, this.y, this.width, this.height);
   }
 
@@ -54,14 +42,15 @@ function(keystatus, util) {
   }
 
   Player.prototype.shoot = function() {
-    this.bullets.push(
+    this.world.bullets.push(
       new this.Bullet(this.world, {
         color: '#090',
         x: this.midpoint().x,
         y: this.midpoint().y - (this.height / 2) - 2,
         width: 2,
         height: 2,
-        direction: 'up'
+        direction: 'up',
+        owner: this.type
       }
     ));
   }

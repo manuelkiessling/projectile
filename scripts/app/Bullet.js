@@ -21,6 +21,7 @@ function() {
     }
 
     this.active = true;
+    this.owner = options.owner;
   };
 
   Bullet.prototype.update = function() {

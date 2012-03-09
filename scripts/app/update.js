@@ -10,8 +10,16 @@ function() {
       enemy.update();
     });
 
+    world.bullets.forEach(function(bullet) {
+      bullet.update();
+    });
+
     world.enemies = world.enemies.filter(function(enemy) {
       return enemy.active;
+    });
+
+    world.bullets = world.bullets.filter(function(bullet) {
+      return bullet.active;
     });
 
     if(Math.random() < 0.05) {

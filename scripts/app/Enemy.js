@@ -15,7 +15,7 @@ function(util) {
     this.y = -this.height;
     this.active = true;
     this.age = Math.random() * 360;
-    this.bullets = [];
+    this.type = 'enemy';
   };
 
   Enemy.prototype.update = function() {
@@ -28,24 +28,12 @@ function(util) {
 
     this.active = this.active && this.inBounds();
 
-    if (Math.random() < 0.04) {
+    if (Math.random() < 0.01) {
       this.shoot();
     }
-
-    this.bullets.forEach(function(bullet) {
-      bullet.update();
-    });
-
-    this.bullets = this.bullets.filter(function(bullet) {
-      return bullet.active;
-    });
   };
 
   Enemy.prototype.draw = function() {
-    this.bullets.forEach(function(bullet) {
-      bullet.draw();
-    });
-    
     this.world.drawSprite('enemy', this.x, this.y, this.width, this.height);
   };
 
@@ -62,15 +50,16 @@ function(util) {
   }
 
   Enemy.prototype.shoot = function() {
-    this.bullets.push(
+    this.world.bullets.push(
       new this.Bullet(this.world, {
         color: '#C00',
         x: this.midpoint().x,
         y: this.midpoint().y - (this.height / 2) - 2,
-        width: 3,
-        height: 3,
+        width: 5,
+        height: 5,
         direction: 'down',
-        speed: this.yVelocity + 1
+        speed: this.yVelocity + 1,
+        owner: this.type
       })
     );
   };

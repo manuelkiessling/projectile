@@ -17,8 +17,9 @@ function($, update, draw, collider, Player, Enemy, Bullet) {
     canvas: document.getElementById('world').getContext('2d'),
     width: 800,
     height: 600,
-    fps: 30,
-    enemies: []
+    fps: 40,
+    enemies: [],
+    bullets: []
   };
 
   world.player = new Player(world, Bullet);
