@@ -55,8 +55,15 @@ function(keystatus, util) {
 
   Player.prototype.shoot = function() {
     this.bullets.push(
-      new this.Bullet(this.world, this.midpoint().x, this.midpoint().y - (this.height / 2) - 2, 'up')
-    );
+      new this.Bullet(this.world, {
+        color: '#090',
+        x: this.midpoint().x,
+        y: this.midpoint().y - (this.height / 2) - 2,
+        width: 2,
+        height: 2,
+        direction: 'up'
+      }
+    ));
   }
 
   Player.prototype.explode = function() {

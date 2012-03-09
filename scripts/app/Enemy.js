@@ -63,7 +63,15 @@ function(util) {
 
   Enemy.prototype.shoot = function() {
     this.bullets.push(
-      new this.Bullet(this.world, this.midpoint().x, this.midpoint().y - (this.height / 2) - 2, 'down', 6)
+      new this.Bullet(this.world, {
+        color: '#C00',
+        x: this.midpoint().x,
+        y: this.midpoint().y - (this.height / 2) - 2,
+        width: 3,
+        height: 3,
+        direction: 'down',
+        speed: this.yVelocity + 1
+      })
     );
   };
 

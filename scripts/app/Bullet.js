@@ -3,20 +3,20 @@ define([],
 
 function() {
 
-  var Bullet = function(world, x, y, direction, speed) {
+  var Bullet = function(world, options) {
     this.world = world;
-    this.color = '#F00';
-    this.x = x;
-    this.y = y;
-    this.width = 1;
-    this.height = 1;
-    this.speed = speed || 4;
+    this.color = options.color || '#F00';
+    this.x = options.x;
+    this.y = options.y;
+    this.width = options.width || 1;
+    this.height = options.height || 1;
+    this.speed = options.speed || 4;
 
     this.xVelocity = 0;
 
-    if (direction === 'up') {
+    if (options.direction === 'up') {
       this.yVelocity = -this.speed;
-    } else if (direction === 'down') {
+    } else {
       this.yVelocity = this.speed;
     }
 
