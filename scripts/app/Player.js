@@ -12,7 +12,7 @@ function(keystatus, util) {
     this.y = 270;
     this.width = 16;
     this.height = 30;
-    this.speed = 10;
+    this.speed = 5;
     this.bullets = [];
   };
 
@@ -27,7 +27,7 @@ function(keystatus, util) {
       this.shoot();
     }
 
-    this.x = util.clamp(this.x, 0, this.world.canvas_width - this.width);
+    this.x = util.clamp(this.x, 0, this.world.width - this.width);
 
     this.bullets.forEach(function(bullet) {
       bullet.update();
@@ -55,9 +55,13 @@ function(keystatus, util) {
 
   Player.prototype.shoot = function() {
     this.bullets.push(
-      new this.Bullet(this.world, this.midpoint().x, this.midpoint().y)
+      new this.Bullet(this.world, this.midpoint().x, this.midpoint().y - (this.height / 2) - 2)
     );
   }
+
+  Player.prototype.explode = function() {
+    //
+  };
 
   return Player;
 

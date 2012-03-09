@@ -2,24 +2,26 @@
 define(['jquery',
         'update',
         'draw',
+        'collider',
         'Player',
-        //'Enemy',
+        'Enemy',
         'Bullet'
        ],
 
-function($, update, draw, Player, Bullet) {
+function($, update, draw, collider, Player, Enemy, Bullet) {
 
   var world;
   var sprites = {};
-  var player;
-  var enemies = [];
 
   world = {
     canvas: document.getElementById('world').getContext('2d'),
-    canvas_width: 480,
-    canvas_height: 320,
-    fps: 50
+    width: 480,
+    height: 320,
+    fps: 30,
+    enemies: []
   };
+
+  world.player = new Player(world, Bullet);
 
   world.drawSprite = function(spriteName, x, y, width, height) {
     if (!sprites[spriteName]) {
@@ -41,15 +43,17 @@ function($, update, draw, Player, Bullet) {
 
   // Game loop
   setInterval(function() {
-    update(world, player, enemies);
-    draw(world, player, enemies);
+    collider(world);
+    update(world, Enemy);
+    draw(world);
   }, 1000/world.fps);
 
   setInterval(function() {
-    console.log(player.bullets);
+    //console.log(player.bullets);
+    //console.log(enemies);
   }, 1000);
 
-  player = new Player(world, Bullet);
+
   //enemies.push(new Enemy(world));
 
 });

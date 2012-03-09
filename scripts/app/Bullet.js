@@ -28,8 +28,12 @@ function() {
   };
 
   Bullet.prototype.inBounds = function() {
-    return this.x >= 0 && this.x <= this.world.canvas_width &&
-           this.y >= 0 && this.y <= this.world.canvas_height;
+    return this.x >= 0 && this.x <= this.world.width &&
+           this.y >= 0 && this.y <= this.world.height;
+  };
+
+  Bullet.prototype.explode = function() {
+    this.active = false;
   };
 
   return Bullet;
