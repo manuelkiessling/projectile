@@ -28,7 +28,7 @@ function(util) {
 
     this.active = this.active && this.inBounds();
 
-    if (Math.random() < 0.01) {
+    if (Math.random() < 0.003) {
       this.shoot();
     }
   };
@@ -58,7 +58,7 @@ function(util) {
         width: 5,
         height: 5,
         direction: 'down',
-        speed: this.yVelocity + 1,
+        speed: this.yVelocity + 10,
         owner: this.type
       })
     );
