@@ -3,16 +3,23 @@ define([],
 
 function() {
 
-  var Bullet = function(world, x, y) {
+  var Bullet = function(world, x, y, direction, speed) {
     this.world = world;
     this.color = '#F00';
     this.x = x;
     this.y = y;
     this.width = 1;
     this.height = 1;
-    this.speed = 4;
+    this.speed = speed || 4;
+
     this.xVelocity = 0;
-    this.yVelocity = -this.speed;
+
+    if (direction === 'up') {
+      this.yVelocity = -this.speed;
+    } else if (direction === 'down') {
+      this.yVelocity = this.speed;
+    }
+
     this.active = true;
   };
 

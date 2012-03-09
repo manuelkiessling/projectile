@@ -8,10 +8,10 @@ function(keystatus, util) {
   var Player = function(world, Bullet) {
     this.world = world;
     this.Bullet = Bullet;
-    this.x = 220;
-    this.y = 270;
     this.width = 16;
     this.height = 30;
+    this.x = (this.world.width / 2) + (this.width / 2);
+    this.y = this.world.height - this.height;
     this.speed = 5;
     this.bullets = [];
   };
@@ -55,7 +55,7 @@ function(keystatus, util) {
 
   Player.prototype.shoot = function() {
     this.bullets.push(
-      new this.Bullet(this.world, this.midpoint().x, this.midpoint().y - (this.height / 2) - 2)
+      new this.Bullet(this.world, this.midpoint().x, this.midpoint().y - (this.height / 2) - 2, 'up')
     );
   }
 

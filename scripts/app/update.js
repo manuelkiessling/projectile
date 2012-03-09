@@ -3,7 +3,7 @@ define([],
 
 function() {
 
-  var update = function(world, Enemy) {
+  var update = function(world, Enemy, Bullet) {
     world.player.update();
 
     world.enemies.forEach(function(enemy) {
@@ -15,7 +15,7 @@ function() {
     });
 
     if(Math.random() < 0.05) {
-      world.enemies.push(new Enemy(world));
+      world.enemies.push(new Enemy(world, Bullet));
     }
   }
   return update;
