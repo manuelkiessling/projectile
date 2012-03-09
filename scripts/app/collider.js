@@ -18,17 +18,21 @@ function() {
           console.log('Boom!');
         }
       });
-      if (collides(bullet, world.player)) {
-        world.player.explode();
-        bullet.explode();
-      }
+      world.players.forEach(function(player) {
+        if (collides(bullet, player)) {
+          player.explode();
+          bullet.explode();
+        }
+      });
     });
 
     world.enemies.forEach(function(enemy) {
-      if (collides(enemy, world.player)) {
-        enemy.explode();
-        world.player.explode();
-      }
+      world.players.forEach(function(player) {
+        if (collides(enemy, player)) {
+          enemy.explode();
+          player.explode();
+        }
+      });
     });
   }
 

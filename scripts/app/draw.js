@@ -6,7 +6,13 @@ function() {
   var draw = function(world) {
     world.canvas.clearRect(0, 0, world.width, world.height);
 
-    world.player.draw();
+    world.tiles.forEach(function(tile) {
+      tile.draw();
+    });
+
+    world.players.forEach(function(player) {
+      player.draw();
+    });
 
     world.enemies.forEach(function(enemy) {
       enemy.draw();

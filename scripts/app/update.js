@@ -4,7 +4,9 @@ define([],
 function() {
 
   var update = function(world, Enemy, Bullet) {
-    world.player.update();
+    world.players.forEach(function(player) {
+      player.update();
+    });
 
     world.enemies.forEach(function(enemy) {
       enemy.update();
@@ -12,6 +14,10 @@ function() {
 
     world.bullets.forEach(function(bullet) {
       bullet.update();
+    });
+
+    world.tiles.forEach(function(tile) {
+      tile.update();
     });
 
     world.enemies = world.enemies.filter(function(enemy) {
@@ -22,7 +28,11 @@ function() {
       return bullet.active;
     });
 
-    if(Math.random() < 0.05) {
+    world.tiles = world.tiles.filter(function(tile) {
+      return tile.active;
+    });
+
+    if(Math.random() < 0.01) {
       world.enemies.push(new Enemy(world, Bullet));
     }
   }

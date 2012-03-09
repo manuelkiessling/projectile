@@ -5,10 +5,12 @@ define(['jquery',
         'collider',
         'Player',
         'Enemy',
-        'Bullet'
+        'Bullet',
+        'TerrainBuilder',
+        'Tile'
        ],
 
-function($, update, draw, collider, Player, Enemy, Bullet) {
+function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile) {
 
   var world;
   var sprites = {};
@@ -18,11 +20,30 @@ function($, update, draw, collider, Player, Enemy, Bullet) {
     width: 800,
     height: 600,
     fps: 40,
+    ticks: 0,
+    players: [],
     enemies: [],
-    bullets: []
+    bullets: [],
+    tiles: []
   };
 
-  world.player = new Player(world, Bullet);
+  world.players.push(new Player(world, Bullet, {
+    keyleft: 'left',
+    keyright: 'right',
+    keyup: 'up',
+    keydown: 'down',
+    keyfire: 'space'
+  }));
+
+  world.players.push(new Player(world, Bullet, {
+    keyleft: 'a',
+    keyright: 'd',
+    keyup: 'w',
+    keydown: 's',
+    keyfire: 'q'
+  }));
+
+  world.terrainBuilder = new TerrainBuilder(world, Tile);
 
   world.drawSprite = function(spriteName, x, y, width, height) {
     if (!sprites[spriteName]) {
@@ -47,6 +68,7 @@ function($, update, draw, collider, Player, Enemy, Bullet) {
     collider(world);
     update(world, Enemy, Bullet);
     draw(world);
+    world.ticks++;
   }, 1000/world.fps);
 
   setInterval(function() {
