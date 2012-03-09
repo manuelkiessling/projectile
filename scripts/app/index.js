@@ -18,7 +18,7 @@ function($, update, draw, Player, Bullet) {
     canvas: document.getElementById('world').getContext('2d'),
     canvas_width: 480,
     canvas_height: 320,
-    fps: 60
+    fps: 50
   };
 
   world.drawSprite = function(spriteName, x, y, width, height) {
@@ -41,9 +41,13 @@ function($, update, draw, Player, Bullet) {
 
   // Game loop
   setInterval(function() {
-    update(world, player, enemies, player.bullets);
-    draw(world, player, enemies, player.bullets);
+    update(world, player, enemies);
+    draw(world, player, enemies);
   }, 1000/world.fps);
+
+  setInterval(function() {
+    console.log(player.bullets);
+  }, 1000);
 
   player = new Player(world, Bullet);
   //enemies.push(new Enemy(world));

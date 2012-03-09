@@ -12,24 +12,37 @@ function(keystatus, util) {
     this.y = 270;
     this.width = 16;
     this.height = 30;
+    this.speed = 10;
     this.bullets = [];
   };
 
   Player.prototype.update = function() {
     if (keystatus.keydown.left) {
-      this.x -= 5;
+      this.x -= this.speed;
     }
     if (keystatus.keydown.right) {
-      this.x += 5;
+      this.x += this.speed;
     }
     if (keystatus.keydown.space) {
       this.shoot();
     }
 
     this.x = util.clamp(this.x, 0, this.world.canvas_width - this.width);
+
+    this.bullets.forEach(function(bullet) {
+      bullet.update();
+    });
+
+    this.bullets = this.bullets.filter(function(bullet) {
+      return bullet.active;
+    });
   }
 
   Player.prototype.draw = function() {
+    this.bullets.forEach(function(bullet) {
+      bullet.draw();
+    });
+
     this.world.drawSprite('player', this.x, this.y, this.width, this.height);
   }
 

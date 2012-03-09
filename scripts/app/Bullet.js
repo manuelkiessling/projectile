@@ -5,24 +5,32 @@ function() {
 
   var Bullet = function(world, x, y) {
     this.world = world;
-    this.color = '#00A';
+    this.color = '#F00';
     this.x = x;
     this.y = y;
     this.width = 1;
-    this.height = 2;
+    this.height = 1;
     this.speed = 4;
     this.xVelocity = 0;
     this.yVelocity = -this.speed;
+    this.active = true;
   };
 
   Bullet.prototype.update = function() {
     this.x += this.xVelocity;
     this.y += this.yVelocity;
-  }
+
+    this.active = this.active && this.inBounds();
+  };
 
   Bullet.prototype.draw = function() {
     this.world.drawRectangle(this.color, this.x, this.y, this.width, this.height);
-  }
+  };
+
+  Bullet.prototype.inBounds = function() {
+    return this.x >= 0 && this.x <= this.world.canvas_width &&
+           this.y >= 0 && this.y <= this.world.canvas_height;
+  };
 
   return Bullet;
 
