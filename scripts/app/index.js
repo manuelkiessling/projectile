@@ -19,7 +19,7 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
     canvas: document.getElementById('world').getContext('2d'),
     width: 800,
     height: 800,
-    fps: 30,
+    fps: 60,
     ticks: 0,
     players: [],
     enemies: [],

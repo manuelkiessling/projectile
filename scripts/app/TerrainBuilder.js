@@ -14,7 +14,7 @@ function(draw) {
 
     this.buffer = document.getElementById('world').getContext('2d'),
 
-    this.factor = 10;
+    this.factor = 25;
 
     this.tileWidth = world.width / this.factor;
     this.tileHeight = world.height / this.factor;
@@ -33,7 +33,7 @@ function(draw) {
 
   TerrainBuilder.prototype.update = function() {
     this.loops++;
-    if (this.loops === 80) {
+    if (this.loops === 32) {
       generateAndPushRow(this, draw);
       this.loops = 0;
       console.log('new Terrain sent...');
