@@ -53,9 +53,9 @@ var collides = function(a, b) {
     lethal = false;                                              // bullets from same owner don't collide
   }
 
-  return a.x < b.x      + b.width  &&
-         a.x + a.width  > b.x      &&
-         a.y < b.y      + b.height &&
-         a.y + a.height > b.y      &&
+  return a.hitbox.x < b.hitbox.x      + b.hitbox.width  &&
+         a.hitbox.x + a.hitbox.width  > b.hitbox.x      &&
+         a.hitbox.y < b.hitbox.y      + b.hitbox.height &&
+         a.hitbox.y + a.hitbox.height > b.hitbox.y      &&
          lethal;
 };

@@ -5,7 +5,8 @@ function() {
 
   var Tile = function(world, options) {
     this.world = world;
-    this.color = options.color || '#000';
+    this.color = options.color || null;
+    this.sprite = options.sprite || null;
     this.imageData = options.imageData || null;
     this.x = options.x;
     this.y = options.y;
@@ -27,6 +28,8 @@ function() {
   Tile.prototype.draw = function() {
     if (this.imageData) {
       this.world.canvas.putImageData(this.imageData, this.x, this.y);
+    } else if (this.sprite) {
+      this.world.drawSprite(this.sprite, this.x, this.y, this.width, this.height);
     } else {
       this.world.drawRectangle(this.color, this.x, this.y, this.width, this.height);
     }

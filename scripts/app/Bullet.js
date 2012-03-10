@@ -24,11 +24,27 @@ function() {
 
     this.active = true;
     this.owner = options.owner;
+
+    this.hitboxMetrics = {
+      x: 0,
+      y: 0,
+      width: this.width,
+      height: this.height
+    };
+
+    this.hitbox = {
+      x: this.x + this.hitboxMetrics.x,
+      y: this.y + this.hitboxMetrics.y,
+      width: this.hitboxMetrics.width,
+      height: this.hitboxMetrics.height
+    };
   };
 
   Bullet.prototype.update = function() {
     this.x += this.xVelocity;
     this.y += this.yVelocity;
+
+    this.updateHitbox();
 
     if (this.direction === 'up') {
       this.yVelocity = this.yVelocity + this.acceleration;
@@ -36,8 +52,14 @@ function() {
       this.yVelocity = this.yVelocity - this.acceleration;
     }
 
-
     this.active = this.active && this.inBounds();
+
+    this.hitbox = {
+      x: this.x,
+      y: this.y,
+      width: this.width,
+      height: this.height
+    };
   };
 
   Bullet.prototype.draw = function() {
@@ -56,6 +78,15 @@ function() {
 
   Bullet.prototype.explode = function() {
     this.active = false;
+  };
+
+  Bullet.prototype.updateHitbox = function() {
+    this.hitbox = {
+      x: this.x + this.hitboxMetrics.x,
+      y: this.y + this.hitboxMetrics.y,
+      width: this.hitboxMetrics.width,
+      height: this.hitboxMetrics.height
+    };
   };
 
   return Bullet;

@@ -8,68 +8,68 @@ function(draw) {
     this.Tile = Tile;
 
     this.bufferWorld = Object.create(world);
-    console.log(this.bufferWorld);
     this.bufferWorld.canvas = document.getElementById('bufferWorld').getContext('2d');
     this.bufferWorld.tiles = [];
 
-    this.buffer = document.getElementById('world').getContext('2d'),
+    this.tilesPerDimension = 8;
 
-    this.factor = 25;
+    // Options for generating one screen of the world
+    this.options = {};
+    this.options.xOffset = 0;
+    this.options.yOffset = 0;
+    this.options.tileWidth = world.width / this.tilesPerDimension;
+    this.options.tileHeight = world.height / this.tilesPerDimension;
+    this.options.rows = world.width / this.options.tileWidth;
+    this.options.columns = world.height / this.options.tileHeight;
 
-    this.tileWidth = world.width / this.factor;
-    this.tileHeight = world.height / this.factor;
-    this.tileSpeed = 1;
-    this.rows = world.width / this.tileWidth;
-    this.columns = world.height / this.tileHeight;
-    this.loops = 0;
-
-    // create a set of tiles for one full world-area
-    var imageData = createImageData(this.bufferWorld, this.Tile, this, draw);
-    pushImageDataToRealWorld(imageData, this.world, Tile, 0, 0, this.tileSpeed);
-
-    // create one row of tiles
-    generateAndPushRow(this, draw);
+    // Generate 20 full screens and put them one below the other
+    for (var i = 0; i < 10; i++) {
+      var imageData = createImageData(this.bufferWorld, this.Tile, this.options, draw);
+      pushImageDataToWorld(imageData, this.world, Tile, 0, -(this.world.height * i), this.world.width, this.world.height);
+    }
   };
 
+  var loops = 0;
+  var rowNumber = 0;
   TerrainBuilder.prototype.update = function() {
-    this.loops++;
-    if (this.loops === 32) {
-      generateAndPushRow(this, draw);
-      this.loops = 0;
-      console.log('new Terrain sent...');
+    if (loops === (this.world.height / this.tilesPerDimension) * (1 / this.world.terrainSpeed)) {
+      //generateRow(this, rowNumber, draw);
+      loops = 0;
+      rowNumber++;
     }
+    loops++;
   };
 
   return TerrainBuilder;
 
 });
 
-var generateAndPushRow = function(terrainBuilder, draw) {
+var generateRow = function(terrainBuilder, rowNumber, draw) {
   var options = {
     rows: 1,
-    columns: terrainBuilder.columns,
-    tileWidth: terrainBuilder.tileWidth,
-    tileHeight: terrainBuilder.tileHeight,
-    tileSpeed: 0
+    columns: terrainBuilder.options.columns,
+    tileWidth: terrainBuilder.options.tileWidth,
+    tileHeight: terrainBuilder.options.tileHeight,
+    xOffset: 0,
+    yOffset: rowNumber * terrainBuilder.options.tileHeight
   };
-  var imageData = createImageData(terrainBuilder.bufferWorld, terrainBuilder.Tile, options, draw);
-  pushImageDataToRealWorld(imageData, terrainBuilder.world, terrainBuilder.Tile, 0, -options.tileHeight, terrainBuilder.world.width, options.tileHeight, terrainBuilder.tileSpeed);
+  createImageData(terrainBuilder.bufferWorld, terrainBuilder.Tile, options, draw);
 };
 
-var pushImageDataToRealWorld = function(imageData, world, Tile, x, y, width, height, speed) {
+var pushImageDataToWorld = function(imageData, world, Tile, x, y, width, height) {
   var tile = new Tile(world, {
     imageData: imageData,
     x: x,
     y: y,
     width: width,
     height: height,
-    speed: speed
+    speed: world.terrainSpeed
   });
   world.tiles.push(tile);
 };
 
 var createImageData = function(world, Tile, options, draw) {
-  var tiles = generateTerrain(world, Tile, 0, 0, options.rows, options.columns, options.tileWidth, options.tileHeight, options.tileSpeed);
+  var tiles = generateTerrain(world, Tile, options.xOffset, options.yOffset, options.rows, options.columns, options.tileWidth, options.tileHeight);
   tiles.forEach(function(tile) {
     world.tiles.push(tile);
   });
@@ -79,17 +79,27 @@ var createImageData = function(world, Tile, options, draw) {
   return world.canvas.getImageData(0, 0, options.columns * options.tileWidth, options.rows * options.tileHeight);
 };
 
-var generateTerrain = function(world, Tile, x, y, rows, columns, width, height, speed) {
+var generateTerrain = function(world, Tile, xOffset, yOffset, rows, columns, width, height) {
   var tiles = [];
+  var sprite = 'grass';
+  var rand;
   for (var i=0; i < rows; i++) {
     for (var j=0; j < columns; j++) {
+      rand = Math.random();
+      if (rand < 0.05) {
+        sprite = 'yellowtrees';
+      } else if (rand < 0.1) {
+        sprite = 'greentrees'
+      } else {
+        sprite = 'grass'
+      }
       tiles.push(new Tile(world, {
-        color: '#F' + Math.round(Math.random() * 9) + 'F',
-        x: x + (j * width),
-        y: y + (i * height),
+        sprite: 'terrain_' + sprite,
+        x: xOffset + (j * width),
+        y: yOffset + (i * height),
         width: width,
         height: height,
-        speed: speed
+        speed: 0
       }));
     }
   }

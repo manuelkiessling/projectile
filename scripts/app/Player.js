@@ -8,13 +8,27 @@ function(keystatus, util) {
   var Player = function(world, Bullet, options) {
     this.world = world;
     this.Bullet = Bullet;
-    this.width = 16;
-    this.height = 30;
+    this.width = 256;
+    this.height = 256;
     this.x = (this.world.width / 2) + (this.width / 2);
     this.y = this.world.height - this.height;
     this.speed = 5;
     this.type = 'player';
     this.shootLock = false;
+
+    this.hitboxMetrics = {
+      x: 32,
+      y: 28,
+      width: 73,
+      height: 120
+    };
+
+    this.hitbox = {
+      x: this.x + this.hitboxMetrics.x,
+      y: this.y + this.hitboxMetrics.y,
+      width: this.hitboxMetrics.width,
+      height: this.hitboxMetrics.height
+    };
 
     this.keyleft = options.keyleft || 'left';
     this.keyright = options.keyright || 'right';
@@ -47,8 +61,10 @@ function(keystatus, util) {
       }
     }
 
-    this.x = util.clamp(this.x, 0, this.world.width - this.width);
-    this.y = util.clamp(this.y, 0, this.world.height - this.height);
+    this.x = util.clamp(this.x, -this.hitboxMetrics.x, (this.world.width - this.hitboxMetrics.width - this.hitboxMetrics.x));
+    this.y = util.clamp(this.y, -this.hitboxMetrics.y, (this.world.height - this.hitboxMetrics.height - this.hitboxMetrics.y));
+
+    this.updateHitbox();
   }
 
   Player.prototype.draw = function() {
@@ -57,17 +73,26 @@ function(keystatus, util) {
 
   Player.prototype.midpoint = function() {
     return {
-      x: this.x + this.width/2,
-      y: this.y + this.height/2
+      x: (this.x + this.width/2) - 64, // Spaceship is in upper left corner
+      y: (this.y + this.height/2) - 44
     }
   }
+
+  Player.prototype.updateHitbox = function() {
+    this.hitbox = {
+      x: this.x + this.hitboxMetrics.x,
+      y: this.y + this.hitboxMetrics.y,
+      width: this.hitboxMetrics.width,
+      height: this.hitboxMetrics.height
+    };
+  };
 
   Player.prototype.shoot = function() {
     this.world.bullets.push(
       new this.Bullet(this.world, {
         color: '#090',
         x: this.midpoint().x,
-        y: this.midpoint().y - (this.height / 2) - 2,
+        y: this.midpoint().y - 61, // Shoot from top of ship
         width: 10,
         height: 26,
         direction: 'up',
