@@ -73,8 +73,8 @@ function(keystatus, util) {
 
   Player.prototype.midpoint = function() {
     return {
-      x: (this.x + this.width/2) - 64, // Spaceship is in upper left corner
-      y: (this.y + this.height/2) - 44
+      x: (this.hitbox.x + this.hitbox.width/2),
+      y: (this.hitbox.y + this.hitbox.height/2)
     }
   }
 
@@ -90,13 +90,19 @@ function(keystatus, util) {
   Player.prototype.shoot = function() {
     this.world.bullets.push(
       new this.Bullet(this.world, {
-        color: '#090',
-        x: this.midpoint().x,
-        y: this.midpoint().y - 61, // Shoot from top of ship
-        width: 10,
-        height: 26,
+        x: this.midpoint().x - 5, // Correction: half of missile width
+        y: this.midpoint().y - this.hitbox.height/2, // Shoot from top of ship
+        width: 141,
+        height: 133,
+        hitboxMetrics: {
+          x: 10,
+          y: 11,
+          width: 13,
+          height: 42
+        },
         direction: 'up',
-        acceleration: 0.3,
+        speed: 0.01,
+        acceleration: 0.9,
         owner: this.type,
         image: 'playerBullet'
       }

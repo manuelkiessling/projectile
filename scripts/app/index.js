@@ -65,6 +65,7 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
       keyfire: 'space'
     }));
 
+    /*
     world.players.push(new Player(world, Bullet, {
       keyleft: 'a',
       keyright: 'd',
@@ -72,6 +73,7 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
       keydown: 's',
       keyfire: 'q'
     }));
+    */
 
     world.terrainBuilder = new TerrainBuilder(world, Tile);
 

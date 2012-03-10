@@ -8,8 +8,8 @@ function() {
     this.color = options.color || '#F00';
     this.x = options.x;
     this.y = options.y;
-    this.width = options.width || 1;
-    this.height = options.height || 1;
+    this.width = options.width;
+    this.height = options.height;
     this.speed = options.speed || 4;
     this.acceleration = options.acceleration || 0;
     this.image = options.image || null;
@@ -25,12 +25,7 @@ function() {
     this.active = true;
     this.owner = options.owner;
 
-    this.hitboxMetrics = {
-      x: 0,
-      y: 0,
-      width: this.width,
-      height: this.height
-    };
+    this.hitboxMetrics = options.hitboxMetrics;
 
     this.hitbox = {
       x: this.x + this.hitboxMetrics.x,
@@ -53,13 +48,6 @@ function() {
     }
 
     this.active = this.active && this.inBounds();
-
-    this.hitbox = {
-      x: this.x,
-      y: this.y,
-      width: this.width,
-      height: this.height
-    };
   };
 
   Bullet.prototype.draw = function() {

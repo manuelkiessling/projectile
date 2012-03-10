@@ -10,16 +10,16 @@ function() {
       tile.draw();
     });
 
-    world.players.forEach(function(player) {
-      player.draw();
-    });
-
     world.enemies.forEach(function(enemy) {
       enemy.draw();
     });
 
     world.bullets.forEach(function(bullet) {
       bullet.draw();
+    });
+
+    world.players.forEach(function(player) {
+      player.draw();
     });
   }
   return draw;

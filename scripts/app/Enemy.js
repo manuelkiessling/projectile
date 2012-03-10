@@ -44,7 +44,7 @@ function(util) {
 
     this.active = this.active && this.inBounds();
 
-    if (Math.random() < 0.003) {
+    if (Math.random() < 0.03) {
       this.shoot();
     }
   };
@@ -60,8 +60,8 @@ function(util) {
 
   Enemy.prototype.midpoint = function() {
     return {
-      x: (this.x + this.width/2) - 100, // Spaceship is in upper left corner
-      y: (this.y + this.height/2) - 97
+      x: (this.hitbox.x + this.hitbox.width/2),
+      y: (this.hitbox.y + this.hitbox.height/2)
     }
   }
 
@@ -78,10 +78,16 @@ function(util) {
     this.world.bullets.push(
       new this.Bullet(this.world, {
         color: '#C00',
-        x: this.midpoint().x,
-        y: this.midpoint().y - (this.height / 2) + 30, // Shoot from bottom of ship
-        width: 5,
-        height: 5,
+        x: this.midpoint().x - 3, // Correction: half of shot width
+        y: this.midpoint().y + this.hitbox.height/2, // Shoot from top of ship
+        width: 6,
+        height: 16,
+        hitboxMetrics: {
+          x: 0,
+          y: 0,
+          width: 6,
+          height: 16
+        },
         direction: 'down',
         speed: this.yVelocity + 10,
         owner: this.type
