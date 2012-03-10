@@ -18,7 +18,7 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
   world = {
     canvas: document.getElementById('world').getContext('2d'),
     width: 800,
-    height: 300,
+    height: 800,
     fps: 30,
     ticks: 0,
     players: [],

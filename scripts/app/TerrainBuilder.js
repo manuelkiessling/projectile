@@ -14,7 +14,7 @@ function(draw) {
 
     this.buffer = document.getElementById('world').getContext('2d'),
 
-    this.factor = 100;
+    this.factor = 10;
 
     this.tileWidth = world.width / this.factor;
     this.tileHeight = world.height / this.factor;
@@ -23,24 +23,18 @@ function(draw) {
     this.columns = world.height / this.tileHeight;
     this.loops = 0;
 
+    // create a set of tiles for one full world-area
     var imageData = createImageData(this.bufferWorld, this.Tile, this, draw);
     pushImageDataToRealWorld(imageData, this.world, Tile, 0, 0, this.tileSpeed);
 
-    var imageData = createImageData(this.bufferWorld, this.Tile, this, draw);
-    pushImageDataToRealWorld(imageData, this.world, Tile, 0, -300, this.tileSpeed);
-
-    this.imageData = null;
-    var that = this;
-    setInterval(function() {
-      that.imageData = createImageData(that.bufferWorld, that.Tile, that, draw);
-      console.log('new Terrain generated...');
-    }, 5000);
+    // create one row of tiles
+    generateAndPushRow(this, draw);
   };
 
   TerrainBuilder.prototype.update = function() {
     this.loops++;
-    if (this.loops === 300) {
-      pushImageDataToRealWorld(this.imageData, this.world, this.Tile, 0, -300, this.tileSpeed);
+    if (this.loops === 80) {
+      generateAndPushRow(this, draw);
       this.loops = 0;
       console.log('new Terrain sent...');
     }
@@ -50,13 +44,25 @@ function(draw) {
 
 });
 
-var pushImageDataToRealWorld = function(imageData, world, Tile, x, y, speed) {
+var generateAndPushRow = function(terrainBuilder, draw) {
+  var options = {
+    rows: 1,
+    columns: terrainBuilder.columns,
+    tileWidth: terrainBuilder.tileWidth,
+    tileHeight: terrainBuilder.tileHeight,
+    tileSpeed: 0
+  };
+  var imageData = createImageData(terrainBuilder.bufferWorld, terrainBuilder.Tile, options, draw);
+  pushImageDataToRealWorld(imageData, terrainBuilder.world, terrainBuilder.Tile, 0, -options.tileHeight, terrainBuilder.world.width, options.tileHeight, terrainBuilder.tileSpeed);
+};
+
+var pushImageDataToRealWorld = function(imageData, world, Tile, x, y, width, height, speed) {
   var tile = new Tile(world, {
     imageData: imageData,
     x: x,
     y: y,
-    width: world.width,
-    height: world.height,
+    width: width,
+    height: height,
     speed: speed
   });
   world.tiles.push(tile);
@@ -70,7 +76,7 @@ var createImageData = function(world, Tile, options, draw) {
 
   draw(world);
 
-  return world.canvas.getImageData(0, 0, world.width, world.height);
+  return world.canvas.getImageData(0, 0, options.columns * options.tileWidth, options.rows * options.tileHeight);
 };
 
 var generateTerrain = function(world, Tile, x, y, rows, columns, width, height, speed) {
