@@ -4,6 +4,8 @@ define([],
 function() {
 
   var update = function(world, Enemy, Bullet) {
+    world.terrainBuilder.update();
+
     world.players.forEach(function(player) {
       player.update();
     });
