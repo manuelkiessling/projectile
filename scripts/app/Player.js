@@ -95,7 +95,7 @@ function(keystatus, util) {
         width: 141,
         height: 133,
         hitboxMetrics: {
-          x: 10,
+          x: 20,
           y: 11,
           width: 13,
           height: 42
