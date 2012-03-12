@@ -24,9 +24,11 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
   spriteNames.forEach(function(spriteFile) {
     var img = new Image();
     img.onload = function() {
+      $('#loadbar').css('width', 20 * spriteCounter);
       spriteCounter++;
       sprites[spriteFile] = img;
       if (spriteCounter === spriteNames.length) {
+        $('#loadscreen').css('display', 'none');
         start();
       }
     };
