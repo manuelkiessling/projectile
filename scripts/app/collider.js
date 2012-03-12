@@ -15,6 +15,7 @@ function() {
         if (collides(bullet, enemy)) {
           enemy.explode();
           bullet.explode();
+          world.addHit();
           console.log('Boom!');
         }
       });

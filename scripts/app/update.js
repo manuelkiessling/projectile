@@ -42,7 +42,7 @@ function() {
       return tile.active;
     });
 
-    if(Math.random() < 0.01) {
+    if(Math.random() < 0.02) {
       world.enemies.push(new Enemy(world, Bullet, Explosion));
     }
   }

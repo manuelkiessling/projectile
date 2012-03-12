@@ -63,6 +63,11 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
       this.canvas.fillRect(x, y, width, height);
     };
 
+    World.prototype.addHit = function() {
+      this.hits++;
+      $('#hits').html('' + this.hits + '');
+    };
+
 
     var world = new World();
 
@@ -70,6 +75,7 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
     world.width = 960;
     world.height = 640;
     world.fps = 40;
+    world.hits = 0;
     world.terrainSpeed = 1;
     world.players = [];
     world.enemies = [];
