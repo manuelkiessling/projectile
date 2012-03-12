@@ -65,9 +65,9 @@ function() {
            this.y >= 0 && this.y <= this.world.height;
   };
 
-  Bullet.prototype.explode = function() {
+  Bullet.prototype.explode = function(typeOfOther) {
     this.active = false;
-    if (this.owner === 'player') {
+    if (this.owner === 'player' && typeOfOther == 'bullet') {
       this.world.explosions.push(new this.Explosion(this.world, {
         x: this.x + this.hitboxMetrics.x,
         y: this.y + this.hitboxMetrics.y,

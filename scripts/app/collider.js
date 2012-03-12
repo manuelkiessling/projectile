@@ -7,14 +7,14 @@ function() {
     world.bullets.forEach(function(bullet) {
       world.bullets.forEach(function(otherBullet) {
         if (collides(bullet, otherBullet)) {
-          bullet.explode();
-          otherBullet.explode();
+          bullet.explode('bullet');
+          otherBullet.explode('bullet');
         }
       });
       world.enemies.forEach(function(enemy) {
         if (collides(bullet, enemy)) {
           enemy.explode();
-          bullet.explode();
+          bullet.explode('enemy');
           world.addHit();
           console.log('Boom!');
         }
@@ -22,7 +22,7 @@ function() {
       world.players.forEach(function(player) {
         if (collides(bullet, player)) {
           player.explode();
-          bullet.explode();
+          bullet.explode('player');
         }
       });
     });
