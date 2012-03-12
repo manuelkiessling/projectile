@@ -6,7 +6,7 @@ HTML5 space shooter game using Canvas and JavaScript
 
 ## Demo
 
-__Play the game right now__ at http://manuelkiessling.github.com/bivouac/
+__Play the game right now__ at http://manuelkiessling.github.com/projectile/
 
 Watch the video at http://www.youtube.com/watch?v=I6w-Kj66110
 
