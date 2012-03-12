@@ -94,12 +94,12 @@ function(keystatus, util) {
         x: this.midpoint().x - 5, // Correction: half of missile width
         y: this.midpoint().y - this.hitbox.height/2, // Shoot from top of ship
         width: 141,
-        height: 133,
+        height: 144,
         hitboxMetrics: {
-          x: 20,
-          y: 11,
-          width: 13,
-          height: 42
+          x: 15,
+          y: 12,
+          width: 12,
+          height: 47
         },
         direction: 'up',
         speed: 0.01,
