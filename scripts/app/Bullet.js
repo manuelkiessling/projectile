@@ -3,8 +3,9 @@ define([],
 
 function() {
 
-  var Bullet = function(world, options) {
+  var Bullet = function(world, Explosion, options) {
     this.world = world;
+    this.Explosion = Explosion;
     this.color = options.color || '#F00';
     this.x = options.x;
     this.y = options.y;
@@ -66,6 +67,12 @@ function() {
 
   Bullet.prototype.explode = function() {
     this.active = false;
+    this.world.explosions.push(new this.Explosion(this.world, {
+      x: this.x,
+      y: this.y,
+      width: 35,
+      height: 50
+    }));
   };
 
   Bullet.prototype.updateHitbox = function() {

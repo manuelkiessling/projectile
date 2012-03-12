@@ -5,9 +5,10 @@ define(['../lib/keystatus',
 
 function(keystatus, util) {
 
-  var Player = function(world, Bullet, options) {
+  var Player = function(world, Bullet, Explosion, options) {
     this.world = world;
     this.Bullet = Bullet;
+    this.Explosion = Explosion;
     this.width = 256;
     this.height = 256;
     this.x = (this.world.width / 2) + (this.width / 2);
@@ -89,7 +90,7 @@ function(keystatus, util) {
 
   Player.prototype.shoot = function() {
     this.world.bullets.push(
-      new this.Bullet(this.world, {
+      new this.Bullet(this.world, this.Explosion, {
         x: this.midpoint().x - 5, // Correction: half of missile width
         y: this.midpoint().y - this.hitbox.height/2, // Shoot from top of ship
         width: 141,

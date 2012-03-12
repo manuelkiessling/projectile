@@ -6,16 +6,21 @@ define(['jquery',
         'Player',
         'Enemy',
         'Bullet',
+        'Explosion',
         'TerrainBuilder',
-        'Tile'
+        'Tile',
+        '../lib/SpriteAnimation'
        ],
 
-function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile) {
+function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBuilder, Tile, SpriteAnimation) {
 
   var sprites = {};
   var spriteCounter = 0;
 
   var spriteNames = ['enemy', 'player', 'playerBullet', 'terrain_grass', 'terrain_yellowtrees', 'terrain_greentrees'];
+  for (var i=0; i < 17; i++) {
+    spriteNames.push('explosion/explosion-' + i);
+  }
   spriteNames.forEach(function(spriteFile) {
     var img = new Image();
     img.onload = function() {
@@ -29,7 +34,7 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
   });
 
   var start = function() {
-      var World = function() {
+    var World = function() {
       this.sprites = sprites;
     };
 
@@ -39,9 +44,19 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
 
     World.prototype.drawSprite = function(spriteName, x, y, width, height) {
       if (this.sprites[spriteName]) {
+        if (!width) {
+          width = sprites[spriteName].width;
+        }
+        if (!height) {
+          height = sprites[spriteName].height;
+        }
         this.canvas.drawImage(this.sprites[spriteName], x, y, width, height);
       }
     };
+
+    World.prototype.drawImage = function(image, x, y, width, height) {
+      this.canvas.drawImage(image, x, y, width, height);
+    }
 
     World.prototype.drawRectangle = function(color, x, y, width, height) {
       this.canvas.fillStyle = color;
@@ -59,9 +74,10 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
     world.players = [];
     world.enemies = [];
     world.bullets = [];
+    world.explosions = [];
     world.tiles = [];
 
-    world.players.push(new Player(world, Bullet, {
+    world.players.push(new Player(world, Bullet, Explosion, {
       keyleft: 'left',
       keyright: 'right',
       keyup: 'up',
@@ -70,30 +86,29 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
     }));
 
     /*
-    world.players.push(new Player(world, Bullet, {
-      keyleft: 'a',
-      keyright: 'd',
-      keyup: 'w',
-      keydown: 's',
-      keyfire: 'q'
-    }));
-    */
+     world.players.push(new Player(world, Bullet, {
+     keyleft: 'a',
+     keyright: 'd',
+     keyup: 'w',
+     keydown: 's',
+     keyfire: 'q'
+     }));
+     */
 
     world.terrainBuilder = new TerrainBuilder(world, Tile);
 
     // Game loop
     setInterval(function() {
       collider(world);
-      update(world, Enemy, Bullet);
+      update(world, Enemy, Bullet, Explosion);
       draw(world);
-    }, 1000/world.fps);
+    }, 1000 / world.fps);
 
     setInterval(function() {
       //console.log(player.bullets);
       //console.log(enemies);
     }, 1000);
   };
-
 
 
 });

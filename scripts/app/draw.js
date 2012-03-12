@@ -18,6 +18,10 @@ function() {
       bullet.draw();
     });
 
+    world.explosions.forEach(function(explosion) {
+      explosion.draw();
+    });
+
     world.players.forEach(function(player) {
       player.draw();
     });

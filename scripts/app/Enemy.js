@@ -3,9 +3,10 @@ define(['../lib/util'],
 
 function(util) {
 
-  var Enemy = function(world, Bullet) {
+  var Enemy = function(world, Bullet, Explosion) {
     this.world = world;
     this.Bullet = Bullet;
+    this.Explosion = Explosion;
     this.width = 256;
     this.height = 256;
     this.xVelocity = 0;
@@ -76,7 +77,7 @@ function(util) {
 
   Enemy.prototype.shoot = function() {
     this.world.bullets.push(
-      new this.Bullet(this.world, {
+      new this.Bullet(this.world, this.Explosion, {
         color: '#C00',
         x: this.midpoint().x - 3, // Correction: half of shot width
         y: this.midpoint().y + this.hitbox.height/2, // Shoot from top of ship
@@ -97,6 +98,10 @@ function(util) {
 
   Enemy.prototype.explode = function() {
     this.active = false;
+    this.world.explosions.push(new this.Explosion(this.world, {
+      x: this.x,
+      y: this.y
+    }));
     console.log('I exploded...');
   };
 

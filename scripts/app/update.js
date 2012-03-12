@@ -3,7 +3,7 @@ define([],
 
 function() {
 
-  var update = function(world, Enemy, Bullet) {
+  var update = function(world, Enemy, Bullet, Explosion) {
     world.terrainBuilder.update();
 
     world.players.forEach(function(player) {
@@ -18,6 +18,10 @@ function() {
       bullet.update();
     });
 
+    world.explosions.forEach(function(explosion) {
+      explosion.update();
+    });
+
     world.tiles.forEach(function(tile) {
       tile.update();
     });
@@ -30,12 +34,16 @@ function() {
       return bullet.active;
     });
 
+    world.explosions = world.explosions.filter(function(explosion) {
+      return explosion.active;
+    });
+
     world.tiles = world.tiles.filter(function(tile) {
       return tile.active;
     });
 
     if(Math.random() < 0.01) {
-      world.enemies.push(new Enemy(world, Bullet));
+      world.enemies.push(new Enemy(world, Bullet, Explosion));
     }
   }
   return update;
