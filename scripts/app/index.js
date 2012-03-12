@@ -48,8 +48,8 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
     var world = new World();
 
     world.canvas = document.getElementById('world').getContext('2d');
-    world.width = 800;
-    world.height = 800;
+    world.width = 960;
+    world.height = 640;
     world.fps = 40;
     world.terrainSpeed = 0.5;
     world.players = [];
