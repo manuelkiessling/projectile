@@ -23,8 +23,8 @@ function(draw, util) {
     this.options.rows = this.bufferWorld.height / this.options.tileHeight;
 
 
-    // Generate 20 full screens and put them one below the other
-    for (var i = 0; i < 10; i++) {
+    // Generate 40 full screens and put them one below the other
+    for (var i = 0; i < 40; i++) {
       var imageData = createImageData(this.bufferWorld, this.Tile, this.options, draw);
       pushImageDataToWorld(imageData, this.world, Tile, 0, -(this.bufferWorld.height * i), this.bufferWorld.width, this.bufferWorld.height);
     }
