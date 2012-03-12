@@ -27,7 +27,7 @@ function() {
 
   Tile.prototype.draw = function() {
     if (this.imageData) {
-      this.world.canvas.putImageData(this.imageData, this.x, this.y);
+      this.world.drawImageData(this.imageData, this.x, this.y);
     } else if (this.sprite) {
       this.world.drawSprite(this.sprite, this.x, this.y, this.width, this.height);
     } else {

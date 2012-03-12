@@ -33,6 +33,10 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
       this.sprites = sprites;
     };
 
+    World.prototype.drawImageData = function(imageData, x, y) {
+      this.canvas.putImageData(imageData, x, y);
+    };
+
     World.prototype.drawSprite = function(spriteName, x, y, width, height) {
       if (this.sprites[spriteName]) {
         this.canvas.drawImage(this.sprites[spriteName], x, y, width, height);
@@ -51,7 +55,7 @@ function($, update, draw, collider, Player, Enemy, Bullet, TerrainBuilder, Tile)
     world.width = 960;
     world.height = 640;
     world.fps = 40;
-    world.terrainSpeed = 0.5;
+    world.terrainSpeed = 1;
     world.players = [];
     world.enemies = [];
     world.bullets = [];
