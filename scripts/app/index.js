@@ -75,6 +75,7 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
     world.width = 960;
     world.height = 640;
     world.fps = 40;
+    world.remainingTime = 60;
     world.hits = 0;
     world.terrainSpeed = 1;
     world.players = [];
@@ -109,6 +110,17 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
       update(world, Enemy, Bullet, Explosion);
       draw(world);
     }, 1000 / world.fps);
+
+    setInterval(function() {
+      world.remainingTime--;
+      $('#time').html('' + world.remainingTime + '');
+    }, 1000);
+
+    setTimeout(function() {
+      world.remainingTime--;
+      window.alert('Congratulations, your score is: ' + world.hits);
+      window.location.reload();
+    }, world.remainingTime * 1000);
 
     setInterval(function() {
       //console.log(player.bullets);
