@@ -71,8 +71,8 @@ function() {
       this.world.explosions.push(new this.Explosion(this.world, {
         x: this.x,
         y: this.y,
-        width: 35,
-        height: 50
+        width: 15,
+        height: 42
       }));
     }
   };
