@@ -13,7 +13,7 @@ function(keystatus, util) {
     this.height = 256;
     this.x = (this.world.width / 2) + (this.width / 2);
     this.y = this.world.height - this.height;
-    this.speed = 5;
+    this.speed = 7;
     this.type = 'player';
     this.shootLock = false;
 
