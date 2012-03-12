@@ -65,12 +65,13 @@ function() {
            this.y >= 0 && this.y <= this.world.height;
   };
 
-  Bullet.prototype.explode = function() {
+  Bullet.prototype.explode = function(typeOfOther) {
     this.active = false;
-    if (this.owner === 'player') {
+    if ((this.owner === 'player' && typeOfOther == 'bullet') ||
+        (this.owner === 'enemy' && typeOfOther == 'player')) {
       this.world.explosions.push(new this.Explosion(this.world, {
-        x: this.x,
-        y: this.y,
+        x: this.x + this.hitboxMetrics.x,
+        y: this.y + this.hitboxMetrics.y,
         width: 15,
         height: 42
       }));

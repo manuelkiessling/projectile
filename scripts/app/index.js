@@ -17,7 +17,13 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
   var sprites = {};
   var spriteCounter = 0;
 
-  var spriteNames = ['enemy', 'player', 'playerBullet', 'terrain_grass', 'terrain_yellowtrees', 'terrain_greentrees'];
+  var loadCounter = 1;
+  var interval = setInterval(function() {
+    loadCounter++;
+    $('#loadbar').css('width', 10 * loadCounter);
+  }, 1000);
+
+  var spriteNames = ['terrain_mars', 'enemy', 'player', 'playerBullet'];
   for (var i=0; i < 17; i++) {
     spriteNames.push('explosion/explosion-' + i);
   }
@@ -27,6 +33,8 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
       spriteCounter++;
       sprites[spriteFile] = img;
       if (spriteCounter === spriteNames.length) {
+        $('#loadscreen').css('display', 'none');
+        clearInterval(interval);
         start();
       }
     };
@@ -63,6 +71,11 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
       this.canvas.fillRect(x, y, width, height);
     };
 
+    World.prototype.addHit = function() {
+      this.hits++;
+      $('#hits').html('' + this.hits + '');
+    };
+
 
     var world = new World();
 
@@ -70,7 +83,9 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
     world.width = 960;
     world.height = 640;
     world.fps = 40;
-    world.terrainSpeed = 1;
+    world.remainingTime = 60;
+    world.hits = 0;
+    world.terrainSpeed = 2;
     world.players = [];
     world.enemies = [];
     world.bullets = [];
@@ -103,6 +118,17 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
       update(world, Enemy, Bullet, Explosion);
       draw(world);
     }, 1000 / world.fps);
+
+    setInterval(function() {
+      world.remainingTime--;
+      $('#time').html('' + world.remainingTime + '');
+    }, 1000);
+
+    setTimeout(function() {
+      world.remainingTime--;
+      window.alert('Congratulations, your score is: ' + world.hits);
+      window.location.reload();
+    }, world.remainingTime * 1000);
 
     setInterval(function() {
       //console.log(player.bullets);

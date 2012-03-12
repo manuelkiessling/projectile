@@ -10,24 +10,21 @@ function(draw, util) {
     this.bufferWorld = Object.create(world);
     this.bufferWorld.canvas = document.getElementById('bufferWorld').getContext('2d');
     this.bufferWorld.tiles = [];
-    this.bufferWorld.width = 1000;
-    this.bufferWorld.height = 700;
+    this.bufferWorld.width = 960;
+    this.bufferWorld.height = 7000;
 
     // Options for generating one screen of the world
     this.options = {};
     this.options.xOffset = 0;
     this.options.yOffset = 0;
-    this.options.tileWidth = 100;
-    this.options.tileHeight = 100;
+    this.options.tileWidth = 960;
+    this.options.tileHeight = 7000;
     this.options.columns = this.bufferWorld.width / this.options.tileWidth;
     this.options.rows = this.bufferWorld.height / this.options.tileHeight;
 
 
-    // Generate 200 full screens and put them one below the other
-    for (var i = 0; i < 200; i++) {
-      var imageData = createImageData(this.bufferWorld, this.Tile, this.options, draw);
-      pushImageDataToWorld(imageData, this.world, Tile, 0, -(this.bufferWorld.height * i), this.bufferWorld.width, this.bufferWorld.height);
-    }
+    var imageData = createImageData(this.bufferWorld, this.Tile, this.options, draw);
+    pushImageDataToWorld(imageData, this.world, Tile, 0, -(this.bufferWorld.height - this.world.height), this.bufferWorld.width, this.bufferWorld.height);
   };
 
   var loops = 0;
@@ -80,18 +77,21 @@ function(draw, util) {
 
   var generateTerrain = function(world, Tile, xOffset, yOffset, rows, columns, width, height) {
     var tiles = [];
-    var sprite = 'grass';
+    var sprite;
     var rand;
     for (var i=0; i < rows; i++) {
       for (var j=0; j < columns; j++) {
         rand = Math.random();
-        if (rand < 0.05) {
-          sprite = 'yellowtrees';
-        } else if (rand < 0.1) {
-          sprite = 'greentrees'
+        if (rand < 0.5) {
+          sprite = 'starfield1';
+        } else if (rand < 0.98) {
+          sprite = 'starfield2'
+        } else if (rand < 0.99) {
+          sprite = 'starfield_planet';
         } else {
-          sprite = 'grass'
+          sprite = 'starfield_galaxy';
         }
+        sprite = 'mars';
         tiles.push(new Tile(world, {
           sprite: 'terrain_' + sprite,
           x: xOffset + (j * width),
