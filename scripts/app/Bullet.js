@@ -69,8 +69,8 @@ function() {
     this.active = false;
     if (this.owner === 'player') {
       this.world.explosions.push(new this.Explosion(this.world, {
-        x: this.x,
-        y: this.y,
+        x: this.x + this.hitboxMetrics.x,
+        y: this.y + this.hitboxMetrics.y,
         width: 15,
         height: 42
       }));
