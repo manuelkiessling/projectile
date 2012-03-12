@@ -17,18 +17,24 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
   var sprites = {};
   var spriteCounter = 0;
 
-  var spriteNames = ['enemy', 'player', 'playerBullet', 'terrain_mars'];
+  var loadCounter = 1;
+  var interval = setInterval(function() {
+    loadCounter++;
+    $('#loadbar').css('width', 10 * loadCounter);
+  }, 1000);
+
+  var spriteNames = ['terrain_mars', 'enemy', 'player', 'playerBullet'];
   for (var i=0; i < 17; i++) {
     spriteNames.push('explosion/explosion-' + i);
   }
   spriteNames.forEach(function(spriteFile) {
     var img = new Image();
     img.onload = function() {
-      $('#loadbar').css('width', 20 * spriteCounter);
       spriteCounter++;
       sprites[spriteFile] = img;
       if (spriteCounter === spriteNames.length) {
         $('#loadscreen').css('display', 'none');
+        clearInterval(interval);
         start();
       }
     };
