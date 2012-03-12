@@ -80,17 +80,19 @@ function(draw, util) {
 
   var generateTerrain = function(world, Tile, xOffset, yOffset, rows, columns, width, height) {
     var tiles = [];
-    var sprite = 'grass';
+    var sprite;
     var rand;
     for (var i=0; i < rows; i++) {
       for (var j=0; j < columns; j++) {
         rand = Math.random();
-        if (rand < 0.05) {
-          sprite = 'yellowtrees';
-        } else if (rand < 0.1) {
-          sprite = 'greentrees'
+        if (rand < 0.5) {
+          sprite = 'starfield1';
+        } else if (rand < 0.98) {
+          sprite = 'starfield2'
+        } else if (rand < 0.99) {
+          sprite = 'starfield_planet';
         } else {
-          sprite = 'grass'
+          sprite = 'starfield_galaxy';
         }
         tiles.push(new Tile(world, {
           sprite: 'terrain_' + sprite,
