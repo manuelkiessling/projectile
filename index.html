@@ -5,18 +5,44 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <script data-main="./scripts/app/index" src="./scripts/vendor/require-jquery.min.js"></script>
     <style type="text/css">
-      html, body, canvas {
-        margin: 0;
+      html, body {
         padding: 0;
+      }
+      #worldbox {
+        width: 960px;
+        margin: 0 auto;
+        padding: 0;
+        border: 1px solid black;
       }
     </style>
   </head>
   <body>
-    <canvas id="world" width="960" height="640" style="border: 1px solid gray">
+  <div id="worldbox">
+    <canvas id="world" width="960" height="640">
       This browser can not run this game (canvas support missing).
     </canvas>
-    <canvas id="bufferWorld" width="960" height="640" style="display: none;">
-      This browser can not run this game (canvas support missing).
-    </canvas>
+  </div>
+
+  <div id="help">
+    Use arrow keys to move, space to shoot.
+  </div>
+
+  <canvas id="bufferWorld" width="960" height="640" style="display: none;">
+    This browser can not run this game (canvas support missing).
+  </canvas>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-2127388-10']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
   </body>
 </html>
