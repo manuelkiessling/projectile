@@ -10,24 +10,21 @@ function(draw, util) {
     this.bufferWorld = Object.create(world);
     this.bufferWorld.canvas = document.getElementById('bufferWorld').getContext('2d');
     this.bufferWorld.tiles = [];
-    this.bufferWorld.width = 1000;
-    this.bufferWorld.height = 700;
+    this.bufferWorld.width = 960;
+    this.bufferWorld.height = 7000;
 
     // Options for generating one screen of the world
     this.options = {};
     this.options.xOffset = 0;
     this.options.yOffset = 0;
-    this.options.tileWidth = 100;
-    this.options.tileHeight = 100;
+    this.options.tileWidth = 960;
+    this.options.tileHeight = 7000;
     this.options.columns = this.bufferWorld.width / this.options.tileWidth;
     this.options.rows = this.bufferWorld.height / this.options.tileHeight;
 
 
-    // Generate 40 full screens and put them one below the other
-    for (var i = 0; i < 40; i++) {
-      var imageData = createImageData(this.bufferWorld, this.Tile, this.options, draw);
-      pushImageDataToWorld(imageData, this.world, Tile, 0, -(this.bufferWorld.height * i), this.bufferWorld.width, this.bufferWorld.height);
-    }
+    var imageData = createImageData(this.bufferWorld, this.Tile, this.options, draw);
+    pushImageDataToWorld(imageData, this.world, Tile, 0, -(this.bufferWorld.height - this.world.height), this.bufferWorld.width, this.bufferWorld.height);
   };
 
   var loops = 0;
@@ -94,6 +91,7 @@ function(draw, util) {
         } else {
           sprite = 'starfield_galaxy';
         }
+        sprite = 'mars';
         tiles.push(new Tile(world, {
           sprite: 'terrain_' + sprite,
           x: xOffset + (j * width),

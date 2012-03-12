@@ -17,7 +17,7 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
   var sprites = {};
   var spriteCounter = 0;
 
-  var spriteNames = ['enemy', 'player', 'playerBullet', 'terrain_starfield1', 'terrain_starfield2', 'terrain_starfield_planet', 'terrain_starfield_galaxy'];
+  var spriteNames = ['enemy', 'player', 'playerBullet', 'terrain_mars'];
   for (var i=0; i < 17; i++) {
     spriteNames.push('explosion/explosion-' + i);
   }
