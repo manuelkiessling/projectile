@@ -1,15 +1,12 @@
 # projectile
 HTML5 space shooter game using Canvas and JavaScript
 
-![Screenshot](http://manuelkiessling.github.com/projectile/screenshot.png)
+![Screenshot](http://manuel.kiessling.net/projectile/screenshot.png)
 
 
 ## Demo
 
-__Play the game right now__ at http://manuelkiessling.github.com/projectile/
-
-Watch the video at http://www.youtube.com/watch?v=I6w-Kj66110
-
+__Play the game right now__ at http://manuel.kiessling.net/projectile/
 
 ## About
 
