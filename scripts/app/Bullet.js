@@ -67,12 +67,14 @@ function() {
 
   Bullet.prototype.explode = function() {
     this.active = false;
-    this.world.explosions.push(new this.Explosion(this.world, {
-      x: this.x,
-      y: this.y,
-      width: 35,
-      height: 50
-    }));
+    if (this.owner === 'player') {
+      this.world.explosions.push(new this.Explosion(this.world, {
+        x: this.x,
+        y: this.y,
+        width: 35,
+        height: 50
+      }));
+    }
   };
 
   Bullet.prototype.updateHitbox = function() {
