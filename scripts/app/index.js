@@ -85,7 +85,7 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
     world.fps = 40;
     world.remainingTime = 60;
     world.hits = 0;
-    world.terrainSpeed = 1;
+    world.terrainSpeed = 2;
     world.players = [];
     world.enemies = [];
     world.bullets = [];
