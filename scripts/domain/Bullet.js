@@ -13,7 +13,7 @@ function() {
     this.height = options.height;
     this.speed = options.speed || 4;
     this.acceleration = options.acceleration || 0;
-    this.image = options.image || null;
+    this.spriteName = options.spriteName || null;
 
     this.xVelocity = 0;
 
@@ -52,10 +52,10 @@ function() {
   };
 
   Bullet.prototype.draw = function() {
-    if (this.image === null) {
+    if (this.spriteName === null) {
       this.world.drawRectangle(this.color, this.x, this.y, this.width, this.height);
     } else {
-      this.world.drawSprite(this.image, this.x, this.y, this.width, this.height);
+      this.world.drawSprite(this.spriteName, this.x, this.y, this.width, this.height);
     }
 
   };

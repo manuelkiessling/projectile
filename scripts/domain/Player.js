@@ -105,7 +105,7 @@ function(keystatus, util) {
         speed: 0.01,
         acceleration: 0.9,
         owner: this.type,
-        image: 'playerBullet'
+        spriteName: 'playerBullet'
       }
     ));
   }
