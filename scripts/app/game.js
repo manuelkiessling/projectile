@@ -3,16 +3,16 @@ define(['jquery',
         'update',
         'draw',
         'collider',
-        'Player',
-        'Enemy',
-        'Bullet',
-        'Explosion',
+        '../domain/Player',
+        '../domain/Enemy',
+        '../domain/Bullet',
+        '../domain/Explosion',
+        '../domain/Tile',
         'TerrainBuilder',
-        'Tile',
         '../lib/SpriteAnimation'
        ],
 
-function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBuilder, Tile, SpriteAnimation) {
+function($, update, draw, collider, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder, SpriteAnimation) {
 
   var sprites = {};
   var spriteCounter = 0;
