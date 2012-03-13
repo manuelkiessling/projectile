@@ -58,7 +58,7 @@ function(keystatus, util) {
         var that = this
         setTimeout(function() {
           that.shootLock = false;
-        }, 200);
+        }, 180);
       }
     }
 
@@ -97,14 +97,14 @@ function(keystatus, util) {
         width: 141,
         height: 144,
         hitboxMetrics: {
-          x: 15,
-          y: 12,
-          width: 12,
-          height: 47
+          x: 18,
+          y: 20,
+          width: 6,
+          height: 30
         },
         direction: 'up',
-        speed: 20,
-        acceleration: 0.4,
+        speed: 10,
+        acceleration: 0.9,
         owner: this.type,
         spriteName: 'playerBullet'
       }
@@ -118,14 +118,14 @@ function(keystatus, util) {
         width: 141,
         height: 144,
         hitboxMetrics: {
-          x: 15,
-          y: 12,
-          width: 12,
-          height: 47
+          x: 18,
+          y: 20,
+          width: 6,
+          height: 30
         },
         direction: 'up',
-        speed: 20,
-        acceleration: 0.4,
+        speed: 10,
+        acceleration: 0.9,
         owner: this.type,
         spriteName: 'playerBullet'
       }

@@ -36,10 +36,14 @@ function() {
     });
 
     if(Math.random() < 0.02) {
-      if (Math.random() < 0.5) {
-        world.enemies.push(new Enemy(world, Bullet, Explosion, { spriteName: 'enemy' }));
+      if (Math.random() < 0.1) {
+        world.enemies.push(new Enemy(world, Bullet, Explosion, { spriteName: 'enemy2' }));
       } else {
-        world.enemies.push(new Enemy(world, Bullet, Explosion, { spriteName: 'enemy_turquoise' }));
+        if (Math.random() < 0.8) {
+          world.enemies.push(new Enemy(world, Bullet, Explosion, { spriteName: 'enemy' }));
+        } else {
+          world.enemies.push(new Enemy(world, Bullet, Explosion, { spriteName: 'enemy_turquoise' }));
+        }
       }
     }
   }
