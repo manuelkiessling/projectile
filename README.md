@@ -48,3 +48,6 @@ or send me an email at [manuel@kiessling.net](mailto:manuel@kiessling.net)
     CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
     OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
     OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+Background image is (c) http://mydarktime.deviantart.com/ and used under
+CC BY-NC-SA 3.0
