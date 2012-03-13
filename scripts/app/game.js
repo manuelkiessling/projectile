@@ -1,5 +1,6 @@
 "use strict";
 define(['jquery',
+        '../lib/SpriteLoader',
         'update',
         'draw',
         'collider',
@@ -11,10 +12,9 @@ define(['jquery',
         'TerrainBuilder'
        ],
 
-function($, update, draw, collider, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder) {
+function($, SpriteLoader, update, draw, collider, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder) {
 
   var sprites = {};
-  var spriteCounter = 0;
 
   var loadCounter = 1;
   var interval = setInterval(function() {
@@ -26,18 +26,13 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, Tile, Terr
   for (var i=0; i < 17; i++) {
     spriteNames.push('explosion/explosion-' + i);
   }
-  spriteNames.forEach(function(spriteFile) {
-    var img = new Image();
-    img.onload = function() {
-      spriteCounter++;
-      sprites[spriteFile] = img;
-      if (spriteCounter === spriteNames.length) {
-        $('#loadscreen').css('display', 'none');
-        clearInterval(interval);
-        start();
-      }
-    };
-    img.src = 'assets/images/' + spriteFile + '.png';
+
+  var spriteLoader = new SpriteLoader();
+  spriteLoader.load('assets/images', spriteNames, '.png', function(loadedSprites) {
+    sprites = loadedSprites;
+    $('#loadscreen').css('display', 'none');
+    clearInterval(interval);
+    start();
   });
 
   var start = function() {
