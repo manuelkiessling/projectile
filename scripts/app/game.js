@@ -9,7 +9,10 @@ define(['jquery',
         '../domain/Bullet',
         '../domain/Explosion',
         '../domain/Tile',
-        'TerrainBuilder'
+        'TerrainBuilder',
+        '../vendor/requestAnimFrame',
+        '../vendor/requestInterval',
+        '../vendor/requestTimeout'
        ],
 
 function($, SpriteLoader, update, draw, collider, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder) {
@@ -107,24 +110,24 @@ function($, SpriteLoader, update, draw, collider, Player, Enemy, Bullet, Explosi
     world.terrainBuilder = new TerrainBuilder(world, Tile);
 
     // Game loop
-    setInterval(function() {
+    requestInterval(function() {
       collider(world);
       update(world, Enemy, Bullet, Explosion);
       draw(world);
     }, 1000 / world.fps);
 
-    setInterval(function() {
+    requestInterval(function() {
       world.remainingTime--;
       $('#time').html('' + world.remainingTime + '');
     }, 1000);
 
-    setTimeout(function() {
+    requestTimeout(function() {
       world.remainingTime--;
       window.alert('Congratulations, your score is: ' + world.hits);
       window.location.reload();
     }, world.remainingTime * 1000);
 
-    setInterval(function() {
+    requestInterval(function() {
       //console.log(player.bullets);
       //console.log(enemies);
     }, 1000);
