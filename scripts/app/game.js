@@ -25,7 +25,7 @@ function($, SpriteLoader, update, draw, collider, Player, Enemy, Bullet, Explosi
     $('#loadbar').css('width', 10 * loadCounter);
   }, 1000);
 
-  var spriteNames = ['terrain_mars', 'enemy', 'player2', 'playerBullet'];
+  var spriteNames = ['terrain_mars', 'enemy', 'enemy_turquoise', 'player2', 'playerBullet'];
   for (var i=0; i < 17; i++) {
     spriteNames.push('explosion/explosion-' + i);
   }

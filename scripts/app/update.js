@@ -36,7 +36,11 @@ function() {
     });
 
     if(Math.random() < 0.02) {
-      world.enemies.push(new Enemy(world, Bullet, Explosion));
+      if (Math.random() < 0.5) {
+        world.enemies.push(new Enemy(world, Bullet, Explosion, { spriteName: 'enemy' }));
+      } else {
+        world.enemies.push(new Enemy(world, Bullet, Explosion, { spriteName: 'enemy_turquoise' }));
+      }
     }
   }
   return update;

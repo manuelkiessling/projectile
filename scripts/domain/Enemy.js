@@ -3,10 +3,13 @@ define(['../lib/util'],
 
 function(util) {
 
-  var Enemy = function(world, Bullet, Explosion) {
+  var Enemy = function(world, Bullet, Explosion, options) {
     this.world = world;
     this.Bullet = Bullet;
     this.Explosion = Explosion;
+
+    this.spriteName = options.spriteName || 'enemy';
+
     this.width = 256;
     this.height = 256;
     this.xVelocity = 0;
@@ -51,7 +54,7 @@ function(util) {
   };
 
   Enemy.prototype.draw = function() {
-    this.world.drawSprite('enemy', this.x, this.y, this.width, this.height);
+    this.world.drawSprite(this.spriteName, this.x, this.y, this.width, this.height);
   };
 
   Enemy.prototype.inBounds = function() {
