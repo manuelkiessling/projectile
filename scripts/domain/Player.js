@@ -63,13 +63,13 @@ function(keystatus, util) {
     }
 
     this.x = util.clamp(this.x, -this.hitboxMetrics.x, (this.world.width - this.hitboxMetrics.width - this.hitboxMetrics.x));
-    this.y = util.clamp(this.y, -this.hitboxMetrics.y, (this.world.height - this.hitboxMetrics.height - this.hitboxMetrics.y));
+    this.y = util.clamp(this.y, -this.hitboxMetrics.y, (this.world.height - this.hitboxMetrics.height - this.hitboxMetrics.y + 50));
 
     this.updateHitbox();
   }
 
   Player.prototype.draw = function() {
-    this.world.drawSprite('player', this.x, this.y, this.width, this.height);
+    this.world.drawSprite('player2', this.x, this.y, this.width, this.height);
   }
 
   Player.prototype.midpoint = function() {
@@ -89,10 +89,11 @@ function(keystatus, util) {
   };
 
   Player.prototype.shoot = function() {
+    // Left laser
     this.world.bullets.push(
       new this.Bullet(this.world, this.Explosion, {
-        x: this.midpoint().x - 5, // Correction: half of missile width
-        y: this.midpoint().y - this.hitbox.height/2, // Shoot from top of ship
+        x: this.midpoint().x - 64,
+        y: this.midpoint().y - this.hitbox.height/2 + 15,
         width: 141,
         height: 144,
         hitboxMetrics: {
@@ -102,8 +103,29 @@ function(keystatus, util) {
           height: 47
         },
         direction: 'up',
-        speed: 0.01,
-        acceleration: 0.9,
+        speed: 20,
+        acceleration: 0.4,
+        owner: this.type,
+        spriteName: 'playerBullet'
+      }
+    ));
+
+    // Right laser
+    this.world.bullets.push(
+      new this.Bullet(this.world, this.Explosion, {
+        x: this.midpoint().x + 14,
+        y: this.midpoint().y - this.hitbox.height/2 + 15,
+        width: 141,
+        height: 144,
+        hitboxMetrics: {
+          x: 15,
+          y: 12,
+          width: 12,
+          height: 47
+        },
+        direction: 'up',
+        speed: 20,
+        acceleration: 0.4,
         owner: this.type,
         spriteName: 'playerBullet'
       }

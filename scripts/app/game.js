@@ -25,7 +25,7 @@ function($, SpriteLoader, update, draw, collider, Player, Enemy, Bullet, Explosi
     $('#loadbar').css('width', 10 * loadCounter);
   }, 1000);
 
-  var spriteNames = ['terrain_mars', 'enemy', 'player', 'playerBullet'];
+  var spriteNames = ['terrain_mars', 'enemy', 'player2', 'playerBullet'];
   for (var i=0; i < 17; i++) {
     spriteNames.push('explosion/explosion-' + i);
   }
@@ -80,7 +80,7 @@ function($, SpriteLoader, update, draw, collider, Player, Enemy, Bullet, Explosi
     world.width = 960;
     world.height = 640;
     world.fps = 40;
-    world.remainingTime = 60;
+    world.remainingTime = 180;
     world.hits = 0;
     world.terrainSpeed = 2;
     world.players = [];
