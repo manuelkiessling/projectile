@@ -18,10 +18,10 @@ function(keystatus, util) {
     this.shootLock = false;
 
     this.hitboxMetrics = {
-      x: 32,
+      x: 21,
       y: 28,
-      width: 73,
-      height: 120
+      width: 87,
+      height: 99
     };
 
     this.hitbox = {
@@ -92,8 +92,8 @@ function(keystatus, util) {
     // Left laser
     this.world.bullets.push(
       new this.Bullet(this.world, this.Explosion, {
-        x: this.midpoint().x - 64,
-        y: this.midpoint().y - this.hitbox.height/2 + 15,
+        x: this.midpoint().x - 60,
+        y: (this.midpoint().y - this.hitbox.height/2) + 20,
         width: 141,
         height: 144,
         hitboxMetrics: {
@@ -113,8 +113,8 @@ function(keystatus, util) {
     // Right laser
     this.world.bullets.push(
       new this.Bullet(this.world, this.Explosion, {
-        x: this.midpoint().x + 14,
-        y: this.midpoint().y - this.hitbox.height/2 + 15,
+        x: this.midpoint().x + 18,
+        y: (this.midpoint().y - this.hitbox.height/2) + 20,
         width: 141,
         height: 144,
         hitboxMetrics: {

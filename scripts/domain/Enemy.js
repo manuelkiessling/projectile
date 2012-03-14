@@ -58,8 +58,8 @@ function(util) {
   };
 
   Enemy.prototype.inBounds = function() {
-    return this.x >= (-this.width) && this.x <= this.world.width + this.width &&
-           this.y >= (-this.height) && this.y <= this.world.height + this.height;
+    return this.hitbox.x >= (-this.hitbox.width) && this.hitbox.x <= this.world.width + this.hitbox.width &&
+           this.hitbox.y >= (- 400) && this.hitbox.y <= this.world.height + this.hitbox.height;
   };
 
   Enemy.prototype.midpoint = function() {

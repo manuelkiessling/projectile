@@ -61,8 +61,8 @@ function() {
   };
 
   Bullet.prototype.inBounds = function() {
-    return this.x >= 0 && this.x <= this.world.width &&
-           this.y >= 0 && this.y <= this.world.height;
+    return this.hitbox.x >= 0 && this.hitbox.x <= this.world.width &&
+           this.hitbox.y >= 0 && this.hitbox.y <= this.world.height;
   };
 
   Bullet.prototype.explode = function(typeOfOther) {
