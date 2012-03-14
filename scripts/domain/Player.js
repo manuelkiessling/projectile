@@ -16,6 +16,7 @@ function(keystatus, util) {
     this.speed = 7;
     this.type = 'player';
     this.shootLock = false;
+    this.lastShotFrom = 'left';
 
     this.hitboxMetrics = {
       x: 21,
@@ -89,47 +90,51 @@ function(keystatus, util) {
   };
 
   Player.prototype.shoot = function() {
-    // Left laser
-    this.world.bullets.push(
-      new this.Bullet(this.world, this.Explosion, {
-        x: this.midpoint().x - 60,
-        y: (this.midpoint().y - this.hitbox.height/2) + 20,
-        width: 141,
-        height: 144,
-        hitboxMetrics: {
-          x: 18,
-          y: 20,
-          width: 6,
-          height: 30
-        },
-        direction: 'up',
-        speed: 10,
-        acceleration: 0.9,
-        owner: this.type,
-        spriteName: 'playerBullet'
-      }
-    ));
-
-    // Right laser
-    this.world.bullets.push(
-      new this.Bullet(this.world, this.Explosion, {
-        x: this.midpoint().x + 18,
-        y: (this.midpoint().y - this.hitbox.height/2) + 20,
-        width: 141,
-        height: 144,
-        hitboxMetrics: {
-          x: 18,
-          y: 20,
-          width: 6,
-          height: 30
-        },
-        direction: 'up',
-        speed: 10,
-        acceleration: 0.9,
-        owner: this.type,
-        spriteName: 'playerBullet'
-      }
-    ));
+    if (this.lastShotFrom == 'left') {
+      // Right laser
+      this.world.bullets.push(
+        new this.Bullet(this.world, this.Explosion, {
+          x: this.midpoint().x + 18,
+          y: (this.midpoint().y - this.hitbox.height/2) + 20,
+          width: 141,
+          height: 144,
+          hitboxMetrics: {
+            x: 18,
+            y: 20,
+            width: 6,
+            height: 30
+          },
+          direction: 'up',
+          speed: 10,
+          acceleration: 0.9,
+          owner: this.type,
+          spriteName: 'playerBullet'
+        }
+      ));
+      this.lastShotFrom = 'right';
+    } else {
+      // Left laser
+      this.world.bullets.push(
+        new this.Bullet(this.world, this.Explosion, {
+          x: this.midpoint().x - 60,
+          y: (this.midpoint().y - this.hitbox.height/2) + 20,
+          width: 141,
+          height: 144,
+          hitboxMetrics: {
+            x: 18,
+            y: 20,
+            width: 6,
+            height: 30
+          },
+          direction: 'up',
+          speed: 10,
+          acceleration: 0.9,
+          owner: this.type,
+          spriteName: 'playerBullet'
+        }
+      ));
+      this.lastShotFrom = 'left';
+    }
   }
 
   Player.prototype.explode = function() {

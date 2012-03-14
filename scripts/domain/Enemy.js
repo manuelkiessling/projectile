@@ -48,7 +48,7 @@ function(util) {
 
     this.active = this.active && this.inBounds();
 
-    if (Math.random() < 0.03) {
+    if (Math.random() < 0.01) {
       this.shoot();
     }
   };
@@ -81,22 +81,23 @@ function(util) {
   Enemy.prototype.shoot = function() {
     this.world.bullets.push(
       new this.Bullet(this.world, this.Explosion, {
-        color: '#C00',
-        x: this.midpoint().x - 3, // Correction: half of shot width
-        y: this.midpoint().y + this.hitbox.height/2, // Shoot from top of ship
-        width: 6,
-        height: 16,
+        x: (this.hitbox.x + this.hitbox.width/2) - 21,
+        y: (this.hitbox.y + this.hitbox.height) - 47,
+        width: 141,
+        height: 144,
         hitboxMetrics: {
-          x: 0,
-          y: 0,
-          width: 6,
-          height: 16
+          x: 19,
+          y: 26,
+          width: 4,
+          height: 19
         },
         direction: 'down',
-        speed: this.yVelocity + 10,
-        owner: this.type
-      })
-    );
+        speed: 5,
+        acceleration: -0.6,
+        owner: this.type,
+        spriteName: 'enemyBullet'
+      }
+    ));
   };
 
   Enemy.prototype.explode = function() {
