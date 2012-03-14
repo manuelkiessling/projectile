@@ -1,6 +1,7 @@
 "use strict";
 define(['jquery',
         '../lib/SpriteLoader',
+        '../lib/util',
         'update',
         'draw',
         'collider',
@@ -12,10 +13,12 @@ define(['jquery',
         'TerrainBuilder',
         '../vendor/requestAnimFrame',
         '../vendor/requestInterval',
-        '../vendor/requestTimeout'
+        '../vendor/requestTimeout',
+        '../vendor/webgl-2d',
+        '../vendor/browserdetect'
        ],
 
-function($, SpriteLoader, update, draw, collider, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder) {
+function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder) {
 
   var sprites = {};
 
@@ -39,6 +42,17 @@ function($, SpriteLoader, update, draw, collider, Player, Enemy, Bullet, Explosi
   });
 
   var start = function() {
+    var canvas = document.getElementById('world');
+
+    if (util.webglEnabled()) {
+      $('#webglnote').html('WebGL is enabled');
+      WebGL2D.enable(canvas);
+      var context = canvas.getContext('webgl-2d');
+    } else {
+      $('#webglnote').html('WebGL is disabled');
+      var context = canvas.getContext('2d');
+    }
+
     var World = function() {
       this.sprites = sprites;
     };
@@ -78,10 +92,8 @@ function($, SpriteLoader, update, draw, collider, Player, Enemy, Bullet, Explosi
       $('#hits').html('' + this.hits + '');
     };
 
-
     var world = new World();
-
-    world.canvas = document.getElementById('world').getContext('2d');
+    world.canvas = context;
     world.width = 960;
     world.height = 640;
     world.fps = 40;

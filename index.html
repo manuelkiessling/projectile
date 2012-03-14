@@ -43,6 +43,7 @@
         margin: 0 auto;
         padding: 0;
         border: 1px solid black;
+        background-color: black;
       }
       #help {
         width: 960px;
@@ -50,6 +51,9 @@
         text-align: center;
         font-family: Arial, Verdana, sans-serif;
         color: #999;
+      }
+      #webglnote {
+        color: #555;
       }
       #stats {
         width: 960px;
@@ -85,6 +89,7 @@
 
     <div id="help">
       Use arrow keys to move, space to shoot.
+      <span id="webglnote"></span>
     </div>
 
     <canvas id="bufferWorld" width="960" height="7000" style="display: none;">
