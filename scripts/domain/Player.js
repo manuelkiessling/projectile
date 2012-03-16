@@ -17,6 +17,7 @@ function(keystatus, util) {
     this.type = 'player';
     this.shootLock = false;
     this.lastShotFrom = 'left';
+    this.powerups = [];
 
     this.hitboxMetrics = {
       x: 21,
@@ -40,26 +41,36 @@ function(keystatus, util) {
   };
 
   Player.prototype.update = function() {
-    if (keystatus.keydown[this.keyleft]) {
-      this.x -= this.speed;
-    }
-    if (keystatus.keydown[this.keyright]) {
-      this.x += this.speed;
-    }
-    if (keystatus.keydown[this.keyup]) {
-      this.y -= this.speed;
-    }
-    if (keystatus.keydown[this.keydown]) {
-      this.y += this.speed;
-    }
-    if (keystatus.keydown[this.keyfire]) {
-      if (!this.shootLock) {
-        this.shoot();
-        this.shootLock = true;
-        var that = this
-        setTimeout(function() {
-          that.shootLock = false;
-        }, 180);
+    var overwriteSteering = false; // Powerups can take over steering control, e.g. reverse steering etc.
+    this.powerups.forEach(function(powerup) {
+      if (!overwriteSteering) {
+        overwriteSteering = powerup.doesOverwriteSteering; // First overwriter wins
+      }
+      powerup.update();
+    });
+
+    if (!overwriteSteering) {
+      if (keystatus.keydown[this.keyleft]) {
+        this.x -= this.speed;
+      }
+      if (keystatus.keydown[this.keyright]) {
+        this.x += this.speed;
+      }
+      if (keystatus.keydown[this.keyup]) {
+        this.y -= this.speed;
+      }
+      if (keystatus.keydown[this.keydown]) {
+        this.y += this.speed;
+      }
+      if (keystatus.keydown[this.keyfire]) {
+        if (!this.shootLock) {
+          this.shoot();
+          this.shootLock = true;
+          var that = this;
+          setTimeout(function() {
+            that.shootLock = false;
+          }, 180);
+        }
       }
     }
 
@@ -70,7 +81,17 @@ function(keystatus, util) {
   }
 
   Player.prototype.draw = function() {
-    this.world.drawSprite('player2', this.x, this.y, this.width, this.height);
+    var overwriteDrawing = false; // Powerups can overwrite player drawing completely, e.g. invisibility
+    this.powerups.forEach(function(powerup) {
+      if (!overwriteDrawing) {
+        overwriteDrawing = powerup.overwriteDrawing; // First overwriter wins
+      }
+      powerup.draw();
+    });
+
+    if (!overwriteDrawing) {
+      this.world.drawSprite('player2', this.x, this.y, this.width, this.height);
+    }
   }
 
   Player.prototype.midpoint = function() {
@@ -90,6 +111,13 @@ function(keystatus, util) {
   };
 
   Player.prototype.shoot = function() {
+    var powerupHandledShooting = false;
+    this.powerups.forEach(function(powerup) {
+      if (!powerupHandledShooting && typeof powerup.shoot === 'function') { // only use first shoot handler found
+        powerup.shoot();
+        powerupHandledShooting = true;
+      }
+    });
     if (this.lastShotFrom == 'left') {
       // Right laser
       this.world.bullets.push(
@@ -135,6 +163,11 @@ function(keystatus, util) {
       ));
       this.lastShotFrom = 'left';
     }
+  }
+
+  Player.prototype.activatePowerup = function(powerup) {
+    // @TODO In case of exclusive Powerups, add check here
+    this.powerups.push(powerup);
   }
 
   Player.prototype.explode = function() {
