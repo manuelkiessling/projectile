@@ -3,28 +3,29 @@ define(['draw', '../lib/util'],
 
 function(draw, util) {
 
-  var TerrainBuilder = function(world, Tile) {
+  var TerrainBuilder = function(options, world, bufferWorldCanvas, Tile) {
     this.world = world;
     this.Tile = Tile;
 
     this.bufferWorld = Object.create(world);
-    this.bufferWorld.canvas = document.getElementById('bufferWorld').getContext('2d');
+    this.bufferWorld.context = bufferWorldCanvas.getContext('2d');
     this.bufferWorld.tiles = [];
-    this.bufferWorld.width = 740;
-    this.bufferWorld.height = 7560;
+    this.bufferWorld.width = this.options.width;
+    this.bufferWorld.height = this.options.height;
 
     // Options for generating one screen of the world
     this.options = {};
     this.options.xOffset = 0;
     this.options.yOffset = 0;
-    this.options.tileWidth = 740;
-    this.options.tileHeight = 1512;
+    this.options.tileWidth = this.options.tileWidth;
+    this.options.tileHeight = this.options.tileHeight;
     this.options.columns = this.bufferWorld.width / this.options.tileWidth;
     this.options.rows = this.bufferWorld.height / this.options.tileHeight;
+  };
 
-
+  TerrainBuilder.prototype.createTerrain = function() {
     var imageData = createImageData(this.bufferWorld, this.Tile, this.options, draw);
-    pushImageDataToWorld(imageData, this.world, Tile, 0, -(this.bufferWorld.height - this.world.height), this.bufferWorld.width, this.bufferWorld.height);
+    pushImageDataToWorld(imageData, this.world, this.Tile, 0, -(this.bufferWorld.height - this.world.height), this.bufferWorld.width, this.bufferWorld.height);
   };
 
   var loops = 0;
@@ -72,7 +73,7 @@ function(draw, util) {
 
     var width = util.clamp(options.columns * options.tileWidth, 0, world.width);
     var height = util.clamp(options.rows * options.tileHeight, 0, world.height);
-    return world.canvas.getImageData(0, 0, width, height);
+    return world.context.getImageData(0, 0, width, height);
   };
 
   var generateTerrain = function(world, Tile, xOffset, yOffset, rows, columns, width, height) {

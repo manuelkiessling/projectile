@@ -1,10 +1,10 @@
 "use strict";
 define(['jquery',
-        '../lib/SpriteLoader',
-        '../lib/util',
+        'util',
         'update',
         'draw',
         'collider',
+        '../domain/World',
         '../domain/Player',
         '../domain/Enemy',
         '../domain/Bullet',
@@ -18,150 +18,74 @@ define(['jquery',
         '../vendor/browserdetect'
        ],
 
-function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder) {
+function($, util, update, draw, collider, World, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder) {
 
-  var game = {};
+  var Game = function(options, canvas, bufferCanvas, sprites) {
+    this.options = options;
+    this.canvas = canvas;
+    this.bufferCanvas = bufferCanvas;
+    this.sprites = sprites;
+
+    this.fps = 40;
+    this.remainingTime = 60;
+  };
 
   var eventHandlers = {};
-  game.on = function(eventName, callback) {
+  Game.prototype.on = function(eventName, callback) {
     eventHandlers[eventName] = callback;
   };
 
-  var sprites = {};
-  game.setSprites = function(theSprites) {
-    sprites = theSprites;
-  };
+  Game.prototype.start = function() {
+    var game = this;
+    var canvas = this.options.canvas;
 
-  game.play = function() {
+    var context;
+    if (util.webglEnabled()) {
+      eventHandlers['webglDetectionFinished'](true);
+      WebGL2D.enable(canvas);
+      context = canvas.getContext('webgl-2d');
+    } else {
+      eventHandlers['webglDetectionFinished'](false);
+      context = canvas.getContext('2d');
+    }
 
-
-    var start = function() {
-      var canvas = document.getElementById('world');
-
-      if (util.webglEnabled()) {
-        $('#webglnote').html('WebGL is enabled');
-        WebGL2D.enable(canvas);
-        var context = canvas.getContext('webgl-2d');
-      } else {
-        $('#webglnote').html('WebGL is disabled');
-        var context = canvas.getContext('2d');
-      }
-
-      var World = function() {
-        this.sprites = sprites;
-      };
-
-      World.prototype.drawImageData = function(imageData, x, y) {
-        this.canvas.putImageData(imageData, x, y);
-      };
-
-      World.prototype.drawSprite = function(spriteName, x, y, width, height) {
-        if (this.sprites[spriteName]) {
-          if (!width) {
-            width = sprites[spriteName].width;
-          }
-          if (!height) {
-            height = sprites[spriteName].height;
-          }
-          this.canvas.drawImage(this.sprites[spriteName], x, y, width, height);
-        }
-      };
-
-      World.prototype.drawImage = function(image, x, y, width, height) {
-        this.canvas.drawImage(image, x, y, width, height);
-      }
-
-      World.prototype.drawRectangle = function(color, x, y, width, height) {
-        this.canvas.fillStyle = color;
-        this.canvas.fillRect(x, y, width, height);
-      };
-
-      World.prototype.addHit = function() {
-        this.hits++;
-        $('#hits').html('' + this.hits + '');
-      };
-
-      World.prototype.substractHit = function() {
-        if (this.hits > 0) {
-          this.hits--;
-        }
-        $('#hits').html('' + this.hits + '');
-      };
-
-      var world = new World();
-      world.canvas = context;
-      world.width = 740;
-      world.height = 640;
-      world.fps = 40;
-      world.remainingTime = 60;
-      world.hits = 0;
-      world.terrainSpeed = 1;
-      world.players = [];
-      world.enemies = [];
-      world.bullets = [];
-      world.explosions = [];
-      world.tiles = [];
-
-      world.players.push(new Player(world, Bullet, Explosion, {
-        keyleft: 'left',
-        keyright: 'right',
-        keyup: 'up',
-        keydown: 'down',
-        keyfire: 'space'
-      }));
-
-      /*
-       world.players.push(new Player(world, Bullet, {
-       keyleft: 'a',
-       keyright: 'd',
-       keyup: 'w',
-       keydown: 's',
-       keyfire: 'q'
-       }));
-       */
-
-      world.terrainBuilder = new TerrainBuilder(world, Tile);
-
-      // Game loop
-      var gameloop = requestInterval(function() {
-        collider(world);
-        update(world, Enemy, Bullet, Explosion);
-        draw(world);
-      }, 1000 / world.fps);
-
-      var timerloop = requestInterval(function() {
-        world.remainingTime--;
-        $('#time').html('' + world.remainingTime + '');
-      }, 1000);
-
-      requestTimeout(function() {
-        clearRequestInterval(gameloop);
-        clearRequestInterval(timerloop);
-        $('#gameoverhits').html('' + world.hits + '');
-        $('#gameoverscreen').show();
-        FB.ui(
-          {
-            method :     'feed',
-            link   :     'https://apps.facebook.com/projectilegame/',
-            name   :     'projectile - a 2D space shooter',
-            caption:     'https://apps.facebook.com/projectilegame/',
-            description: 'I just scored ' + world.hits + ' points - play this old-school action space shooter right in your browser and see how much you can score!',
-            picture:     'http://stark-stream-6982.herokuapp.com/assets/images/logo75x75.png'
-          },
-          function (response) {
-            window.location = window.location;
-          }
-        );
-      }, world.remainingTime * 1000);
-
-      requestInterval(function() {
-        //console.log(player.bullets);
-        //console.log(enemies);
-      }, 1000);
+    var worldOptions = {
+      context: context,
+      width: this.options.world_width,
+      height: this.options.world_height,
+      terrainSpeed: 1
     };
+    var world = new World(worldOptions, context, this.sprites);
+
+    var terrainBuilderOptions = {
+      width: 740,
+      height: 7560,
+      tileWidth: 740,
+      tileHeight: 1512
+    };
+    var terrainBuilder = new TerrainBuilder(terrainBuilderOptions, world, this.bufferCanvas, Tile);
+    terrainBuilder.createTerrain();
+
+    world.addPlayer(new Player(world, Bullet, Explosion, {
+      keyleft: 'left',
+      keyright: 'right',
+      keyup: 'up',
+      keydown: 'down',
+      keyfire: 'space'
+    }));
+
+    var gameloop = requestInterval(function() {
+      collider(world);
+      update(world, Enemy, Bullet, Explosion);
+      draw(world);
+    }, 1000 / game.fps);
+
+    requestTimeout(function() {
+      clearRequestInterval(gameloop);
+      eventHandlers['end']();
+    }, game.runtime * 1000);
   };
 
-  return game;
+  return Game;
 
 });
-// http://www.html5rocks.com/en/tutorials/canvas/notearsgame/

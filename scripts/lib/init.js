@@ -1,7 +1,7 @@
 "use strict";
-describe([],
+define(['SpriteLoader'],
 
-function() {
+function(SpriteLoader) {
 
   var loadCounter = 1;
   var interval = setInterval(function() {
