@@ -41,12 +41,12 @@ function($, util, update, draw, collider, World, Player, Enemy, Bullet, Explosio
 
     var context;
     if (util.webglEnabled()) {
-      eventHandlers['webglDetectionFinished'](true);
       WebGL2D.enable(canvas);
       context = canvas.getContext('webgl-2d');
+      eventHandlers['webglDetectionFinished'](true);
     } else {
-      eventHandlers['webglDetectionFinished'](false);
       context = canvas.getContext('2d');
+      eventHandlers['webglDetectionFinished'](false);
     }
 
     var worldOptions = {
