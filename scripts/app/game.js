@@ -144,7 +144,7 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
       requestTimeout(function() {
         clearRequestInterval(gameloop);
         clearRequestInterval(timerloop);
-        $('#gameoverscreenhist').html('' + this.hits + '');
+        $('#gameoverscreenhits').html('' + this.hits + '');
         $('#gameoverscreen').show();
         FB.ui(
           {
