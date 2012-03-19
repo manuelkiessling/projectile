@@ -100,7 +100,7 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
       world.width = 740;
       world.height = 640;
       world.fps = 40;
-      world.remainingTime = 5;
+      world.remainingTime = 60;
       world.hits = 0;
       world.terrainSpeed = 1;
       world.players = [];
