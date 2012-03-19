@@ -159,6 +159,7 @@ $app_name = idx($app_info, 'name', '');
         margin: 0 auto;
         text-align: center;
         font-family: "Courier New", Courier, sans-serif;
+        font-weight: bold;
         color: #4c8000;
       }
       #webglnote {
