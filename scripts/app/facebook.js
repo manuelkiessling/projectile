@@ -72,6 +72,9 @@ function($, init, Game) {
           }
         );
       });
+
+      game.start();
+
     });
   });
 
