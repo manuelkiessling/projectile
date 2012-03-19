@@ -164,7 +164,7 @@ $app_name = idx($app_info, 'name', '');
         color: #99ff00;
         text-align: center;
       }
-      #gameoverhits {
+      #gameoverscore {
         color: #fff;
         font-weight: bolder;
       }
@@ -191,7 +191,7 @@ $app_name = idx($app_info, 'name', '');
       <div id="stats">
         Welcome, <?php echo he(idx($basic, 'name')); ?> -
         Time: <span id="time">60</span> seconds -
-        Score: <span id="hits">0</span>
+        Score: <span id="score">0</span>
       </div>
 
       <div id="worldbox">
@@ -211,7 +211,7 @@ $app_name = idx($app_info, 'name', '');
 
       <div id="gameoverscreen">
         <div id="gameoverscreeninner">
-          Congratulations, you scored <span id="gameoverhits"></span> points.
+          Congratulations, you scored <span id="gameoverscore"></span> points.
           <br />
           <br />
           Share this game with your friends and see how they score!

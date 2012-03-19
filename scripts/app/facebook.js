@@ -45,18 +45,18 @@ function($, init, Game) {
       score = 0;
       game.on('enemyKilled', function() {
         score++;
-        $('#hits').html('' + score + '');
+        $('#score').html('' + score + '');
       });
 
       game.on('playerIsHit', function() {
         if (score > 0) {
             score--;
           }
-          $('#hits').html('' + score + '');
+          $('#score').html('' + score + '');
       });
 
       game.on('end', function() {
-        $('#gameoverhits').html('' + score + '');
+        $('#gameoverscore').html('' + score + '');
         $('#gameoverscreen').show();
         FB.ui(
           {
