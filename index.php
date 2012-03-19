@@ -84,6 +84,13 @@ $app_name = idx($app_info, 'name', '');
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>projectile » Open Source HTML5 space shooter</title>
     <meta name="description" content="projectile is a 2D space shooter playable in your browser, written in JavaScript using Canvas" />
+    <meta property="og:title" content="<?php echo he($app_name); ?>" />
+    <meta property="og:type" content="game" />
+    <meta property="og:url" content="<?php echo AppInfo::getUrl(); ?>" />
+    <!-- <meta property="og:image" content="<?php echo AppInfo::getUrl('/logo.png'); ?>" /> -->
+    <meta property="og:site_name" content="<?php echo he($app_name); ?>" />
+    <meta property="og:description" content="projectile is a 2D space shooter" />
+    <meta property="fb:app_id" content="<?php echo AppInfo::appID(); ?>" />
     <style type="text/css">
       html, body {
         padding: 0;
