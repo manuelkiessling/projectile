@@ -170,7 +170,9 @@ $app_name = idx($app_info, 'name', '');
   <body>
     <div id="fb-root"></div>
 
+
     <?php if (isset($basic)) { ?>
+
       <div id="loadscreen">
         <div id="loadscreen-inner">
           <span id="loadnote">Loading, please wait...</span>
@@ -229,7 +231,6 @@ $app_name = idx($app_info, 'name', '');
 
 
     <script type="text/javascript">
-
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-2127388-10']);
       _gaq.push(['_trackPageview']);
@@ -239,8 +240,8 @@ $app_name = idx($app_info, 'name', '');
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-
     </script>
+
     <script type="text/javascript">
       window.fbAsyncInit = function() {
         FB.init({
