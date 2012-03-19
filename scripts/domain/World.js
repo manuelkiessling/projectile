@@ -46,4 +46,6 @@ function() {
       this.context.fillRect(x, y, width, height);
     };
 
+    return World;
+
 });
