@@ -16,6 +16,6 @@ function(SpriteLoader) {
     });
   };
 
-
+  return init;
 
 });
