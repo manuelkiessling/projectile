@@ -91,7 +91,7 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
       };
 
       World.prototype.substractHit = function() {
-        this.hits--;
+        if (this.hits >= 0) this.hits--;
         $('#hits').html('' + this.hits + '');
       };
 
@@ -144,6 +144,7 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
       requestTimeout(function() {
         clearRequestInterval(gameloop);
         clearRequestInterval(timerloop);
+        $('#gameoverscreenhist').html('' + this.hits + '');
         $('#gameoverscreen').show();
         FB.ui(
           {

@@ -179,17 +179,21 @@ $app_name = idx($app_info, 'name', '');
         color: #99ff00;
       }
       #gameoverscreeninner {
-        margin-top: 100px;
         margin: 0 auto;
+        margin-top: 100px;
+        padding: 32px;
+        border-radius: 16px;
+        background: rgba(0, 0, 0, 0.5);
         width: 300px;
         font-family: "Courier New", Courier, sans-serif;
-        font-weight: bolder;
+        font-weight: bold;
         font-size: 12pt;
         color: #99ff00;
         text-align: center;
       }
       #gameoverhits {
         color: #fff;
+        font-weight: bolder;
       }
     </style>
   </head>
