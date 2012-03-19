@@ -123,6 +123,12 @@ $app_name = idx($app_info, 'name', '');
         margin-top: 8px;
         margin-bottom: 8px;
       }
+      #listoffriends {
+        margin-top: 40px;
+      }
+      #listoffriends a {
+        color: #fff;
+      }
       #loadscreen, #gameoverscreen {
         position: fixed;
         top: 0;
@@ -210,7 +216,7 @@ $app_name = idx($app_info, 'name', '');
     <?php if (isset($basic)) { ?>
       <div id="loadscreen">
         <div id="loadscreen-inner">
-          Loading, please wait...
+          <span id="loadnote">Loading, please wait...</span>
           <br/>
           <span id="loadbar">&nbsp;</span>
           <br />
@@ -262,26 +268,25 @@ $app_name = idx($app_info, 'name', '');
         to play the game.
 
         <?php if (sizeof($app_using_friends) > 0) { ?>
-          <div id="listfriendsapp">
-            <div class="list">
-              <h3>Friends playing this game:</h3>
-              <ul class="friends">
-                <?php
-                  foreach ($app_using_friends as $auf) {
-                    $id = idx($auf, 'uid');
-                    $name = idx($auf, 'name');
-                ?>
-                <li>
-                  <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
-                    <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
-                    <?php echo he($name); ?>
-                  </a>
-                </li>
-                <?php
-                  }
-                ?>
-              </ul>
-            </div>
+          <div id="listoffriends">
+            Friends playing this game:
+            <br />
+            <br />
+            <?php
+              foreach ($app_using_friends as $auf) {
+                $id = idx($auf, 'uid');
+                $name = idx($auf, 'name');
+            ?>
+              <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
+                <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
+                <br />
+                <?php echo he($name); ?>
+              </a>
+              <br />
+              <br />
+            <?php
+              }
+            ?>
           </div>
         <?php } ?>
 
