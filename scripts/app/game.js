@@ -39,8 +39,11 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
     var spriteLoader = new SpriteLoader();
     spriteLoader.load('assets/images', spriteNames, '.png', function(loadedSprites) {
       sprites = loadedSprites;
-      $('#loadscreen').css('display', 'none');
       clearInterval(interval);
+      $('#startlink').show();
+      $('#startlink').click(function() {
+        $('#loadscreen').hide();
+      });
       start();
     });
 

@@ -149,6 +149,9 @@ $app_name = idx($app_info, 'name', '');
         background-color: #0f0;
         width: 0;
       }
+      #startlink {
+        display: none;
+      }
       #worldbox {
         width: 740px;
         height: 640px;
@@ -195,6 +198,9 @@ $app_name = idx($app_info, 'name', '');
         color: #fff;
         font-weight: bolder;
       }
+      #playagainlink {
+        color: #fff;
+      }
     </style>
   </head>
   <body>
@@ -206,6 +212,9 @@ $app_name = idx($app_info, 'name', '');
           Loading, please wait...
           <br/>
           <span id="loadbar">&nbsp;</span>
+          <br />
+          <br />
+          <a id="startlink" href="#">START GAME</a>
         </div>
       </div>
 
@@ -236,6 +245,9 @@ $app_name = idx($app_info, 'name', '');
           <br />
           <br />
           Share this game with your friends and see how they score!
+          <br />
+          <br />
+          <a id="playagainlink" href="./">Click to play again</a>
         </div>
       </div>
 
