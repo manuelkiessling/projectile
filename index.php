@@ -88,7 +88,7 @@ $app_name = idx($app_info, 'name', '');
       html, body {
         padding: 0;
         margin: 0;
-        width: 760px;
+        width: 740px;
       }
       body {
         background-color: #000;
@@ -105,11 +105,11 @@ $app_name = idx($app_info, 'name', '');
         background: rgba(0, 0, 0, 0.8);
       }
       #loadscreen-inner {
-        width: 760px;
+        width: 740px;
         margin: 0 auto;
         margin-top: 300px;
         font-family: "Courier New", Courier, sans-serif;
-        font-size: 36pt;
+        font-size: 24pt;
         font-weight: bolder;
         color: #fff;
         text-align: center;
@@ -120,7 +120,7 @@ $app_name = idx($app_info, 'name', '');
         width: 0;
       }
       #worldbox {
-        width: 760px;
+        width: 740px;
         height: 640px;
         margin: 0 auto;
         padding: 0;
@@ -128,7 +128,7 @@ $app_name = idx($app_info, 'name', '');
         background-color: black;
       }
       #help {
-        width: 760px;
+        width: 740px;
         margin: 0 auto;
         text-align: center;
         font-family: Arial, Verdana, sans-serif;
@@ -138,7 +138,7 @@ $app_name = idx($app_info, 'name', '');
         color: #555;
       }
       #stats {
-        width: 760px;
+        width: 740px;
         margin: 0 auto;
         font-family: "Courier New", Courier;
         font-weight: bolder;
@@ -163,7 +163,7 @@ $app_name = idx($app_info, 'name', '');
     </div>
 
     <div id="worldbox">
-      <canvas id="world" width="760" height="640">
+      <canvas id="world" width="740" height="640">
         This browser can not run this game (canvas support missing).
       </canvas>
     </div>
@@ -173,7 +173,7 @@ $app_name = idx($app_info, 'name', '');
       <span id="webglnote"></span>
     </div>
 
-    <canvas id="bufferWorld" width="760" height="7560" style="display: none;">
+    <canvas id="bufferWorld" width="740" height="7560" style="display: none;">
       This browser can not run this game (canvas support missing).
     </canvas>
 

@@ -10,14 +10,14 @@ function(draw, util) {
     this.bufferWorld = Object.create(world);
     this.bufferWorld.canvas = document.getElementById('bufferWorld').getContext('2d');
     this.bufferWorld.tiles = [];
-    this.bufferWorld.width = 760;
+    this.bufferWorld.width = 740;
     this.bufferWorld.height = 7560;
 
     // Options for generating one screen of the world
     this.options = {};
     this.options.xOffset = 0;
     this.options.yOffset = 0;
-    this.options.tileWidth = 760;
+    this.options.tileWidth = 740;
     this.options.tileHeight = 1512;
     this.options.columns = this.bufferWorld.width / this.options.tileWidth;
     this.options.rows = this.bufferWorld.height / this.options.tileHeight;
