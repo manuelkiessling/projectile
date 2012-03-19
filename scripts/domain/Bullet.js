@@ -13,7 +13,7 @@ function() {
     this.height = options.height;
     this.speed = options.speed || 4;
     this.acceleration = options.acceleration || 0;
-    this.image = options.image || null;
+    this.spriteName = options.spriteName || null;
 
     this.xVelocity = 0;
 
@@ -52,17 +52,17 @@ function() {
   };
 
   Bullet.prototype.draw = function() {
-    if (this.image === null) {
+    if (this.spriteName === null) {
       this.world.drawRectangle(this.color, this.x, this.y, this.width, this.height);
     } else {
-      this.world.drawSprite(this.image, this.x, this.y, this.width, this.height);
+      this.world.drawSprite(this.spriteName, this.x, this.y, this.width, this.height);
     }
 
   };
 
   Bullet.prototype.inBounds = function() {
-    return this.x >= 0 && this.x <= this.world.width &&
-           this.y >= 0 && this.y <= this.world.height;
+    return this.hitbox.x >= 0 && this.hitbox.x <= this.world.width &&
+           this.hitbox.y >= 0 && this.hitbox.y <= this.world.height;
   };
 
   Bullet.prototype.explode = function(typeOfOther) {

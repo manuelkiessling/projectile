@@ -1,21 +1,26 @@
 "use strict";
 define(['jquery',
+        '../lib/SpriteLoader',
+        '../lib/util',
         'update',
         'draw',
         'collider',
-        'Player',
-        'Enemy',
-        'Bullet',
-        'Explosion',
+        '../domain/Player',
+        '../domain/Enemy',
+        '../domain/Bullet',
+        '../domain/Explosion',
+        '../domain/Tile',
         'TerrainBuilder',
-        'Tile',
-        '../lib/SpriteAnimation'
+        '../vendor/requestAnimFrame',
+        '../vendor/requestInterval',
+        '../vendor/requestTimeout',
+        '../vendor/webgl-2d',
+        '../vendor/browserdetect'
        ],
 
-function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBuilder, Tile, SpriteAnimation) {
+function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder) {
 
   var sprites = {};
-  var spriteCounter = 0;
 
   var loadCounter = 1;
   var interval = setInterval(function() {
@@ -23,25 +28,31 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
     $('#loadbar').css('width', 10 * loadCounter);
   }, 1000);
 
-  var spriteNames = ['terrain_mars', 'enemy', 'player', 'playerBullet'];
+  var spriteNames = ['terrain_mars1', 'terrain_mars2', 'enemy', 'enemy_turquoise', 'enemy2', 'player2', 'playerBullet', 'enemyBullet'];
   for (var i=0; i < 17; i++) {
     spriteNames.push('explosion/explosion-' + i);
   }
-  spriteNames.forEach(function(spriteFile) {
-    var img = new Image();
-    img.onload = function() {
-      spriteCounter++;
-      sprites[spriteFile] = img;
-      if (spriteCounter === spriteNames.length) {
-        $('#loadscreen').css('display', 'none');
-        clearInterval(interval);
-        start();
-      }
-    };
-    img.src = 'assets/images/' + spriteFile + '.png';
+
+  var spriteLoader = new SpriteLoader();
+  spriteLoader.load('assets/images', spriteNames, '.png', function(loadedSprites) {
+    sprites = loadedSprites;
+    $('#loadscreen').css('display', 'none');
+    clearInterval(interval);
+    start();
   });
 
   var start = function() {
+    var canvas = document.getElementById('world');
+
+    if (util.webglEnabled()) {
+      $('#webglnote').html('WebGL is enabled');
+      WebGL2D.enable(canvas);
+      var context = canvas.getContext('webgl-2d');
+    } else {
+      $('#webglnote').html('WebGL is disabled');
+      var context = canvas.getContext('2d');
+    }
+
     var World = function() {
       this.sprites = sprites;
     };
@@ -76,16 +87,19 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
       $('#hits').html('' + this.hits + '');
     };
 
+    World.prototype.substractHit = function() {
+      this.hits--;
+      $('#hits').html('' + this.hits + '');
+    };
 
     var world = new World();
-
-    world.canvas = document.getElementById('world').getContext('2d');
+    world.canvas = context;
     world.width = 960;
     world.height = 640;
     world.fps = 40;
     world.remainingTime = 60;
     world.hits = 0;
-    world.terrainSpeed = 2;
+    world.terrainSpeed = 1;
     world.players = [];
     world.enemies = [];
     world.bullets = [];
@@ -113,24 +127,24 @@ function($, update, draw, collider, Player, Enemy, Bullet, Explosion, TerrainBui
     world.terrainBuilder = new TerrainBuilder(world, Tile);
 
     // Game loop
-    setInterval(function() {
+    requestInterval(function() {
       collider(world);
       update(world, Enemy, Bullet, Explosion);
       draw(world);
     }, 1000 / world.fps);
 
-    setInterval(function() {
+    requestInterval(function() {
       world.remainingTime--;
       $('#time').html('' + world.remainingTime + '');
     }, 1000);
 
-    setTimeout(function() {
+    requestTimeout(function() {
       world.remainingTime--;
       window.alert('Congratulations, your score is: ' + world.hits);
       window.location.reload();
     }, world.remainingTime * 1000);
 
-    setInterval(function() {
+    requestInterval(function() {
       //console.log(player.bullets);
       //console.log(enemies);
     }, 1000);

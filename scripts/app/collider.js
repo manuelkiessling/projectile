@@ -21,6 +21,7 @@ function() {
       });
       world.players.forEach(function(player) {
         if (collides(bullet, player)) {
+          world.substractHit();
           player.explode();
           bullet.explode('player');
         }

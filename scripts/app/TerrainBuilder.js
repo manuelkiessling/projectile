@@ -11,14 +11,14 @@ function(draw, util) {
     this.bufferWorld.canvas = document.getElementById('bufferWorld').getContext('2d');
     this.bufferWorld.tiles = [];
     this.bufferWorld.width = 960;
-    this.bufferWorld.height = 7000;
+    this.bufferWorld.height = 7560;
 
     // Options for generating one screen of the world
     this.options = {};
     this.options.xOffset = 0;
     this.options.yOffset = 0;
     this.options.tileWidth = 960;
-    this.options.tileHeight = 7000;
+    this.options.tileHeight = 1512;
     this.options.columns = this.bufferWorld.width / this.options.tileWidth;
     this.options.rows = this.bufferWorld.height / this.options.tileHeight;
 
@@ -77,21 +77,14 @@ function(draw, util) {
 
   var generateTerrain = function(world, Tile, xOffset, yOffset, rows, columns, width, height) {
     var tiles = [];
-    var sprite;
-    var rand;
+    var sprite = 'mars2';
     for (var i=0; i < rows; i++) {
       for (var j=0; j < columns; j++) {
-        rand = Math.random();
-        if (rand < 0.5) {
-          sprite = 'starfield1';
-        } else if (rand < 0.98) {
-          sprite = 'starfield2'
-        } else if (rand < 0.99) {
-          sprite = 'starfield_planet';
+        if (sprite == 'mars1') {
+          sprite = 'mars2';
         } else {
-          sprite = 'starfield_galaxy';
+          sprite = 'mars1';
         }
-        sprite = 'mars';
         tiles.push(new Tile(world, {
           sprite: 'terrain_' + sprite,
           x: xOffset + (j * width),

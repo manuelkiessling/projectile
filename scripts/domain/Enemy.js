@@ -3,10 +3,13 @@ define(['../lib/util'],
 
 function(util) {
 
-  var Enemy = function(world, Bullet, Explosion) {
+  var Enemy = function(world, Bullet, Explosion, options) {
     this.world = world;
     this.Bullet = Bullet;
     this.Explosion = Explosion;
+
+    this.spriteName = options.spriteName || 'enemy';
+
     this.width = 256;
     this.height = 256;
     this.xVelocity = 0;
@@ -45,18 +48,18 @@ function(util) {
 
     this.active = this.active && this.inBounds();
 
-    if (Math.random() < 0.03) {
+    if (Math.random() < 0.01) {
       this.shoot();
     }
   };
 
   Enemy.prototype.draw = function() {
-    this.world.drawSprite('enemy', this.x, this.y, this.width, this.height);
+    this.world.drawSprite(this.spriteName, this.x, this.y, this.width, this.height);
   };
 
   Enemy.prototype.inBounds = function() {
-    return this.x >= (-this.width) && this.x <= this.world.width + this.width &&
-           this.y >= (-this.height) && this.y <= this.world.height + this.height;
+    return this.hitbox.x >= (-this.hitbox.width) && this.hitbox.x <= this.world.width + this.hitbox.width &&
+           this.hitbox.y >= (- 400) && this.hitbox.y <= this.world.height + this.hitbox.height;
   };
 
   Enemy.prototype.midpoint = function() {
@@ -78,22 +81,23 @@ function(util) {
   Enemy.prototype.shoot = function() {
     this.world.bullets.push(
       new this.Bullet(this.world, this.Explosion, {
-        color: '#C00',
-        x: this.midpoint().x - 3, // Correction: half of shot width
-        y: this.midpoint().y + this.hitbox.height/2, // Shoot from top of ship
-        width: 6,
-        height: 16,
+        x: (this.hitbox.x + this.hitbox.width/2) - 21,
+        y: (this.hitbox.y + this.hitbox.height) - 47,
+        width: 141,
+        height: 144,
         hitboxMetrics: {
-          x: 0,
-          y: 0,
-          width: 6,
-          height: 16
+          x: 19,
+          y: 26,
+          width: 4,
+          height: 19
         },
         direction: 'down',
-        speed: this.yVelocity + 10,
-        owner: this.type
-      })
-    );
+        speed: 5,
+        acceleration: -0.6,
+        owner: this.type,
+        spriteName: 'enemyBullet'
+      }
+    ));
   };
 
   Enemy.prototype.explode = function() {
