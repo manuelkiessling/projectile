@@ -150,7 +150,8 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
             link   :     'https://apps.facebook.com/projectilegame/',
             name   :     'projectile - a 2D space shooter',
             caption:     'https://apps.facebook.com/projectilegame/',
-            description: 'Play an old-school action space shooter right in your browser!'
+            description: 'I just received a score of ' + this.hits + ' - play this old-school action space shooter right in your browser and see how much you can score!',
+            picture:     'https://stark-stream-6982.herokuapp.com/assets/images/logo75x75.png'
           },
           function (response) {
             window.location = window.location;
