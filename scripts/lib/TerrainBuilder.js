@@ -1,5 +1,5 @@
 "use strict";
-define(['draw', '../lib/util'],
+define(['draw', 'util'],
 
 function(draw, util) {
 

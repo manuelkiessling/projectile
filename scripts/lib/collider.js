@@ -3,33 +3,33 @@ define([],
 
 function() {
 
-  var collider = function(world) {
-    world.bullets.forEach(function(bullet) {
-      world.bullets.forEach(function(otherBullet) {
+  var collider = function(game, handlePlayerIsHit, handleEnemyIsKilled) {
+    game.world.bullets.forEach(function(bullet) {
+      game.world.bullets.forEach(function(otherBullet) {
         if (collides(bullet, otherBullet)) {
           bullet.explode('bullet');
           otherBullet.explode('bullet');
         }
       });
-      world.enemies.forEach(function(enemy) {
+      game.world.enemies.forEach(function(enemy) {
         if (collides(bullet, enemy)) {
           enemy.explode();
           bullet.explode('enemy');
-          world.addHit();
+          handleEnemyIsKilled();
           console.log('Boom!');
         }
       });
-      world.players.forEach(function(player) {
+      game.world.players.forEach(function(player) {
         if (collides(bullet, player)) {
-          world.substractHit();
+          handlePlayerIsHit();
           player.explode();
           bullet.explode('player');
         }
       });
     });
 
-    world.enemies.forEach(function(enemy) {
-      world.players.forEach(function(player) {
+    game.world.enemies.forEach(function(enemy) {
+      game.world.players.forEach(function(player) {
         if (collides(enemy, player)) {
           enemy.explode();
           player.explode();

@@ -67,15 +67,23 @@ function($, util, update, draw, collider, World, Player, Enemy, Bullet, Explosio
     terrainBuilder.createTerrain();
 
     world.addPlayer(new Player(world, Bullet, Explosion, {
-      keyleft: 'left',
+      keyleft:  'left',
       keyright: 'right',
-      keyup: 'up',
-      keydown: 'down',
-      keyfire: 'space'
+      keyup:    'up',
+      keydown:  'down',
+      keyfire:  'space'
     }));
 
+    var handlePlayerIsHit = function() {
+      eventHandlers['playerIsHit']();
+    };
+
+    var handleEnemyIsKilled = function() {
+      eventHandlers['enemyIsKilled']();
+    };
+
     var gameloop = requestInterval(function() {
-      collider(world);
+      collider(game, handlePlayerIsHit, handleEnemyIsKilled);
       update(world, Enemy, Bullet, Explosion);
       draw(world);
     }, 1000 / game.fps);

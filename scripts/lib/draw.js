@@ -4,7 +4,7 @@ define([],
 function() {
 
   var draw = function(world) {
-    world.canvas.clearRect(0, 0, world.width, world.height);
+    world.context.drawRectangle('#000', 0, 0, world.width, world.height);
 
     [world.tiles,
      world.enemies,
