@@ -123,13 +123,16 @@ $app_name = idx($app_info, 'name', '');
         margin-top: 8px;
         margin-bottom: 8px;
       }
-      #loadscreen {
+      #loadscreen, #gameoverscreen {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.8);
+      }
+      #gameoverscreen {
+        display: none;
       }
       #loadscreen-inner {
         width: 740px;
@@ -175,6 +178,19 @@ $app_name = idx($app_info, 'name', '');
         text-align: center;
         color: #99ff00;
       }
+      #gameoverscreeninner {
+        margin-top: 100px;
+        margin: 0 auto;
+        width: 300px;
+        font-family: "Courier New", Courier, sans-serif;
+        font-weight: bolder;
+        font-size: 12pt;
+        color: #99ff00;
+        text-align: center;
+      }
+      #gameoverhits {
+        color: #fff;
+      }
     </style>
   </head>
   <body>
@@ -209,6 +225,14 @@ $app_name = idx($app_info, 'name', '');
       <canvas id="bufferWorld" width="740" height="7560" style="display: none;">
         This browser can not run this game (canvas support missing).
       </canvas>
+
+      <div id="gameoverscreen">
+        <div id="gameoverscreeninner">
+          Congratulations, you scored <span id="gameoverhits"></span> points.
+          <br />
+          Share this game with your friends and see how they score!
+        </div>
+      </div>
 
       <script data-main="./scripts/app/index" src="./scripts/vendor/require-jquery.min.js"></script>
 
