@@ -37,7 +37,7 @@ function($, util, update, draw, collider, TerrainBuilder, World, Player, Enemy, 
 
   Game.prototype.start = function() {
     var game = this;
-    var canvas = this.options.canvas;
+    var canvas = this.canvas;
 
     var context;
     if (util.webglEnabled()) {
