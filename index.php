@@ -139,9 +139,9 @@ $app_name = idx($app_info, 'name', '');
         margin: 0 auto;
         margin-top: 300px;
         font-family: "Courier New", Courier, sans-serif;
-        font-size: 24pt;
+        font-size: 12pt;
         font-weight: bolder;
-        color: #fff;
+        color: #99ff00;
         text-align: center;
       }
       #loadbar {
