@@ -167,7 +167,9 @@ $app_name = idx($app_info, 'name', '');
     </div>
 
     <div id="stats">
-      Welcome, <strong><?php echo he(idx($basic, 'name')); ?> -
+      <?php if (isset($basic)) { ?>
+        Welcome, <strong><?php echo he(idx($basic, 'name')); ?> -
+      <?php } ?>
       Time: <span id="time">60</span> seconds -
       Score: <span id="hits">0</span>
     </div>
