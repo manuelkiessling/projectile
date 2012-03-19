@@ -78,7 +78,7 @@ $app_name = idx($app_info, 'name', '');
 
 ?>
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="http://ogp.me/ns/fb#" lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="apple-mobile-web-app-capable" content="yes">
