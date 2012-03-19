@@ -158,36 +158,45 @@ $app_name = idx($app_info, 'name', '');
     </style>
   </head>
   <body>
-    <div id="loadscreen">
-      <div id="loadscreen-inner">
-        Loading, please wait...
-        <br/>
-        <span id="loadbar">&nbsp;</span>
+
+    <?php if (isset($basic)) { ?>
+      <div id="loadscreen">
+        <div id="loadscreen-inner">
+          Loading, please wait...
+          <br/>
+          <span id="loadbar">&nbsp;</span>
+        </div>
       </div>
-    </div>
 
-    <div id="stats">
-      <?php if (isset($basic)) { ?>
+      <div id="stats">
         Welcome, <strong><?php echo he(idx($basic, 'name')); ?> -
-      <?php } ?>
-      Time: <span id="time">60</span> seconds -
-      Score: <span id="hits">0</span>
-    </div>
+        Time: <span id="time">60</span> seconds -
+        Score: <span id="hits">0</span>
+      </div>
 
-    <div id="worldbox">
-      <canvas id="world" width="740" height="640">
+      <div id="worldbox">
+        <canvas id="world" width="740" height="640">
+          This browser can not run this game (canvas support missing).
+        </canvas>
+      </div>
+
+      <div id="help">
+        Use arrow keys to move, space to shoot.
+        <span id="webglnote"></span>
+      </div>
+
+      <canvas id="bufferWorld" width="740" height="7560" style="display: none;">
         This browser can not run this game (canvas support missing).
       </canvas>
-    </div>
 
-    <div id="help">
-      Use arrow keys to move, space to shoot.
-      <span id="webglnote"></span>
-    </div>
+      <script data-main="./scripts/app/index" src="./scripts/vendor/require-jquery.min.js"></script>
 
-    <canvas id="bufferWorld" width="740" height="7560" style="display: none;">
-      This browser can not run this game (canvas support missing).
-    </canvas>
+    <?php } else { ?>
+
+      <div class="fb-login-button" data-scope="user_likes,user_photos"></div>
+
+    <?php } ?>
+
 
     <script type="text/javascript">
 
@@ -202,6 +211,38 @@ $app_name = idx($app_info, 'name', '');
       })();
 
     </script>
-    <script data-main="./scripts/app/game" src="./scripts/vendor/require-jquery.min.js"></script>
+    <script type="text/javascript">
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '<?php echo AppInfo::appID(); ?>', // App ID
+          channelUrl : '//<?php echo $_SERVER["HTTP_HOST"]; ?>/channel.html', // Channel File
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : true // parse XFBML
+        });
+
+        // Listen to the auth.login which will be called when the user logs in
+        // using the Login button
+        FB.Event.subscribe('auth.login', function(response) {
+          // We want to reload the page now so PHP can read the cookie that the
+          // Javascript SDK sat. But we don't want to use
+          // window.location.reload() because if this is in a canvas there was a
+          // post made to this page and a reload will trigger a message to the
+          // user asking if they want to send data again.
+          window.location = window.location;
+        });
+
+        FB.Canvas.setAutoGrow();
+      };
+
+      // Load the SDK Asynchronously
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
   </body>
 </html>
