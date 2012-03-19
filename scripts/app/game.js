@@ -144,7 +144,7 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
       requestTimeout(function() {
         world.remainingTime--;
         window.alert('Congratulations, your score is: ' + world.hits);
-        window.location.reload();
+        window.location = window.location;
       }, world.remainingTime * 1000);
 
       requestInterval(function() {
