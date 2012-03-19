@@ -130,21 +130,32 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
       world.terrainBuilder = new TerrainBuilder(world, Tile);
 
       // Game loop
-      requestInterval(function() {
+      var gameloop = requestInterval(function() {
         collider(world);
         update(world, Enemy, Bullet, Explosion);
         draw(world);
       }, 1000 / world.fps);
 
-      requestInterval(function() {
+      var timerloop = requestInterval(function() {
         world.remainingTime--;
         $('#time').html('' + world.remainingTime + '');
       }, 1000);
 
       requestTimeout(function() {
-        world.remainingTime--;
-        window.alert('Congratulations, your score is: ' + world.hits);
-        window.location = window.location;
+        clearRequestInterval(gameloop);
+        clearRequestInterval(timerloop);
+        FB.ui(
+          {
+            method :     'feed',
+            link   :     'https://apps.facebook.com/projectilegame/',
+            name   :     'projectile - a 2D space shooter',
+            caption:     'https://apps.facebook.com/projectilegame/',
+            description: 'Play an old-school action space shooter right in your browser!'
+          },
+          function (response) {
+            window.location = window.location;
+          }
+        );
       }, world.remainingTime * 1000);
 
       requestInterval(function() {
