@@ -158,11 +158,11 @@ $app_name = idx($app_info, 'name', '');
         width: 740px;
         margin: 0 auto;
         text-align: center;
-        font-family: Arial, Verdana, sans-serif;
-        color: #999;
+        font-family: "Courier New", Courier, sans-serif;
+        color: #4c8000;
       }
       #webglnote {
-        color: #555;
+        color: #264000;
       }
       #stats {
         width: 740px;
