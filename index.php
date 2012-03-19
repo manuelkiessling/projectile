@@ -218,29 +218,27 @@ $app_name = idx($app_info, 'name', '');
         <div class="fb-login-button" data-scope="user_likes,user_photos"></div>
         to play the game.
 
-        <?php if (sizeof($app_using_friends) > 0) { ?>
-          <div id="listfriendsapp">
-            <div class="list">
-              <h3>Friends playing this game:</h3>
-              <ul class="friends">
-                <?php
-                  foreach ($app_using_friends as $auf) {
-                    $id = idx($auf, 'uid');
-                    $name = idx($auf, 'name');
-                ?>
-                <li>
-                  <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
-                    <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
-                    <?php echo he($name); ?>
-                  </a>
-                </li>
-                <?php
-                  }
-                ?>
-              </ul>
-            </div>
+        <div id="listfriendsapp">
+          <div class="list">
+            <h3>Friends playing this game:</h3>
+            <ul class="friends">
+              <?php
+                foreach ($app_using_friends as $auf) {
+                  $id = idx($auf, 'uid');
+                  $name = idx($auf, 'name');
+              ?>
+              <li>
+                <a href="https://www.facebook.com/<?php echo he($id); ?>" target="_top">
+                  <img src="https://graph.facebook.com/<?php echo he($id) ?>/picture?type=square" alt="<?php echo he($name); ?>">
+                  <?php echo he($name); ?>
+                </a>
+              </li>
+              <?php
+                }
+              ?>
+            </ul>
           </div>
-        <?php } ?>
+        </div>
 
       </div>
 
