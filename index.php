@@ -148,6 +148,7 @@ $app_name = idx($app_info, 'name', '');
       #stats {
         width: 740px;
         margin: 0 auto;
+        margin-top: 40px;
         font-family: "Courier New", Courier;
         font-weight: bolder;
         font-size: 12pt;
@@ -166,6 +167,7 @@ $app_name = idx($app_info, 'name', '');
     </div>
 
     <div id="stats">
+      Welcome, <strong><?php echo he(idx($basic, 'name')); ?> -
       Time: <span id="time">60</span> seconds -
       Score: <span id="hits">0</span>
     </div>
