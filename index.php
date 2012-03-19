@@ -85,8 +85,10 @@ $app_name = idx($app_info, 'name', '');
     <title>projectile » Open Source HTML5 space shooter</title>
     <meta name="description" content="projectile is a 2D space shooter playable in your browser, written in JavaScript using Canvas" />
     <style type="text/css">
-      html, body, canvas {
+      html, body {
         padding: 0;
+        margin: 0;
+        width: 760px;
       }
       body {
         background-color: #000;
@@ -103,7 +105,7 @@ $app_name = idx($app_info, 'name', '');
         background: rgba(0, 0, 0, 0.8);
       }
       #loadscreen-inner {
-        width: 960px;
+        width: 760px;
         margin: 0 auto;
         margin-top: 300px;
         font-family: "Courier New", Courier, sans-serif;
@@ -118,15 +120,15 @@ $app_name = idx($app_info, 'name', '');
         width: 0;
       }
       #worldbox {
-        width: 960px;
+        width: 760px;
         height: 640px;
         margin: 0 auto;
         padding: 0;
-        border: 1px solid black;
+        border: none;
         background-color: black;
       }
       #help {
-        width: 960px;
+        width: 760px;
         margin: 0 auto;
         text-align: center;
         font-family: Arial, Verdana, sans-serif;
@@ -136,7 +138,7 @@ $app_name = idx($app_info, 'name', '');
         color: #555;
       }
       #stats {
-        width: 960px;
+        width: 760px;
         margin: 0 auto;
         font-family: "Courier New", Courier;
         font-weight: bolder;
@@ -147,7 +149,6 @@ $app_name = idx($app_info, 'name', '');
     </style>
   </head>
   <body>
-    <a href="https://github.com/ManuelKiessling/projectile"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/abad93f42020b733148435e2cd92ce15c542d320/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub"></a>
     <div id="loadscreen">
       <div id="loadscreen-inner">
         Loading, please wait...
@@ -162,7 +163,7 @@ $app_name = idx($app_info, 'name', '');
     </div>
 
     <div id="worldbox">
-      <canvas id="world" width="960" height="640">
+      <canvas id="world" width="760" height="640">
         This browser can not run this game (canvas support missing).
       </canvas>
     </div>
@@ -172,7 +173,7 @@ $app_name = idx($app_info, 'name', '');
       <span id="webglnote"></span>
     </div>
 
-    <canvas id="bufferWorld" width="960" height="7560" style="display: none;">
+    <canvas id="bufferWorld" width="760" height="7560" style="display: none;">
       This browser can not run this game (canvas support missing).
     </canvas>
 

@@ -94,7 +94,7 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
 
     var world = new World();
     world.canvas = context;
-    world.width = 960;
+    world.width = 760;
     world.height = 640;
     world.fps = 40;
     world.remainingTime = 60;
