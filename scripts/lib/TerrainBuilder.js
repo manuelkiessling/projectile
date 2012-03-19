@@ -4,6 +4,7 @@ define(['../lib/draw', '../lib/util'],
 function(draw, util) {
 
   var TerrainBuilder = function(options, world, bufferWorldCanvas, Tile) {
+    this.options = options;
     this.world = world;
     this.Tile = Tile;
 
@@ -13,14 +14,10 @@ function(draw, util) {
     this.bufferWorld.width = this.options.width;
     this.bufferWorld.height = this.options.height;
 
-    // Options for generating one screen of the world
-    this.options = {};
     this.options.xOffset = 0;
     this.options.yOffset = 0;
-    this.options.tileWidth = this.options.tileWidth;
-    this.options.tileHeight = this.options.tileHeight;
-    this.options.columns = this.bufferWorld.width / this.options.tileWidth;
-    this.options.rows = this.bufferWorld.height / this.options.tileHeight;
+    this.options.columns = this.options.width / this.options.tileWidth;
+    this.options.rows = this.options.height / this.options.tileHeight;
   };
 
   TerrainBuilder.prototype.createTerrain = function() {
