@@ -158,6 +158,7 @@ $app_name = idx($app_info, 'name', '');
     </style>
   </head>
   <body>
+    <div id="fb-root"></div>
 
     <?php if (isset($basic)) { ?>
       <div id="loadscreen">
