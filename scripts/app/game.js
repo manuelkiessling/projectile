@@ -20,6 +20,8 @@ define(['jquery',
 
 function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder) {
 
+  $('#worldbox').focus();
+
   var sprites = {};
 
   var loadCounter = 1;
