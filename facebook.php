@@ -63,7 +63,7 @@ $app_name = idx($app_info, 'name', '');
       }
       body {
         background-color: #000;
-        background-image: url('assets/images/background.png');
+        background-image: url('assets/images/background.jpg');
         background-repeat: no-repeat;
         background-size: 100%;
       }
