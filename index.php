@@ -87,7 +87,7 @@ $app_name = idx($app_info, 'name', '');
     <meta property="og:title" content="<?php echo he($app_name); ?>" />
     <meta property="og:type" content="game" />
     <meta property="og:url" content="<?php echo AppInfo::getUrl(); ?>" />
-    <meta property="og:image" content="<?php echo AppInfo::getUrl('/assets/images/logo.png'); ?>" />
+    <meta property="og:image" content="<?php echo AppInfo::getUrl('/assets/images/logo75x75.png'); ?>" />
     <meta property="og:site_name" content="<?php echo he($app_name); ?>" />
     <meta property="og:description" content="projectile is a 2D space shooter" />
     <meta property="fb:app_id" content="<?php echo AppInfo::appID(); ?>" />
@@ -215,7 +215,7 @@ $app_name = idx($app_info, 'name', '');
 
       <div id="login">
         Please
-        <div class="fb-login-button" data-scope="user_likes,user_photos"></div>
+        <div class="fb-login-button" data-scope=""></div>
         to play the game.
 
         <?php if (sizeof($app_using_friends) > 0) { ?>
