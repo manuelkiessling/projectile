@@ -234,6 +234,7 @@ $app_name = idx($app_info, 'name', '');
         <div id="gameoverscreeninner">
           Congratulations, you scored <span id="gameoverhits"></span> points.
           <br />
+          <br />
           Share this game with your friends and see how they score!
         </div>
       </div>
