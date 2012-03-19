@@ -1,16 +1,16 @@
 "use strict";
 define(['jquery',
-        'util',
-        'update',
-        'draw',
-        'collider',
+        '../lib/util',
+        '../lib/update',
+        '../lib/draw',
+        '../lib/collider',
+        '../lib/TerrainBuilder',
         '../domain/World',
         '../domain/Player',
         '../domain/Enemy',
         '../domain/Bullet',
         '../domain/Explosion',
         '../domain/Tile',
-        'TerrainBuilder',
         '../vendor/requestAnimFrame',
         '../vendor/requestInterval',
         '../vendor/requestTimeout',
@@ -18,7 +18,7 @@ define(['jquery',
         '../vendor/browserdetect'
        ],
 
-function($, util, update, draw, collider, World, Player, Enemy, Bullet, Explosion, Tile, TerrainBuilder) {
+function($, util, update, draw, collider, TerrainBuilder, World, Player, Enemy, Bullet, Explosion, Tile) {
 
   var Game = function(options, canvas, bufferCanvas, sprites) {
     this.options = options;
