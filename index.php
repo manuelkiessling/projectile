@@ -168,7 +168,7 @@ $app_name = idx($app_info, 'name', '');
         width: 740px;
         margin: 0 auto;
         margin-top: 40px;
-        font-family: "Courier New", Courier;
+        font-family: "Courier New", Courier, sans-serif;
         font-weight: bolder;
         font-size: 12pt;
         text-align: center;
