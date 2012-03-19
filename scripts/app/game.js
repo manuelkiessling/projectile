@@ -91,7 +91,7 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
       };
 
       World.prototype.substractHit = function() {
-        if (this.hits >= 0) this.hits--;
+        if (!this.hits === 0) this.hits--;
         $('#hits').html('' + this.hits + '');
       };
 
