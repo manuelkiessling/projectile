@@ -106,18 +106,22 @@ $app_name = idx($app_info, 'name', '');
       }
       #login {
         width: 300px;
-        background-color: rgba(1.0, 1.0, 1.0, 0.2);
+        background: rgba(0, 0, 0, 0.4);
         border: 1px solid black;
         padding: 32px;
         margin: 0 auto;
         margin-top: 200px;
         font-family: "Courier New", Courier, sans-serif;
-        color: #fff;
+        font-weight: bold;
+        font-size: 12pt;
+        color: #99ff00;
         text-align: center;
       }
       div.fb-login-button {
         width: 200px;
         margin: 0 auto;
+        margin-top: 8px;
+        margin-bottom: 8px;
       }
       #loadscreen {
         position: fixed;
@@ -210,8 +214,9 @@ $app_name = idx($app_info, 'name', '');
     <?php } else { ?>
 
       <div id="login">
-        In order to play the game you must first
+        Please
         <div class="fb-login-button" data-scope="user_likes,user_photos"></div>
+        to play the game.
       </div>
 
     <?php } ?>
