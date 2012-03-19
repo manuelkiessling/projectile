@@ -88,7 +88,8 @@ $app_name = idx($app_info, 'name', '');
       html, body {
         padding: 0;
         margin: 0;
-        width: 740px;
+        border: none;
+        width: 100%;
       }
       body {
         background-color: #000;
