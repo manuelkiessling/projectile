@@ -43,8 +43,8 @@ function($, SpriteLoader, util, update, draw, collider, Player, Enemy, Bullet, E
       $('#startlink').show();
       $('#startlink').click(function() {
         $('#loadscreen').hide();
+        start();
       });
-      start();
     });
 
     var start = function() {

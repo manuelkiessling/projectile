@@ -151,6 +151,7 @@ $app_name = idx($app_info, 'name', '');
       }
       #startlink {
         display: none;
+        color: #fff;
       }
       #worldbox {
         width: 740px;
