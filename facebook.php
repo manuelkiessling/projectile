@@ -67,19 +67,6 @@ $app_name = idx($app_info, 'name', '');
         background-repeat: no-repeat;
         background-size: 100%;
       }
-      #login {
-        width: 300px;
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid black;
-        padding: 32px;
-        margin: 0 auto;
-        margin-top: 200px;
-        font-family: "Courier New", Courier, sans-serif;
-        font-weight: bold;
-        font-size: 12pt;
-        color: #99ff00;
-        text-align: center;
-      }
       div.fb-login-button {
         width: 200px;
         margin: 0 auto;
@@ -92,7 +79,25 @@ $app_name = idx($app_info, 'name', '');
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 24, 0, 0.95);
+        background-image: url('assets/images/background.jpg');
+        background-repeat: no-repeat;
+        background-size: 100%;
+        background-color: #000;
+      }
+      #gameoverscreeninner, #loadscreenloading, #loadscreenstart, #login {
+        margin: 0 auto;
+        margin-top: 20px;
+        padding: 32px;
+        border: 32px solid rgba(49, 142, 190, 0.2);
+        border-radius: 16px;
+        background: rgba(0, 0, 0, 0.6);
+        width: 300px;
+        font-family: "Courier New", Courier, sans-serif;
+        font-weight: bold;
+        font-size: 12pt;
+        color: #99ff00;
+        text-align: center;
+        box-shadow: 0px 0px 54px rgba(49, 142, 190, 0.5);
       }
       #gameoverscreen {
         display: none;
@@ -103,7 +108,16 @@ $app_name = idx($app_info, 'name', '');
         width: 0;
       }
       #startlink {
+        color: #fff;
+      }
+      #loadscreenstart {
         display: none;
+      }
+      #gameoverscore {
+        color: #fff;
+        font-weight: bolder;
+      }
+      #playagainlink {
         color: #fff;
       }
       #worldbox {
@@ -129,32 +143,16 @@ $app_name = idx($app_info, 'name', '');
         width: 740px;
         margin: 0 auto;
         margin-top: 40px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        background-color: rgba(0, 0, 0, 0.6);
+        box-shadow: 0px 0px 54px rgba(49, 142, 190, 0.5);
+        border-radius: 16px 16px 0 0;
         font-family: "Courier New", Courier, sans-serif;
         font-weight: bolder;
         font-size: 12pt;
         text-align: center;
         color: #99ff00;
-      }
-      #gameoverscreeninner, #loadscreeninner {
-        margin: 0 auto;
-        margin-top: 20px;
-        padding: 32px;
-        border: 2px solid #264000;
-        border-radius: 16px;
-        background: #000;
-        width: 300px;
-        font-family: "Courier New", Courier, sans-serif;
-        font-weight: bold;
-        font-size: 12pt;
-        color: #99ff00;
-        text-align: center;
-      }
-      #gameoverscore {
-        color: #fff;
-        font-weight: bolder;
-      }
-      #playagainlink {
-        color: #fff;
       }
     </style>
   </head>
@@ -165,19 +163,20 @@ $app_name = idx($app_info, 'name', '');
     <?php if (isset($basic)) { ?>
 
       <div id="loadscreen">
-        <div id="loadscreeninner">
+        <div id="loadscreenloading">
           <span id="loadnote">Loading, please wait...</span>
           <br />
+          <br />
           <span id="loadbar">&nbsp;</span>
-          <br />
-          <br />
+        </div>
+        <div id="loadscreenstart">
           <a id="startlink" href="#">START GAME</a>
         </div>
       </div>
 
       <div id="stats">
-        Welcome, <?php echo he(idx($basic, 'name')); ?> -
-        Time: <span id="time">60</span> seconds -
+        Welcome, <?php echo he(idx($basic, 'name')); ?> ■
+        Time: <span id="time">60</span> seconds ■
         Score: <span id="score">0</span>
       </div>
 
@@ -198,7 +197,9 @@ $app_name = idx($app_info, 'name', '');
 
       <div id="gameoverscreen">
         <div id="gameoverscreeninner">
-          Congratulations, you scored <span id="gameoverscore"></span> points.
+          Congratulations,
+          <br />
+          you scored <span id="gameoverscore"></span> points.
           <br />
           <br />
           Share this game with your friends and see how they score!

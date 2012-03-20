@@ -22,9 +22,8 @@ function($, init, Game) {
   init(function(sprites) {
 
     clearInterval(loadInterval); // stop growing the status bar
-    $('#loadbar').hide();
-    $('#loadnote').hide();
-    $('#startlink').show();
+    $('#loadscreenloading').hide();
+    $('#loadscreenstart').show();
     $('#startlink').click(function() {
       $('#loadscreen').hide();
     
