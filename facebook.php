@@ -106,7 +106,7 @@ $app_name = idx($app_info, 'name', '');
           Share this game with your friends and see how they score!
           <br />
           <br />
-          <a id="playagainlink" href="#">Click to play again</a>
+          <a id="playagainlink" href="facebook.php?start">Click to play again</a>
         </div>
       </div>
 
