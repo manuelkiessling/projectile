@@ -65,6 +65,9 @@ body {
   border: none;
   background-color: black;
 }
+#world {
+  box-shadow: 0px 0px 54px rgba(49, 142, 190, 0.5);
+}
 #help {
   width: 740px;
   margin: 0 auto;
