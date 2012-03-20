@@ -17,7 +17,7 @@ function() {
           callback(sprites);
         }
       };
-      imgage.src = folder + '/' + name + '.png';
+      imgage.src = folder + '/' + name + extension;
     });
   };
 
