@@ -9,6 +9,7 @@ function($, init, Game) {
   var game;
   var gameOptions;
   var score;
+  var remainingTime = 60;
 
   // Grow a status bar while initializing the game
   loadCounter = 1;
@@ -42,6 +43,14 @@ function($, init, Game) {
         }
       });
 
+      var gametimeInterval;
+      game.on('start', function() {
+        gametimeInterval = setInterval(function() {
+          remainingTime--;
+          $('#time').html('' + remainingTime + '');
+        }, 1000);
+      });
+
       score = 0;
       game.on('enemyIsKilled', function() {
         score++;
@@ -56,6 +65,7 @@ function($, init, Game) {
       });
 
       game.on('end', function() {
+        clearInterval(gametimeInterval);
         $('#gameoverscore').html('' + score + '');
         $('#gameoverscreen').show();
         FB.ui(

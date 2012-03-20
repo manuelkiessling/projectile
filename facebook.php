@@ -92,20 +92,10 @@ $app_name = idx($app_info, 'name', '');
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(0, 24, 0, 0.95);
       }
       #gameoverscreen {
         display: none;
-      }
-      #loadscreen-inner {
-        width: 740px;
-        margin: 0 auto;
-        margin-top: 300px;
-        font-family: "Courier New", Courier, sans-serif;
-        font-size: 12pt;
-        font-weight: bolder;
-        color: #99ff00;
-        text-align: center;
       }
       #loadbar {
         display: inline-block;
@@ -145,12 +135,13 @@ $app_name = idx($app_info, 'name', '');
         text-align: center;
         color: #99ff00;
       }
-      #gameoverscreeninner {
+      #gameoverscreeninner, #loadscreeninner {
         margin: 0 auto;
-        margin-top: 100px;
+        margin-top: 20px;
         padding: 32px;
+        border: 2px solid #264000;
         border-radius: 16px;
-        background: rgba(0, 0, 0, 0.5);
+        background: #000;
         width: 300px;
         font-family: "Courier New", Courier, sans-serif;
         font-weight: bold;
@@ -174,7 +165,7 @@ $app_name = idx($app_info, 'name', '');
     <?php if (isset($basic)) { ?>
 
       <div id="loadscreen">
-        <div id="loadscreen-inner">
+        <div id="loadscreeninner">
           <span id="loadnote">Loading, please wait...</span>
           <br/>
           <span id="loadbar">&nbsp;</span>
@@ -213,7 +204,7 @@ $app_name = idx($app_info, 'name', '');
           Share this game with your friends and see how they score!
           <br />
           <br />
-          <a id="playagainlink" href="./">Click to play again</a>
+          <a id="playagainlink" href="#">Click to play again</a>
         </div>
       </div>
 

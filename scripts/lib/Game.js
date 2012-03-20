@@ -27,7 +27,6 @@ function($, util, update, draw, collider, TerrainBuilder, World, Player, Enemy, 
     this.sprites = sprites;
 
     this.fps = 40;
-    this.remainingTime = 60;
   };
 
   var eventHandlers = {};
@@ -91,7 +90,9 @@ function($, util, update, draw, collider, TerrainBuilder, World, Player, Enemy, 
     requestTimeout(function() {
       clearRequestInterval(gameloop);
       eventHandlers['end']();
-    }, game.runtime * 1000);
+    }, game.options.runtime * 1000);
+
+    eventHandlers['start']();
   };
 
   return Game;
