@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>projectile » Open Source HTML5 space shooter</title>
+    <meta name="description" content="Play this old-school action space shooter right in your browser and see how much you can score!" />
+    <link href="assets/css/default.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+
+    <div id="loadscreen">
+      <div id="loadscreenloading">
+        <span id="loadnote">Loading, please wait...</span>
+        <br />
+        <br />
+        <span id="loadbar">&nbsp;</span>
+      </div>
+      <div id="loadscreenstart">
+        <a id="startlink" href="#">START GAME</a>
+      </div>
+    </div>
+
+    <div id="stats">
+      Time: <span id="time">60</span> seconds ■
+      Score: <span id="score">0</span>
+    </div>
+
+    <div id="worldbox">
+      <canvas id="world" width="740" height="640">
+        This browser can not run this game (canvas support missing).
+      </canvas>
+    </div>
+
+    <div id="help">
+      Use arrow keys to move, space to shoot.
+      <span id="webglnote"></span>
+    </div>
+
+    <canvas id="bufferWorld" width="740" height="7560" style="display: none;">
+      This browser can not run this game (canvas support missing).
+    </canvas>
+
+    <div id="gameoverscreen">
+      <div id="gameoverscreeninner">
+        Congratulations,
+        <br />
+        you scored <span id="gameoverscore"></span> points.
+        <br />
+        <br />
+        <a id="playagainlink" href="index.html">Click to play again</a>
+      </div>
+    </div>
+
+    <script data-main="./scripts/app/index" src="./scripts/vendor/require-jquery.min.js"></script>
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-2127388-10']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+  </body>
+</html>
