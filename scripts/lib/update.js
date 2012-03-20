@@ -3,14 +3,14 @@ define([],
 
 function() {
 
-  var update = function(world, Enemy, Bullet, Explosion) {
-    world.terrainBuilder.update();
+  var update = function(game, Enemy, Bullet, Explosion) {
+    game.terrainBuilder.update();
 
-    [world.tiles,
-     world.enemies,
-     world.bullets,
-     world.explosions,
-     world.players
+    [game.world.tiles,
+     game.world.enemies,
+     game.world.bullets,
+     game.world.explosions,
+     game.world.players
     ].forEach(
       function(gameElementArray) {
         gameElementArray.forEach(function(gameElement) {
@@ -19,30 +19,30 @@ function() {
       }
     );
 
-    world.enemies = world.enemies.filter(function(enemy) {
+    game.world.enemies = game.world.enemies.filter(function(enemy) {
       return enemy.active;
     });
 
-    world.bullets = world.bullets.filter(function(bullet) {
+    game.world.bullets = game.world.bullets.filter(function(bullet) {
       return bullet.active;
     });
 
-    world.explosions = world.explosions.filter(function(explosion) {
+    game.world.explosions = game.world.explosions.filter(function(explosion) {
       return explosion.active;
     });
 
-    world.tiles = world.tiles.filter(function(tile) {
+    game.world.tiles = game.world.tiles.filter(function(tile) {
       return tile.active;
     });
 
     if(Math.random() < 0.02) {
       if (Math.random() < 0.1) {
-        world.enemies.push(new Enemy(world, Bullet, Explosion, { spriteName: 'enemy2' }));
+        game.world.enemies.push(new Enemy(game.world, Bullet, Explosion, { spriteName: 'enemy2' }));
       } else {
         if (Math.random() < 0.8) {
-          world.enemies.push(new Enemy(world, Bullet, Explosion, { spriteName: 'enemy' }));
+          game.world.enemies.push(new Enemy(game.world, Bullet, Explosion, { spriteName: 'enemy' }));
         } else {
-          world.enemies.push(new Enemy(world, Bullet, Explosion, { spriteName: 'enemy_turquoise' }));
+          game.world.enemies.push(new Enemy(game.world, Bullet, Explosion, { spriteName: 'enemy_turquoise' }));
         }
       }
     }

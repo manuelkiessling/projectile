@@ -43,7 +43,7 @@ function($, init, Game) {
       });
 
       score = 0;
-      game.on('enemyKilled', function() {
+      game.on('enemyIsKilled', function() {
         score++;
         $('#score').html('' + score + '');
       });

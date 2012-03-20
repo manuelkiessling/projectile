@@ -55,7 +55,7 @@ function($, util, update, draw, collider, TerrainBuilder, World, Player, Enemy, 
       height: this.options.world_height,
       terrainSpeed: 1
     };
-    var world = new World(worldOptions, context, this.sprites);
+    this.world = new World(worldOptions, context, this.sprites);
 
     var terrainBuilderOptions = {
       width: 740,
@@ -63,10 +63,10 @@ function($, util, update, draw, collider, TerrainBuilder, World, Player, Enemy, 
       tileWidth: 740,
       tileHeight: 1512
     };
-    var terrainBuilder = new TerrainBuilder(terrainBuilderOptions, world, this.bufferCanvas, Tile);
-    terrainBuilder.createTerrain();
+    this.terrainBuilder = new TerrainBuilder(terrainBuilderOptions, this.world, this.bufferCanvas, Tile);
+    this.terrainBuilder.createTerrain();
 
-    world.addPlayer(new Player(world, Bullet, Explosion, {
+    this.world.addPlayer(new Player(this.world, Bullet, Explosion, {
       keyleft:  'left',
       keyright: 'right',
       keyup:    'up',
@@ -84,8 +84,8 @@ function($, util, update, draw, collider, TerrainBuilder, World, Player, Enemy, 
 
     var gameloop = requestInterval(function() {
       collider(game, handlePlayerIsHit, handleEnemyIsKilled);
-      update(world, Enemy, Bullet, Explosion);
-      draw(world);
+      update(game, Enemy, Bullet, Explosion);
+      draw(game.world);
     }, 1000 / game.fps);
 
     requestTimeout(function() {
