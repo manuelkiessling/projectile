@@ -167,7 +167,7 @@ $app_name = idx($app_info, 'name', '');
       <div id="loadscreen">
         <div id="loadscreeninner">
           <span id="loadnote">Loading, please wait...</span>
-          <br/>
+          <br />
           <span id="loadbar">&nbsp;</span>
           <br />
           <br />
