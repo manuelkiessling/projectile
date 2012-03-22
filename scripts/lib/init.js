@@ -6,7 +6,7 @@ function(SpriteLoader) {
   var init = function(callback) {
     var sprites = {};
 
-    var spriteNames = ['enemy', 'enemy_turquoise', 'enemy2', 'player2', 'playerBullet', 'enemyBullet'];
+    var spriteNames = ['enemy', 'enemy_turquoise', 'enemy2', 'player', 'playerBullet', 'enemyBullet'];
     for (var i=0; i < 17; i++) {
       spriteNames.push('explosion/explosion-' + i);
     }

@@ -70,7 +70,7 @@ function(keystatus, util) {
   }
 
   Player.prototype.draw = function() {
-    this.world.drawSprite('player2', this.x, this.y, this.width, this.height);
+    this.world.drawSprite('player', this.x, this.y, this.width, this.height);
   }
 
   Player.prototype.midpoint = function() {
