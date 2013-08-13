@@ -29,7 +29,6 @@ function(draw, util) {
   var rowNumber = 0;
   TerrainBuilder.prototype.update = function() {
     if (loops === (this.world.height / this.tilesPerDimension) * (1 / this.world.terrainSpeed)) {
-      //generateRow(this, rowNumber, draw);
       loops = 0;
       rowNumber++;
     }
@@ -100,4 +99,3 @@ function(draw, util) {
   return TerrainBuilder;
 
 });
-
