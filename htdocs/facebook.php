@@ -110,7 +110,7 @@ $app_name = idx($app_info, 'name', '');
         </div>
       </div>
 
-      <script data-main="./scripts/app/facebook" src="./scripts/vendor/require-jquery.min.js"></script>
+      <script data-main="./js/app/facebook" src="./js/vendor/require-jquery.min.js"></script>
 
     <?php } else { ?>
 
