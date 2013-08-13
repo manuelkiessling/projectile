@@ -4,7 +4,6 @@ define([],
 function() {
 
   var update = function(game, Enemy, Bullet, Explosion) {
-    game.terrainBuilder.update();
 
     [game.world.tiles,
      game.world.enemies,

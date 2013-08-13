@@ -25,16 +25,6 @@ function(draw, util) {
     pushImageDataToWorld(imageData, this.world, this.Tile, 0, -(this.bufferWorld.height - this.world.height), this.bufferWorld.width, this.bufferWorld.height);
   };
 
-  var loops = 0;
-  var rowNumber = 0;
-  TerrainBuilder.prototype.update = function() {
-    if (loops === (this.world.height / this.tilesPerDimension) * (1 / this.world.terrainSpeed)) {
-      loops = 0;
-      rowNumber++;
-    }
-    loops++;
-  };
-
   var generateRow = function(terrainBuilder, rowNumber, draw) {
     var options = {
       rows: 1,
