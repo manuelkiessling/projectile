@@ -37,7 +37,16 @@ function(keystatus, util) {
     this.keyup = options.keyup || 'up';
     this.keydown = options.keydown || 'down';
     this.keyfire = options.keyfire || 'space';
+
+    this.eventSubscribers = Array();
   };
+
+  Player.prototype.addEventSubscriber = function(eventType, subscriberCallback) {
+    if (Object.prototype.toString.call(this.eventSubscribers[eventType]) === '[object Array]') {
+      this.eventSubscribers[eventType] = Array();
+    }
+    this.eventSubscribers[eventType].push(subscriberCallback);
+  }
 
   Player.prototype.update = function() {
     if (keystatus.keydown[this.keyleft]) {
