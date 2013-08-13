@@ -70,7 +70,10 @@ function(keystatus, util) {
   }
 
   Player.prototype.draw = function() {
+    //this.world.drawRectangle("#00ff00", this.x, this.y, this.width, this.height);
+    //this.world.drawRectangle("#ffffff", this.hitbox.x, this.hitbox.y, this.hitbox.width, this.hitbox.height);
     this.world.drawSprite('player', this.x, this.y, this.width, this.height);
+    //this.world.drawRectangle("#000000", this.midpoint().x, this.midpoint().y, 1, 40);
   }
 
   Player.prototype.midpoint = function() {

@@ -43,18 +43,26 @@ function(util) {
     this.xVelocity = (0.5 + (Math.random() * 4)) * Math.sin((this.age) * Math.PI / this.range);
     this.x = util.clamp(this.x, -this.hitboxMetrics.x, (this.world.width - this.hitboxMetrics.width - this.hitboxMetrics.x));
 
+    this.x = Math.round(this.x);
+    this.y = Math.round(this.y);
+
     this.updateHitbox();
     this.age++;
 
     this.active = this.active && this.inBounds();
 
-    if (Math.random() < 0.01) {
+    // Shoot if a Player is in line
+    if (   this.midpoint().x >= this.world.players[0].hitbox.x
+        && this.midpoint().x <= (this.world.players[0].hitbox.x + this.world.players[0].hitbox.width)) {
       this.shoot();
     }
   };
 
   Enemy.prototype.draw = function() {
+    //this.world.drawRectangle("#ff0000", this.x, this.y, this.width, this.height);
+    //this.world.drawRectangle("#ffffff", this.hitbox.x, this.hitbox.y, this.hitbox.width, this.hitbox.height);
     this.world.drawSprite(this.spriteName, this.x, this.y, this.width, this.height);
+    //this.world.drawRectangle("#000000", this.midpoint().x, this.midpoint().y, 1, 40);
   };
 
   Enemy.prototype.inBounds = function() {
