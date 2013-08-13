@@ -1,4 +1,11 @@
 "use strict";
+
+requirejs.config({
+  paths: {
+    'jquery': '../vendor/jquery',
+  },
+});
+
 define(['jquery',
         '../lib/init',
         '../lib/Game'],

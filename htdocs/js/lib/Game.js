@@ -1,6 +1,5 @@
 "use strict";
-define(['jquery',
-        '../lib/util',
+define(['../lib/util',
         '../lib/update',
         '../lib/draw',
         '../lib/collider',
@@ -15,10 +14,11 @@ define(['jquery',
         '../vendor/requestInterval',
         '../vendor/requestTimeout',
         '../vendor/webgl-2d',
-        '../vendor/browserdetect'
+        '../vendor/browserdetect',
+        'jquery'
        ],
 
-function($, util, update, draw, collider, TerrainBuilder, World, Player, Enemy, Bullet, Explosion, Tile) {
+function(util, update, draw, collider, TerrainBuilder, World, Player, Enemy, Bullet, Explosion, Tile, $) {
 
   var Game = function(options, canvas, bufferCanvas, sprites) {
     this.options = options;

@@ -7,13 +7,25 @@ for (var file in window.__karma__.files) {
   }
 }
 
+var jQuery;
+
 requirejs.config({
       // Karma serves files from '/base'
-      baseUrl: '/base/src',
+      baseUrl: '/base/htdocs/js',
+
+      paths: {
+        'jquery': 'vendor/jquery',
+      },
+
+      shim: {
+        'vendor/jquery.hotkeys.js': ['jquery'],
+      },
 
       // ask Require.js to load these files (all our tests)
       deps: tests,
 
       // start test run, once Require.js is done
-      callback: window.__karma__.start
+      callback: function() {
+        window.__karma__.start();
+      }
 });

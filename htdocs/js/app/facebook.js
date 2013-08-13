@@ -1,5 +1,5 @@
 "use strict";
-define(['jquery',
+define(['../vendor/jquery',
         '../lib/init',
         '../lib/Game'],
 
