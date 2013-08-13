@@ -1,6 +1,6 @@
 "use strict";
 define(['jquery',
-        '../vendor/jquery.hotkeys'],
+        'vendor/jquery.hotkeys'],
 
 function($) {
 

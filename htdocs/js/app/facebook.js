@@ -1,7 +1,15 @@
 "use strict";
-define(['../vendor/jquery',
-        '../lib/init',
-        '../lib/Game'],
+
+requirejs.config({
+  baseUrl: '/js',
+  paths: {
+    'jquery': 'vendor/jquery',
+  },
+});
+
+define(['jquery',
+        'lib/init',
+        'lib/Game'],
 
 function($, init, Game) {
 

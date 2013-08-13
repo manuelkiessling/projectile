@@ -1,5 +1,5 @@
 "use strict";
-define(['../lib/SpriteAnimation'],
+define(['lib/SpriteAnimation'],
 
 function(SpriteAnimation) {
 

@@ -1,5 +1,5 @@
 "use strict";
-define(['../lib/SpriteLoader'],
+define(['lib/SpriteLoader'],
 
 function(SpriteLoader) {
 

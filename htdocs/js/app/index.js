@@ -1,14 +1,15 @@
 "use strict";
 
 requirejs.config({
+  baseUrl: '/js',
   paths: {
-    'jquery': '../vendor/jquery',
+    'jquery': 'vendor/jquery',
   },
 });
 
 define(['jquery',
-        '../lib/init',
-        '../lib/Game'],
+        'lib/init',
+        'lib/Game'],
 
 function($, init, Game) {
 

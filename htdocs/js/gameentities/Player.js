@@ -1,6 +1,6 @@
 "use strict";
-define(['../lib/keystatus',
-        '../lib/util'
+define(['lib/keystatus',
+        'lib/util'
        ],
 
 function(keystatus, util) {

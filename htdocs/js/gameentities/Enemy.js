@@ -1,5 +1,5 @@
 "use strict";
-define(['../lib/util'],
+define(['lib/util'],
 
 function(util) {
 

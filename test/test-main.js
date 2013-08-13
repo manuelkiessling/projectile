@@ -18,7 +18,7 @@ requirejs.config({
       },
 
       shim: {
-        'vendor/jquery.hotkeys.js': ['jquery'],
+        'vendor/jquery.hotkeys': ['jquery'],
       },
 
       // ask Require.js to load these files (all our tests)
