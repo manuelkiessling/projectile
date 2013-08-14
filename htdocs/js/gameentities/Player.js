@@ -18,6 +18,8 @@ function(keystatus, util) {
     this.shootLock = false;
     this.lastShotFrom = 'left';
 
+    this._health = options.health;
+
     this.hitboxMetrics = {
       x: 21,
       y: 28,
@@ -41,12 +43,16 @@ function(keystatus, util) {
     this.eventSubscribers = Array();
   };
 
-  Player.prototype.on = function(eventType, callback) {
-    if (Object.prototype.toString.call(this.eventSubscribers[eventType]) === '[object Array]') {
+  Player.prototype.on = function(eventType, subscriber) {
+    if (Object.prototype.toString.call(this.eventSubscribers[eventType]) !== '[object Array]') {
       this.eventSubscribers[eventType] = Array();
     }
-    this.eventSubscribers[eventType].push(callback);
-  }
+    this.eventSubscribers[eventType].push(subscriber);
+  };
+
+  Player.prototype.health = function() {
+    return this._health;
+  };
 
   Player.prototype.update = function() {
     if (keystatus.keydown[this.keyleft]) {
@@ -149,8 +155,14 @@ function(keystatus, util) {
     }
   }
 
-  Player.prototype.explode = function() {
-    //window.alert('You died!');
+  Player.prototype.handleHitByBullet = function(bulletStrength) {
+    this._health = this._health - bulletStrength;
+    if (this.eventSubscribers['hasTakenDamage'] !== undefined) {
+      var player = this;
+      this.eventSubscribers['hasTakenDamage'].forEach(function(subscriber) {
+        subscriber(bulletStrength, player._health);
+      });
+    }
   };
 
   return Player;
