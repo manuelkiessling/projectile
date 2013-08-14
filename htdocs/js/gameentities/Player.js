@@ -41,11 +41,11 @@ function(keystatus, util) {
     this.eventSubscribers = Array();
   };
 
-  Player.prototype.addEventSubscriber = function(eventType, subscriberCallback) {
+  Player.prototype.on = function(eventType, callback) {
     if (Object.prototype.toString.call(this.eventSubscribers[eventType]) === '[object Array]') {
       this.eventSubscribers[eventType] = Array();
     }
-    this.eventSubscribers[eventType].push(subscriberCallback);
+    this.eventSubscribers[eventType].push(callback);
   }
 
   Player.prototype.update = function() {
