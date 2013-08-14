@@ -3,7 +3,7 @@ define([],
 
 function() {
 
-  var collider = function(game, handlePlayerIsHit, handleEnemyIsHit) {
+  var checkForCollisions = function(game) {
     game.world.bullets.forEach(function(bullet) {
       game.world.bullets.forEach(function(otherBullet) {
         if (collides(bullet, otherBullet)) {
@@ -15,12 +15,10 @@ function() {
         if (collides(bullet, enemy)) {
           enemy.explode();
           bullet.explode('enemy');
-          handleEnemyIsHit();
         }
       });
       game.world.players.forEach(function(player) {
         if (collides(bullet, player)) {
-          handlePlayerIsHit();
           player.handleHitByBullet(1.0);
           bullet.explode('player');
         }
@@ -36,7 +34,7 @@ function() {
     });
   }
 
-  return collider;
+  return checkForCollisions;
 });
 
 var collides = function(source, target) {

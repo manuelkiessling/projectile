@@ -3,7 +3,7 @@ define([],
 
 function() {
 
-  var update = function(game, Enemy, Bullet, Explosion) {
+  var updateGamestate = function(game, Enemy, Bullet, Explosion) {
 
     [game.world.tiles,
      game.world.enemies,
@@ -46,6 +46,6 @@ function() {
       }
     }
   }
-  return update;
+  return updateGamestate;
 
 });

@@ -10,8 +10,7 @@ function() {
   };
 
   Healthbar.prototype.updateHealth = function(damageAmount, currentHealth) {
-    console.log(currentHealth);
-    healthbar._valueElement.text("foo bar " + currentHealth);
+    healthbar._valueElement.text(currentHealth);
   };
 
   Healthbar.prototype.getHasTakenDamageSubscriber = function() {

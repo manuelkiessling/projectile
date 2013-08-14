@@ -1,8 +1,8 @@
 "use strict";
 define(['lib/util',
-        'lib/update',
+        'lib/updateGamestate',
         'lib/draw',
-        'lib/collider',
+        'lib/checkForCollisions',
         'lib/TerrainBuilder',
         'gameentities/World',
         'gameentities/Player',
@@ -19,7 +19,7 @@ define(['lib/util',
         'jquery'
        ],
 
-function(util, update, draw, collider, TerrainBuilder, World, Player, Enemy, Bullet, Explosion, Tile, Healthbar, $) {
+function(util, updateGamestate, draw, checkForCollisions, TerrainBuilder, World, Player, Enemy, Bullet, Explosion, Tile, Healthbar, $) {
 
   var Game = function(options, canvas, bufferCanvas, interfaceElements, sprites) {
     this.options = options;
@@ -80,17 +80,9 @@ function(util, update, draw, collider, TerrainBuilder, World, Player, Enemy, Bul
 
     player.on('hasTakenDamage', healthbar.getHasTakenDamageSubscriber());
 
-    var handlePlayerIsHit = function() {
-      eventHandlers['playerIsHit']();
-    };
-
-    var handleEnemyIsKilled = function() {
-      eventHandlers['enemyIsKilled']();
-    };
-
     var gameloop = requestInterval(function() {
-      collider(game, handlePlayerIsHit, handleEnemyIsKilled);
-      update(game, Enemy, Bullet, Explosion);
+      checkForCollisions(game);
+      updateGamestate(game, Enemy, Bullet, Explosion);
       draw(game.world);
     }, 1000 / game.fps);
 
