@@ -21,7 +21,6 @@ function() {
       game.world.players.forEach(function(player) {
         if (collides(bullet, player)) {
           handlePlayerIsHit();
-          player.explode();
           bullet.explode('player');
         }
       });
@@ -31,7 +30,6 @@ function() {
       game.world.players.forEach(function(player) {
         if (collides(enemy, player)) {
           enemy.explode();
-          player.explode();
         }
       });
     });
