@@ -61,19 +61,6 @@ function($, init, Game) {
         }, 1000);
       });
 
-      score = 0;
-      game.on('enemyIsKilled', function() {
-        score++;
-        $('#score').html('' + score + '');
-      });
-
-      game.on('playerIsHit', function() {
-        if (score > 0) {
-            score--;
-          }
-          $('#score').html('' + score + '');
-      });
-
       game.on('end', function() {
         clearInterval(gametimeInterval);
         $('#gameoverscore').html('' + score + '');
