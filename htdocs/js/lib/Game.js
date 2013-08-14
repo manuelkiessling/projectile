@@ -51,7 +51,6 @@ function(util, updateGamestate, draw, checkForCollisions, TerrainBuilder, World,
     }
 
     var worldOptions = {
-      context: context,
       width: this.options.world_width,
       height: this.options.world_height,
       terrainSpeed: 1
