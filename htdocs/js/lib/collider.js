@@ -3,7 +3,7 @@ define([],
 
 function() {
 
-  var collider = function(game, handlePlayerIsHit, handleEnemyIsKilled) {
+  var collider = function(game, handlePlayerIsHit, handleEnemyIsHit) {
     game.world.bullets.forEach(function(bullet) {
       game.world.bullets.forEach(function(otherBullet) {
         if (collides(bullet, otherBullet)) {
@@ -15,8 +15,7 @@ function() {
         if (collides(bullet, enemy)) {
           enemy.explode();
           bullet.explode('enemy');
-          handleEnemyIsKilled();
-          console.log('Boom!');
+          handleEnemyIsHit();
         }
       });
       game.world.players.forEach(function(player) {
@@ -41,23 +40,23 @@ function() {
   return collider;
 });
 
-var collides = function(a, b) {
+var collides = function(source, target) {
   var lethal = false;
-  if (a.hasOwnProperty('owner') && b.hasOwnProperty('type')) {   // owned objects are, e.g., bullets
-    lethal = (a.owner == 'player' && b.type == 'enemy') ||
-             (a.owner == 'enemy' && b.type == 'player');
+  if (source.hasOwnProperty('owner') && target.hasOwnProperty('type')) {   // owned objects are, e.g., bullets
+    lethal = (source.owner == 'player' && target.type == 'enemy') ||
+             (source.owner == 'enemy' && target.type == 'player');
   } else {
     lethal = true;
   }
 
-  if (a.hasOwnProperty('owner') && b.hasOwnProperty('owner') &&
-      a.owner == b.owner) {
+  if (source.hasOwnProperty('owner') && target.hasOwnProperty('owner') &&
+      source.owner == target.owner) {
     lethal = false;                                              // bullets from same owner don't collide
   }
 
-  return a.hitbox.x < b.hitbox.x      + b.hitbox.width  &&
-         a.hitbox.x + a.hitbox.width  > b.hitbox.x      &&
-         a.hitbox.y < b.hitbox.y      + b.hitbox.height &&
-         a.hitbox.y + a.hitbox.height > b.hitbox.y      &&
+  return source.hitbox.x < target.hitbox.x      + target.hitbox.width  &&
+         source.hitbox.x + source.hitbox.width  > target.hitbox.x      &&
+         source.hitbox.y < target.hitbox.y      + target.hitbox.height &&
+         source.hitbox.y + source.hitbox.height > target.hitbox.y      &&
          lethal;
 };
