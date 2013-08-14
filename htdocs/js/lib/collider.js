@@ -21,6 +21,7 @@ function() {
       game.world.players.forEach(function(player) {
         if (collides(bullet, player)) {
           handlePlayerIsHit();
+          player.handleHitByBullet(1.0);
           bullet.explode('player');
         }
       });

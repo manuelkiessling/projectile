@@ -10,6 +10,7 @@ define(['lib/util',
         'gameentities/Bullet',
         'gameentities/Explosion',
         'gameentities/Tile',
+        'interfaceelements/Healthbar',
         'vendor/requestAnimFrame',
         'vendor/requestInterval',
         'vendor/requestTimeout',
@@ -18,12 +19,13 @@ define(['lib/util',
         'jquery'
        ],
 
-function(util, update, draw, collider, TerrainBuilder, World, Player, Enemy, Bullet, Explosion, Tile, $) {
+function(util, update, draw, collider, TerrainBuilder, World, Player, Enemy, Bullet, Explosion, Tile, Healthbar, $) {
 
-  var Game = function(options, canvas, bufferCanvas, sprites) {
+  var Game = function(options, canvas, bufferCanvas, interfaceElements, sprites) {
     this.options = options;
     this.canvas = canvas;
     this.bufferCanvas = bufferCanvas;
+    this.interfaceElements = interfaceElements;
     this.sprites = sprites;
 
     this.fps = 40;
@@ -65,13 +67,18 @@ function(util, update, draw, collider, TerrainBuilder, World, Player, Enemy, Bul
     this.terrainBuilder = new TerrainBuilder(terrainBuilderOptions, this.world, this.bufferCanvas, Tile);
     this.terrainBuilder.createTerrain();
 
-    this.world.addPlayer(new Player(this.world, Bullet, Explosion, {
+    var player = new Player(this.world, Bullet, Explosion, {
       keyleft:  'left',
       keyright: 'right',
       keyup:    'up',
       keydown:  'down',
       keyfire:  'space'
-    }));
+    });
+    this.world.addPlayer(player);
+
+    var healthbar = new Healthbar(this.interfaceElements.healthinfoValue);
+
+    player.on('hasTakenDamage', healthbar.getHasTakenDamageSubscriber());
 
     var handlePlayerIsHit = function() {
       eventHandlers['playerIsHit']();

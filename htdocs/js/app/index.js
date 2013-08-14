@@ -35,12 +35,15 @@ function($, init, Game) {
     $('#startlink').click(function() {
       $('#loadscreen').hide();
     
-      gameOptions = {
+      var gameOptions = {
         world_width: 740,
         world_height: 640,
         runtime: 60
       };
-      game = new Game(gameOptions, document.getElementById('world'), document.getElementById('bufferWorld'), sprites);
+      var interfaceDomElements = {
+        healthinfoValue: $('#healthinfo-value'),
+      };
+      game = new Game(gameOptions, document.getElementById('world'), document.getElementById('bufferWorld'), interfaceDomElements, sprites);
 
       game.on('webglDetectionFinished', function(hasWebgl) {
         if (hasWebgl) {
