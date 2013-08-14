@@ -8,10 +8,11 @@ requirejs.config({
 });
 
 define(['jquery',
+        'lib/util',
         'lib/init',
         'lib/Game'],
 
-function($, init, Game) {
+function($, util, init, Game) {
 
   var loadCounter;
   var game;
@@ -40,18 +41,23 @@ function($, init, Game) {
         world_height: 640,
         runtime: 60
       };
+
       var interfaceDomElements = {
         healthinfoValue: $('#healthinfo-value'),
       };
-      game = new Game(gameOptions, document.getElementById('world'), document.getElementById('bufferWorld'), interfaceDomElements, sprites);
 
-      game.on('webglDetectionFinished', function(hasWebgl) {
-        if (hasWebgl) {
-          $('#webglnote').html('WebGL is enabled');
-        } else {
-          $('#webglnote').html('WebGL is disabled');
-        }
-      });
+      var context;
+      var canvas = document.getElementById('world');
+      if (util.webglEnabled()) {
+        WebGL2D.enable(canvas);
+        context = canvas.getContext('webgl-2d');
+        $('#webglnote').html('WebGL is enabled');
+      } else {
+        context = canvas.getContext('2d');
+        $('#webglnote').html('WebGL is disabled');
+      }
+
+      game = new Game(gameOptions, document.getElementById('world'), document.getElementById('bufferWorld'), interfaceDomElements, context, sprites);
 
       var gametimeInterval;
       game.on('start', function() {

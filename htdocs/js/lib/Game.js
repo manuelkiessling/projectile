@@ -1,6 +1,5 @@
 "use strict";
-define(['lib/util',
-        'lib/updateGamestate',
+define(['lib/updateGamestate',
         'lib/draw',
         'lib/checkForCollisions',
         'lib/TerrainBuilder',
@@ -19,13 +18,14 @@ define(['lib/util',
         'jquery'
        ],
 
-function(util, updateGamestate, draw, checkForCollisions, TerrainBuilder, World, Player, Enemy, Bullet, Explosion, Tile, Healthbar, $) {
+function(updateGamestate, draw, checkForCollisions, TerrainBuilder, World, Player, Enemy, Bullet, Explosion, Tile, Healthbar, $) {
 
-  var Game = function(options, canvas, bufferCanvas, interfaceElements, sprites) {
+  var Game = function(options, canvas, bufferCanvas, interfaceElements, context, sprites) {
     this.options = options;
     this.canvas = canvas;
     this.bufferCanvas = bufferCanvas;
     this.interfaceElements = interfaceElements;
+    this.context = context;
     this.sprites = sprites;
 
     this.fps = 40;
@@ -38,24 +38,13 @@ function(util, updateGamestate, draw, checkForCollisions, TerrainBuilder, World,
 
   Game.prototype.start = function() {
     var game = this;
-    var canvas = this.canvas;
-
-    var context;
-    if (util.webglEnabled()) {
-      WebGL2D.enable(canvas);
-      context = canvas.getContext('webgl-2d');
-      eventHandlers['webglDetectionFinished'](true);
-    } else {
-      context = canvas.getContext('2d');
-      eventHandlers['webglDetectionFinished'](false);
-    }
 
     var worldOptions = {
       width: this.options.world_width,
       height: this.options.world_height,
       terrainSpeed: 1
     };
-    this.world = new World(worldOptions, context, this.sprites);
+    this.world = new World(worldOptions, this.context, this.sprites);
 
     var terrainBuilderOptions = {
       width: 740,
