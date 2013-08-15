@@ -35,7 +35,8 @@ function($, util, loadSprites, Game) {
       };
 
       var interfaceDomElements = {
-        healthinfoValue: $('#healthinfo-value'),
+        healthinfoBar: $('#healthinfo-bar'),
+        healthinfoMaxbar: $('#healthinfo-maxbar'),
       };
 
       var context;
@@ -53,6 +54,7 @@ function($, util, loadSprites, Game) {
 
       var gametimeInterval;
       game.on('start', function() {
+        $('.interfaceelement').show();
         gametimeInterval = setInterval(function() {
           remainingTime--;
           $('#time').html('' + remainingTime + '');
@@ -60,6 +62,7 @@ function($, util, loadSprites, Game) {
       });
 
       game.on('end', function() {
+        $('.interfaceelement').hide();
         clearInterval(gametimeInterval);
         $('#gameoverscore').html('' + score + '');
         $('#gameoverscreen').show();

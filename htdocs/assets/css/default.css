@@ -94,3 +94,29 @@ body {
   text-align: center;
   color: #99ff00;
 }
+.interfaceelement {
+  display: none;
+}
+#healthinfo {
+  position: absolute;
+  margin-top: 611px;
+  margin-left: 0px;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 4px;
+  font-family: "Courier New", Courier, sans-serif;
+  font-weight: bolder;
+  font-size: 12pt;
+  color: #99ff00;
+  opacity: 0.6;
+  background-color: #000;
+  width: 728px;
+}
+#healthinfo-bar {
+  display: inline-block;
+  background-color: #0f0;
+}
+#healthinfo-maxbar {
+  display: inline-block;
+  border: 1px solid #0f0;
+}

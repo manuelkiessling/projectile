@@ -25,13 +25,15 @@
       Score: <span id="score">0</span>
     </div>
 
-    <div id="healthinfo">
-      <span id="healthinfo-label">Health</span>
-      <span id="healthinfo-bar"></span>
-      <span id="healthinfo-value"></span>
-    </div>
-
     <div id="worldbox">
+      <div id="healthinfo" class="interfaceelement">
+        <span id="healthinfo-label">Health</span>
+        <span id="healthinfo-maxbar">
+          <span id="healthinfo-bar">
+            &nbsp;
+          </span>
+        </span>
+      </div>
       <canvas id="world" width="740" height="640">
         This browser can not run this game (canvas support missing).
       </canvas>

@@ -56,6 +56,7 @@ function(updateGamestate, draw, checkForCollisions, TerrainBuilder, World, Playe
     this.terrainBuilder.createTerrain();
 
     var player = new Player(this.world, Bullet, Explosion, {
+      health: 100.0,
       keyleft:  'left',
       keyright: 'right',
       keyup:    'up',
@@ -64,7 +65,11 @@ function(updateGamestate, draw, checkForCollisions, TerrainBuilder, World, Playe
     });
     this.world.addPlayer(player);
 
-    var healthbar = new Healthbar(this.interfaceElements.healthinfoValue);
+    var healthbar = new Healthbar(
+      this.interfaceElements.healthinfoBar,
+      this.interfaceElements.healthinfoMaxbar,
+      player.health()
+    );
 
     player.on('hasTakenDamage', healthbar.getHasTakenDamageSubscriber());
 
