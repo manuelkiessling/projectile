@@ -9,10 +9,10 @@ requirejs.config({
 
 define(['jquery',
         'lib/util',
-        'lib/init',
+        'lib/loadSprites',
         'lib/Game'],
 
-function($, util, init, Game) {
+function($, util, loadSprites, Game) {
 
   var loadCounter;
   var game;
@@ -20,15 +20,7 @@ function($, util, init, Game) {
   var score;
   var remainingTime = 60;
 
-  // Grow a status bar while initializing the game
-  loadCounter = 1;
-  var loadInterval = setInterval(function() {
-    loadCounter++;
-    $('#loadbar').css('width', 10 * loadCounter);
-  }, 100);
-
-  // initialize the game
-  init(function(sprites) {
+  var andStartGame = function(sprites) {
 
     clearInterval(loadInterval); // stop growing the status bar
     $('#loadscreenloading').hide();
@@ -76,6 +68,15 @@ function($, util, init, Game) {
       game.start();
 
     });
-  });
+  };
+
+  // Grow a status bar while loading sprites
+  loadCounter = 1;
+  var loadInterval = setInterval(function() {
+    loadCounter++;
+    $('#loadbar').css('width', 10 * loadCounter);
+  }, 100);
+
+  loadSprites(andStartGame);
 
 });

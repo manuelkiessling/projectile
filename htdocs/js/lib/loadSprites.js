@@ -3,7 +3,7 @@ define(['lib/SpriteLoader'],
 
 function(SpriteLoader) {
 
-  var init = function(callback) {
+  var loadSprites = function(callback) {
     var sprites = {};
 
     var spriteNames = ['enemy', 'enemy_turquoise', 'enemy2', 'player', 'playerBullet', 'enemyBullet'];
@@ -28,6 +28,6 @@ function(SpriteLoader) {
     });
   };
 
-  return init;
+  return loadSprites;
 
 });
