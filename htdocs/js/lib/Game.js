@@ -72,6 +72,7 @@ function(updateGamestate, draw, checkForCollisions, TerrainBuilder, World, Playe
     );
 
     player.on('hasTakenDamage', healthbar.getHasTakenDamageSubscriber());
+    player.on('died', eventHandlers['end']);
 
     var gameloop = requestInterval(function() {
       checkForCollisions(game);

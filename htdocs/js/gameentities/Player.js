@@ -157,6 +157,13 @@ function(keystatus, util) {
 
   Player.prototype.handleHitByBullet = function(bulletStrength) {
     this._health = this._health - bulletStrength;
+    if (this._health <= 0.0) {
+      if (this.eventSubscribers['died'] !== undefined) {
+        this.eventSubscribers['died'].forEach(function(subscriber) {
+          subscriber();
+        });
+      }
+    }
     if (this.eventSubscribers['hasTakenDamage'] !== undefined) {
       var player = this;
       this.eventSubscribers['hasTakenDamage'].forEach(function(subscriber) {
