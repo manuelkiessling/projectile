@@ -172,6 +172,16 @@ function(keystatus, util) {
     }
   };
 
+  Player.prototype.handleCollidedWithEnemy = function() {
+    this._health = this._health - 10.0;
+    if (this.eventSubscribers['hasTakenDamage'] !== undefined) {
+      var player = this;
+      this.eventSubscribers['hasTakenDamage'].forEach(function(subscriber) {
+        subscriber(10.0, player._health);
+      });
+    }
+  };
+
   return Player;
 
 });

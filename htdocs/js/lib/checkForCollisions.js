@@ -29,6 +29,7 @@ function() {
       game.world.players.forEach(function(player) {
         if (collides(enemy, player)) {
           enemy.explode();
+          player.handleCollidedWithEnemy();
         }
       });
     });

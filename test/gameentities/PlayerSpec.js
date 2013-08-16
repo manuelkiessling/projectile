@@ -40,6 +40,27 @@ define(['/base/htdocs/js/gameentities/Player.js'], function(Player) {
       expect(hasInformedMe).toBe(true);
     });
 
+    it("should loose 10.0 points of health when colliding with an enemy", function() {
+      var player = createPlayer();
+      player.handleCollidedWithEnemy();
+      expect(player.health()).toEqual(90.0);
+    });
+
+    it("should inform subscribers to the hasTakenDamage event upon colliding with an enemy", function() {
+      var player = createPlayer();
+      var hasInformedMe = false;
+
+      player.on('hasTakenDamage', function(damageAmount, currentHealth) {
+        if (damageAmount == 10.0 && currentHealth == 90.0) {
+          hasInformedMe = true;
+        }
+      });
+
+      player.handleCollidedWithEnemy();
+
+      expect(hasInformedMe).toBe(true);
+    });
+
   });
 
 });
