@@ -167,7 +167,7 @@ function(keystatus, util) {
     if (this.eventSubscribers['hasTakenDamage'] !== undefined) {
       var player = this;
       this.eventSubscribers['hasTakenDamage'].forEach(function(subscriber) {
-        subscriber(bulletStrength, player._health);
+        subscriber({damageAmount: bulletStrength, currentHealth: player._health});
       });
     }
   };
@@ -177,7 +177,7 @@ function(keystatus, util) {
     if (this.eventSubscribers['hasTakenDamage'] !== undefined) {
       var player = this;
       this.eventSubscribers['hasTakenDamage'].forEach(function(subscriber) {
-        subscriber(10.0, player._health);
+        subscriber({damageAmount: 10.0, currentHealth: player._health});
       });
     }
   };

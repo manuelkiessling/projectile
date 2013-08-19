@@ -29,8 +29,8 @@ define(['/base/htdocs/js/gameentities/Player.js'], function(Player) {
       var player = createPlayer();
       var hasInformedMe = false;
 
-      player.on('hasTakenDamage', function(damageAmount, currentHealth) {
-        if (damageAmount == 1.0 && currentHealth == 99.0) {
+      player.on('hasTakenDamage', function(info) {
+        if (info.damageAmount == 1.0 && info.currentHealth == 99.0) {
           hasInformedMe = true;
         }
       });
@@ -50,8 +50,8 @@ define(['/base/htdocs/js/gameentities/Player.js'], function(Player) {
       var player = createPlayer();
       var hasInformedMe = false;
 
-      player.on('hasTakenDamage', function(damageAmount, currentHealth) {
-        if (damageAmount == 10.0 && currentHealth == 90.0) {
+      player.on('hasTakenDamage', function(info) {
+        if (info.damageAmount == 10.0 && info.currentHealth == 90.0) {
           hasInformedMe = true;
         }
       });
