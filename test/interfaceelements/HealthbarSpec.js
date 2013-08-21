@@ -1,9 +1,9 @@
-"use strict";
+'use strict';
 define(['/base/htdocs/js/interfaceelements/Healthbar.js'], function(Healthbar) {
 
-  describe("Healthbar", function() {
+  describe('Healthbar', function() {
   
-    it("updates the CSS width of the health bar element when calling the hasTakenDamage subscriber ", function() {
+    it('updates the CSS width of the health bar element when calling the hasTakenDamage subscriber ', function() {
       var hasBeenCalledCorrectly = false;
       var mockBarElement = {};
       mockBarElement.css = function(attr, value) {

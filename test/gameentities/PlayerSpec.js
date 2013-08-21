@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 define(['/base/htdocs/js/gameentities/Player.js'], function(Player) {
 
-  describe("Player", function() {
+  describe('Player', function() {
 
     function createPlayer() {
       var mockWorld = {
@@ -19,13 +19,13 @@ define(['/base/htdocs/js/gameentities/Player.js'], function(Player) {
       return new Player(mockWorld, undefined, undefined, mockOptions);
     }
 
-    it("should loose the damage amount when hit by a bullet as health", function() {
+    it('should loose the damage amount when hit by a bullet as health', function() {
       var player = createPlayer();
       player.handleHitByBullet(1.0);
       expect(player.health()).toEqual(99.0);
     });
 
-    it("should inform subscribers to the hasTakenDamage event upon being hit by a bullet", function() {
+    it('should inform subscribers to the hasTakenDamage event upon being hit by a bullet', function() {
       var player = createPlayer();
       var hasInformedMe = false;
 
@@ -40,13 +40,13 @@ define(['/base/htdocs/js/gameentities/Player.js'], function(Player) {
       expect(hasInformedMe).toBe(true);
     });
 
-    it("should loose 10.0 points of health when colliding with an enemy", function() {
+    it('should loose 10.0 points of health when colliding with an enemy', function() {
       var player = createPlayer();
       player.handleCollidedWithEnemy();
       expect(player.health()).toEqual(90.0);
     });
 
-    it("should inform subscribers to the hasTakenDamage event upon colliding with an enemy", function() {
+    it('should inform subscribers to the hasTakenDamage event upon colliding with an enemy', function() {
       var player = createPlayer();
       var hasInformedMe = false;
 
