@@ -108,13 +108,17 @@ function(util) {
     ));
   };
 
-  Enemy.prototype.explode = function() {
+  Enemy.prototype.handleHitByBullet = function(damageAmount) {
     this.active = false;
     this.world.explosions.push(new this.Explosion(this.world, {
       x: this.x,
       y: this.y
     }));
   };
+
+  Enemy.prototype.handleCollidedWithPlayer = function() {
+    this.handleHitByBullet();
+  }
 
   return Enemy;
 

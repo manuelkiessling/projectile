@@ -13,7 +13,7 @@ function() {
       });
       game.world.enemies.forEach(function(enemy) {
         if (collides(bullet, enemy)) {
-          enemy.explode();
+          enemy.handleHitByBullet();
           bullet.explode('enemy');
         }
       });
@@ -28,7 +28,7 @@ function() {
     game.world.enemies.forEach(function(enemy) {
       game.world.players.forEach(function(player) {
         if (collides(enemy, player)) {
-          enemy.explode();
+          enemy.handleCollidedWithPlayer();
           player.handleCollidedWithEnemy();
         }
       });
