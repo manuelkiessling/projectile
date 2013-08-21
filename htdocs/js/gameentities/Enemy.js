@@ -114,7 +114,6 @@ function(util) {
       x: this.x,
       y: this.y
     }));
-    console.log('I exploded...');
   };
 
   return Enemy;
