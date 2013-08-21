@@ -1,9 +1,10 @@
 "use strict";
-define(['lib/keystatus',
+define(['gameentities/Entity',
+        'lib/keystatus',
         'lib/util'
        ],
 
-function(keystatus, util) {
+function(Entity, keystatus, util) {
 
   var Player = function(world, Bullet, Explosion, options) {
     this.world = world;
@@ -39,16 +40,9 @@ function(keystatus, util) {
     this.keyup = options.keyup || 'up';
     this.keydown = options.keydown || 'down';
     this.keyfire = options.keyfire || 'space';
-
-    this.eventSubscribers = Array();
   };
 
-  Player.prototype.on = function(eventType, subscriber) {
-    if (Object.prototype.toString.call(this.eventSubscribers[eventType]) !== '[object Array]') {
-      this.eventSubscribers[eventType] = Array();
-    }
-    this.eventSubscribers[eventType].push(subscriber);
-  };
+  Player.prototype = new Entity();
 
   Player.prototype.health = function() {
     return this._health;
@@ -158,28 +152,14 @@ function(keystatus, util) {
   Player.prototype.handleHitByBullet = function(bulletStrength) {
     this._health = this._health - bulletStrength;
     if (this._health <= 0.0) {
-      if (this.eventSubscribers['died'] !== undefined) {
-        this.eventSubscribers['died'].forEach(function(subscriber) {
-          subscriber();
-        });
-      }
+      this._publishEvent('died', {});
     }
-    if (this.eventSubscribers['hasTakenDamage'] !== undefined) {
-      var player = this;
-      this.eventSubscribers['hasTakenDamage'].forEach(function(subscriber) {
-        subscriber({damageAmount: bulletStrength, currentHealth: player._health});
-      });
-    }
+    this._publishEvent('hasTakenDamage', {damageAmount: bulletStrength, currentHealth: this._health});
   };
 
   Player.prototype.handleCollidedWithEnemy = function() {
     this._health = this._health - 10.0;
-    if (this.eventSubscribers['hasTakenDamage'] !== undefined) {
-      var player = this;
-      this.eventSubscribers['hasTakenDamage'].forEach(function(subscriber) {
-        subscriber({damageAmount: 10.0, currentHealth: player._health});
-      });
-    }
+    this._publishEvent('hasTakenDamage', {damageAmount: 10.0, currentHealth: this._health});
   };
 
   return Player;

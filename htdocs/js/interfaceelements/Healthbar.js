@@ -3,8 +3,6 @@ define([],
     
 function() {
 
-  var healthbar;
-
   var Healthbar = function(barElement, maxbarElement, maxHealth) {
     this._barElement = barElement;
     this._maxbarElement = maxbarElement;
@@ -14,12 +12,14 @@ function() {
   };
 
   Healthbar.prototype.updateHealth = function(damageAmount, currentHealth) {
-    healthbar._barElement.css('width', currentHealth * 2.0 + "px");
+    this._barElement.css('width', currentHealth * 2.0 + "px");
   };
 
   Healthbar.prototype.getHasTakenDamageSubscriber = function() {
-    healthbar = this;
-    return this.updateHealth;
+    var healthbar = this;
+    return function(eventInfo) {
+      healthbar.updateHealth(eventInfo.damageAmount, eventInfo.currentHealth);
+    }
   };
 
   return Healthbar;
