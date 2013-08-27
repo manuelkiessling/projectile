@@ -28,6 +28,15 @@ define(['/base/htdocs/js/gameentities/Powerup.js'], function(Powerup) {
       powerup.update();
       expect(powerup.y).toBe(3);
     });
+    
+    it('should return the correct hitbox info', function() {
+      var powerup = createPowerup();
+      var hitbox = powerup.hitbox();
+      expect([hitbox.x, hitbox.y, hitbox.width, hitbox.height]).toEqual([0, 0, 10, 10]);
+      powerup.update();
+      hitbox = powerup.hitbox();
+      expect([hitbox.x, hitbox.y, hitbox.width, hitbox.height]).toEqual([0, 1, 10, 10]);
+    });
 
   });
 
