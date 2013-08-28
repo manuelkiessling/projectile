@@ -27,8 +27,10 @@ function(util) {
       width: 55,
       height: 59
     };
+  };
 
-    this.hitbox = {
+  Enemy.prototype.hitbox = function() {
+    return {
       x: this.x + this.hitboxMetrics.x,
       y: this.y + this.hitboxMetrics.y,
       width: this.hitboxMetrics.width,
@@ -46,7 +48,6 @@ function(util) {
     this.x = Math.round(this.x);
     this.y = Math.round(this.y);
 
-    this.updateHitbox();
     this.age++;
 
     this.active = this.active && this.inBounds();
@@ -66,31 +67,22 @@ function(util) {
   };
 
   Enemy.prototype.inBounds = function() {
-    return this.hitbox.x >= (-this.hitbox.width) && this.hitbox.x <= this.world.width + this.hitbox.width &&
-           this.hitbox.y >= (- 400) && this.hitbox.y <= this.world.height + this.hitbox.height;
+    return this.hitbox().x >= (-this.hitbox().width) && this.hitbox().x <= this.world.width + this.hitbox().width &&
+           this.hitbox().y >= (- 400) && this.hitbox().y <= this.world.height + this.hitbox().height;
   };
 
   Enemy.prototype.midpoint = function() {
     return {
-      x: (this.hitbox.x + this.hitbox.width/2),
-      y: (this.hitbox.y + this.hitbox.height/2)
+      x: (this.hitbox().x + this.hitbox().width/2),
+      y: (this.hitbox().y + this.hitbox().height/2)
     }
   }
-
-  Enemy.prototype.updateHitbox = function() {
-    this.hitbox = {
-      x: this.x + this.hitboxMetrics.x,
-      y: this.y + this.hitboxMetrics.y,
-      width: this.hitboxMetrics.width,
-      height: this.hitboxMetrics.height
-    };
-  };
 
   Enemy.prototype.shoot = function() {
     this.world.bullets.push(
       new this.Bullet(this.world, this.Explosion, {
-        x: (this.hitbox.x + this.hitbox.width/2) - 21,
-        y: (this.hitbox.y + this.hitbox.height) - 47,
+        x: (this.hitbox().x + this.hitbox().width/2) - 21,
+        y: (this.hitbox().y + this.hitbox().height) - 47,
         width: 141,
         height: 144,
         hitboxMetrics: {
