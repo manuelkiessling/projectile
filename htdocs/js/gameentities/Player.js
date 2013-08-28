@@ -28,13 +28,6 @@ function(Entity, keystatus, util) {
       height: 99
     };
 
-    this.hitbox = {
-      x: this.x + this.hitboxMetrics.x,
-      y: this.y + this.hitboxMetrics.y,
-      width: this.hitboxMetrics.width,
-      height: this.hitboxMetrics.height
-    };
-
     this.keyleft = options.keyleft || 'left';
     this.keyright = options.keyright || 'right';
     this.keyup = options.keyup || 'up';
@@ -74,8 +67,6 @@ function(Entity, keystatus, util) {
 
     this.x = util.clamp(this.x, -this.hitboxMetrics.x, (this.world.width - this.hitboxMetrics.width - this.hitboxMetrics.x));
     this.y = util.clamp(this.y, -this.hitboxMetrics.y, (this.world.height - this.hitboxMetrics.height - this.hitboxMetrics.y + 50));
-
-    this.updateHitbox();
   }
 
   Player.prototype.draw = function() {
@@ -87,13 +78,13 @@ function(Entity, keystatus, util) {
 
   Player.prototype.midpoint = function() {
     return {
-      x: (this.hitbox.x + this.hitbox.width/2),
-      y: (this.hitbox.y + this.hitbox.height/2)
+      x: (this.hitbox().x + this.hitbox().width/2),
+      y: (this.hitbox().y + this.hitbox().height/2)
     }
   }
 
-  Player.prototype.updateHitbox = function() {
-    this.hitbox = {
+  Player.prototype.hitbox = function() {
+    return {
       x: this.x + this.hitboxMetrics.x,
       y: this.y + this.hitboxMetrics.y,
       width: this.hitboxMetrics.width,
@@ -107,7 +98,7 @@ function(Entity, keystatus, util) {
       this.world.bullets.push(
         new this.Bullet(this.world, this.Explosion, {
           x: this.midpoint().x + 18,
-          y: (this.midpoint().y - this.hitbox.height/2) + 20,
+          y: (this.midpoint().y - this.hitbox().height/2) + 20,
           width: 141,
           height: 144,
           hitboxMetrics: {
@@ -129,7 +120,7 @@ function(Entity, keystatus, util) {
       this.world.bullets.push(
         new this.Bullet(this.world, this.Explosion, {
           x: this.midpoint().x - 60,
-          y: (this.midpoint().y - this.hitbox.height/2) + 20,
+          y: (this.midpoint().y - this.hitbox().height/2) + 20,
           width: 141,
           height: 144,
           hitboxMetrics: {

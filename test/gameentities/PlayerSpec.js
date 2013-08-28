@@ -19,6 +19,15 @@ define(['/base/htdocs/js/gameentities/Player.js'], function(Player) {
       return new Player(mockWorld, undefined, undefined, mockOptions);
     }
 
+    it('should always return a correct hitbox', function() {
+      var player = createPlayer();
+      var hitbox = player.hitbox();
+      expect([hitbox.x, hitbox.y, hitbox.width, hitbox.height]).toEqual([player.x+21, player.y+28, 87, 99]);
+      player.update();
+      hitbox = player.hitbox();
+      expect([hitbox.x, hitbox.y, hitbox.width, hitbox.height]).toEqual([player.x+21, player.y+28, 87, 99]);
+    });
+
     it('should loose the damage amount when hit by a bullet as health', function() {
       var player = createPlayer();
       player.handleHitByBullet(1.0);
