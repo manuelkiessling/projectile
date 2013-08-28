@@ -22,6 +22,15 @@ function() {
     }
   };
 
+  Entity.prototype.hitbox = function() {
+    return {
+      x: this.x + this.hitboxMetrics.x,
+      y: this.y + this.hitboxMetrics.y,
+      width: this.hitboxMetrics.width,
+      height: this.hitboxMetrics.height
+    };
+  };
+
   return Entity;
 
 });

@@ -1,7 +1,9 @@
 "use strict";
-define(['lib/util'],
+define(['gameentities/Entity',
+        'lib/util'
+       ],
 
-function(util) {
+function(Entity, util) {
 
   var Enemy = function(world, Bullet, Explosion, options) {
     this.world = world;
@@ -29,14 +31,7 @@ function(util) {
     };
   };
 
-  Enemy.prototype.hitbox = function() {
-    return {
-      x: this.x + this.hitboxMetrics.x,
-      y: this.y + this.hitboxMetrics.y,
-      width: this.hitboxMetrics.width,
-      height: this.hitboxMetrics.height
-    };
-  };
+  Enemy.prototype = new Entity();
 
   Enemy.prototype.update = function() {
     this.x += this.xVelocity;
